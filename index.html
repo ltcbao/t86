@@ -9,6 +9,11 @@
 
     <link
       rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
+    />
+
+    <link
+      rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
     />
 
@@ -33,21 +38,19 @@
       .font-dancing-script {
         font-family: 'Dancing Script', cursive;
       }
-
-      /* --- Cấu hình Slider --- */
-      .hero-slide,
-      .product-slide {
-        opacity: 0;
-        visibility: hidden;
-        transition: opacity 1s ease-in-out, visibility 1s;
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
+      /* --- Swiper styles --- */
+      .hero-swiper {
+        height: 100vh;
+      }
+      .swiper-pagination-bullet-active {
+        background-color: #c2d436 !important;
+      }
+      .swiper-button-next,
+      .swiper-button-prev {
+        color: #c2d436 !important;
       }
 
-      /* Sửa lỗi bố cục cho Product Slider */
+      /* --- Cấu hình Slider TÙY CHỈNH (CHO SẢN PHẨM) --- */
       .product-slides-container {
         display: grid;
         place-items: center;
@@ -59,18 +62,10 @@
         transition: opacity 1s ease-in-out, visibility 1s;
         width: 100%;
       }
-
-      .hero-slide.active,
       .product-slide.active {
         opacity: 1;
         visibility: visible;
         z-index: 10;
-      }
-      .slide-indicator {
-        transition: all 0.3s ease;
-      }
-      .slide-indicator.active {
-        background-color: #c2d436; /* t86-green-accent */
       }
       .product-indicator {
         transition: all 0.3s ease;
@@ -79,7 +74,7 @@
         background-color: #00833e; /* t86-green */
       }
 
-      /* --- Các hiệu ứng Animation --- */
+      /* --- Các hiệu ứng Animation (Unchanged) --- */
       @keyframes floating {
         0% {
           transform: translateY(0px);
@@ -94,7 +89,6 @@
       .floating {
         animation: floating 6s ease-in-out infinite;
       }
-
       @keyframes spin-slow {
         from {
           transform: rotate(0deg);
@@ -106,7 +100,6 @@
       .animate-spin-slow {
         animation: spin-slow 30s linear infinite;
       }
-
       @keyframes shimmer {
         0% {
           background-position: -500px 0;
@@ -125,13 +118,11 @@
         background-size: 1000px 100%;
         animation: shimmer 3s infinite;
       }
-
-      /* --- Hiệu ứng gõ chữ --- */
       .typing-cursor {
         display: inline-block;
         width: 2px;
         height: 1.2em;
-        background-color: #c2d436; /* Accent color */
+        background-color: #c2d436;
         animation: blink 0.7s infinite;
         margin-left: 4px;
       }
@@ -144,8 +135,28 @@
           opacity: 0;
         }
       }
-
-      /* --- Hiệu ứng Ripple cho nút bấm --- */
+      @keyframes bounce {
+        0%,
+        20%,
+        50%,
+        80%,
+        100% {
+          transform: translateY(0);
+        }
+        40% {
+          transform: translateY(-20px);
+        }
+        60% {
+          transform: translateY(-10px);
+        }
+      }
+      .scroll-down-arrow {
+        position: absolute;
+        bottom: 30px;
+        left: 50%;
+        transform: translateX(-50%);
+        animation: bounce 2s infinite;
+      }
       .ripple {
         position: relative;
         overflow: hidden;
@@ -163,8 +174,6 @@
           opacity: 0;
         }
       }
-
-      /* --- News Ticker --- */
       .news-ticker-content {
         animation: ticker-scroll 30s linear infinite;
       }
@@ -176,8 +185,6 @@
           transform: translateX(-100%);
         }
       }
-
-      /* --- Partner Marquee --- */
       @keyframes marquee {
         from {
           transform: translateX(0);
@@ -192,8 +199,6 @@
       .marquee:hover .marquee-content {
         animation-play-state: paused;
       }
-
-      /* --- Các lớp tiện ích tùy chỉnh DỰA THEO HÌNH ẢNH MỚI --- */
       .gradient-hero-top {
         background: linear-gradient(
           105deg,
@@ -311,186 +316,243 @@
     </header>
 
     <main>
-      <section id="home" class="relative h-screen overflow-hidden">
-        <div class="hero-slides-container relative h-full">
-          <div class="hero-slide active">
-            <div class="h-full flex flex-col">
-              <div
-                class="h-3/5 gradient-hero-top relative text-white flex items-center overflow-hidden"
-              >
+      <section id="home" class="relative h-screen">
+        <div class="swiper hero-swiper">
+          <div class="swiper-wrapper">
+            <div class="swiper-slide">
+              <div class="h-full flex flex-col">
                 <div
-                  id="particles-js-slide1"
-                  class="absolute inset-0 z-0"
-                ></div>
-
-                <div
-                  id="scene"
-                  class="container mx-auto px-4 lg:px-6 z-20 flex justify-between items-center w-full"
+                  class="h-3/5 gradient-hero-top relative text-white flex items-center overflow-hidden"
                 >
                   <div
-                    class="w-full md:w-3/5 text-center md:text-left"
-                    data-depth="0.2"
+                    id="particles-js-slide1"
+                    class="absolute inset-0 z-0"
+                  ></div>
+                  <div
+                    id="scene"
+                    class="container mx-auto px-4 lg:px-6 z-20 flex justify-between items-center w-full"
                   >
-                    <div class="relative">
-                      <span
-                        class="absolute -top-8 -left-4 text-8xl md:text-9xl font-raleway font-black opacity-10 text-white z-0"
-                        >T86</span
-                      >
-                      <h1
-                        class="relative z-10 text-4xl md:text-6xl font-raleway font-bold tracking-wider leading-tight"
-                      >
-                        TÀI CHÍNH CÁ NHÂN
-                      </h1>
-                    </div>
-                    <p
-                      id="typing-text"
-                      class="text-lg md:text-2xl font-raleway font-light mt-4 text-white h-16 md:h-8 border-l-4 border-t86-green-accent pl-4"
-                    ></p>
-                    <button
-                      class="mt-8 bg-t86-green-accent text-t86-blue font-bold px-8 py-3 rounded-full hover:bg-opacity-90 transition-all transform hover:scale-105 ripple flex items-center space-x-2"
-                    >
-                      <span>Tìm hiểu thêm</span>
-                      <span>→</span>
-                    </button>
-                  </div>
-                  <div class="hidden md:block w-2/5 relative" data-depth="0.4">
                     <div
-                      class="absolute right-0 top-1/2 transform -translate-y-1/2 floating"
+                      class="w-full md:w-3/5 text-center md:text-left"
+                      data-depth="0.2"
                     >
-                      <div
-                        class="relative w-64 h-64 flex items-center justify-center"
-                      >
-                        <svg
-                          class="absolute inset-0 w-full h-full"
-                          viewBox="0 0 200 200"
-                          xmlns="http://www.w3.org/2000/svg"
-                        >
-                          <path
-                            fill="#00A651"
-                            opacity="0.2"
-                            d="M52.7,-69.1C67.8,-59.8,79.3,-44.5,82.7,-27.8C86.1,-11.1,81.4,7.1,73.1,22.8C64.9,38.5,53.1,51.8,39.2,62.2C25.3,72.6,9.3,80.1,-6.1,81.2C-21.5,82.3,-42.4,77,-56.6,65.6C-70.8,54.2,-78.3,36.7,-79.9,18.7C-81.5,0.7,-77.1,-17.8,-67.2,-32.9C-57.3,-48,-41.9,-59.7,-27.1,-68.8C-12.3,-77.9,2.1,-84.4,17.4,-82.9C32.7,-81.4,48.9,-72.1,52.7,-69.1Z"
-                            transform="translate(100 100)"
-                          />
-                        </svg>
-                        <span class="text-6xl font-bold text-white opacity-90"
+                      <div class="relative">
+                        <span
+                          class="absolute -top-8 -left-4 text-8xl md:text-9xl font-raleway font-black opacity-10 text-white z-0"
                           >T86</span
                         >
+                        <h1
+                          class="relative z-10 text-4xl md:text-6xl font-raleway font-bold tracking-wider leading-tight"
+                        >
+                          TÀI CHÍNH CÁ NHÂN
+                        </h1>
+                      </div>
+                      <p
+                        id="typing-text"
+                        class="text-lg md:text-2xl font-raleway font-light mt-4 text-white h-16 md:h-8 border-l-4 border-t86-green-accent pl-4"
+                      ></p>
+                      <a
+                        href="#about"
+                        class="mt-8 bg-t86-green-accent text-t86-blue font-bold px-8 py-3 rounded-full hover:bg-opacity-90 transition-all transform hover:scale-105 ripple flex items-center space-x-2 w-fit mx-auto md:mx-0"
+                      >
+                        <span>Tìm hiểu thêm</span>
+                        <span>→</span>
+                      </a>
+                    </div>
+                    <div
+                      class="hidden md:block w-2/5 relative"
+                      data-depth="0.4"
+                    >
+                      <div
+                        class="absolute right-0 top-1/2 transform -translate-y-1/2 floating"
+                      >
+                        <div
+                          class="relative w-64 h-64 flex items-center justify-center"
+                        >
+                          <svg
+                            class="absolute inset-0 w-full h-full"
+                            viewBox="0 0 200 200"
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
+                            <path
+                              fill="#00A651"
+                              opacity="0.2"
+                              d="M52.7,-69.1C67.8,-59.8,79.3,-44.5,82.7,-27.8C86.1,-11.1,81.4,7.1,73.1,22.8C64.9,38.5,53.1,51.8,39.2,62.2C25.3,72.6,9.3,80.1,-6.1,81.2C-21.5,82.3,-42.4,77,-56.6,65.6C-70.8,54.2,-78.3,36.7,-79.9,18.7C-81.5,0.7,-77.1,-17.8,-67.2,-32.9C-57.3,-48,-41.9,-59.7,-27.1,-68.8C-12.3,-77.9,2.1,-84.4,17.4,-82.9C32.7,-81.4,48.9,-72.1,52.7,-69.1Z"
+                              transform="translate(100 100)"
+                            />
+                          </svg>
+                          <span class="text-6xl font-bold text-white opacity-90"
+                            >T86</span
+                          >
+                        </div>
                       </div>
                     </div>
                   </div>
                 </div>
-              </div>
-              <div
-                class="h-2/5 bg-hero-bottom relative text-white flex items-center"
-              >
-                <div class="container mx-auto px-4 lg:px-6 z-10">
-                  <div class="flex items-center mb-6">
-                    <div class="h-0.5 w-8 bg-t86-green-accent mr-3"></div>
-                    <h2
-                      class="text-xl md:text-2xl font-raleway font-light tracking-wider"
+                <div
+                  class="h-2/5 bg-hero-bottom relative text-white flex items-center"
+                >
+                  <div class="container mx-auto px-4 lg:px-6 z-10">
+                    <div class="flex items-center mb-6">
+                      <div class="h-0.5 w-8 bg-t86-green-accent mr-3"></div>
+                      <h2
+                        class="text-xl md:text-2xl font-raleway font-light tracking-wider"
+                      >
+                        Giá trị cốt lõi
+                      </h2>
+                    </div>
+                    <div
+                      class="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-8"
                     >
-                      Giá trị cốt lõi
-                    </h2>
-                  </div>
-                  <div class="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-8">
-                    <div class="flex items-start space-x-4">
-                      <div
-                        class="flex-shrink-0 w-12 h-12 rounded-full bg-t86-green-accent/20 flex items-center justify-center"
-                      >
-                        <i
-                          class="fas fa-users-cog text-2xl text-t86-green-accent"
-                        ></i>
+                      <div class="flex items-start space-x-4">
+                        <div
+                          class="flex-shrink-0 w-12 h-12 rounded-full bg-t86-green-accent/20 flex items-center justify-center"
+                        >
+                          <i
+                            class="fas fa-users-cog text-2xl text-t86-green-accent"
+                          ></i>
+                        </div>
+                        <div>
+                          <h3 class="font-bold text-white">
+                            Khách hàng là trọng tâm
+                          </h3>
+                          <p class="text-white/70 text-sm mt-1">
+                            T86 cam kết lắng nghe, thấu hiểu và hỗ trợ mọi nhu
+                            cầu của khách hàng với sự chân thành và tận tâm.
+                          </p>
+                          <p class="text-white/90 text-sm italic mt-2">
+                            "Luôn luôn lắng nghe, luôn luôn thấu hiểu"
+                          </p>
+                        </div>
                       </div>
-                      <div>
-                        <h3 class="font-bold text-white">
-                          Khách hàng là trọng tâm
-                        </h3>
-                        <p class="text-white/70 text-sm mt-1">
-                          T86 cam kết lắng nghe, thấu hiểu và hỗ trợ mọi nhu cầu
-                          của khách hàng với sự chân thành và tận tâm.
-                        </p>
-                        <p class="text-white/90 text-sm italic mt-2">
-                          "Luôn luôn lắng nghe, luôn luôn thấu hiểu"
-                        </p>
+                      <div class="flex items-start space-x-4">
+                        <div
+                          class="flex-shrink-0 w-12 h-12 rounded-full bg-t86-green-accent/20 flex items-center justify-center"
+                        >
+                          <i
+                            class="fas fa-shield-alt text-2xl text-t86-green-accent"
+                          ></i>
+                        </div>
+                        <div>
+                          <h3 class="font-bold text-white">
+                            Minh bạch và trách nhiệm
+                          </h3>
+                          <p class="text-white/70 text-sm mt-1">
+                            Quy trình dịch vụ và điều kiện cho vay dễ hiểu, rõ
+                            ràng giúp khách hàng an tâm với mỗi lựa chọn.
+                          </p>
+                          <p class="text-white/90 text-sm italic mt-2">
+                            "Uy tín là nền tảng, trách nhiệm là nguyên tắc"
+                          </p>
+                        </div>
                       </div>
-                    </div>
-                    <div class="flex items-start space-x-4">
-                      <div
-                        class="flex-shrink-0 w-12 h-12 rounded-full bg-t86-green-accent/20 flex items-center justify-center"
-                      >
-                        <i
-                          class="fas fa-shield-alt text-2xl text-t86-green-accent"
-                        ></i>
+                      <div class="flex items-start space-x-4">
+                        <div
+                          class="flex-shrink-0 w-12 h-12 rounded-full bg-t86-green-accent/20 flex items-center justify-center"
+                        >
+                          <i
+                            class="fas fa-lightbulb text-2xl text-t86-green-accent"
+                          ></i>
+                        </div>
+                        <div>
+                          <h3 class="font-bold text-white">
+                            Đổi mới và linh hoạt
+                          </h3>
+                          <p class="text-white/70 text-sm mt-1">
+                            Cải tiến công nghệ và quy trình, cung cấp sản phẩm
+                            tới tay khách hàng nhanh chóng và thuận tiện.
+                          </p>
+                          <p class="text-white/90 text-sm italic mt-2">
+                            "Giải pháp linh hoạt, trải nghiệm tối ưu"
+                          </p>
+                        </div>
                       </div>
-                      <div>
-                        <h3 class="font-bold text-white">
-                          Minh bạch và trách nhiệm
-                        </h3>
-                        <p class="text-white/70 text-sm mt-1">
-                          Quy trình dịch vụ và điều kiện cho vay dễ hiểu, rõ
-                          ràng giúp khách hàng an tâm với mỗi lựa chọn.
-                        </p>
-                        <p class="text-white/90 text-sm italic mt-2">
-                          "Uy tín là nền tảng, trách nhiệm là nguyên tắc"
-                        </p>
-                      </div>
-                    </div>
-                    <div class="flex items-start space-x-4">
-                      <div
-                        class="flex-shrink-0 w-12 h-12 rounded-full bg-t86-green-accent/20 flex items-center justify-center"
-                      >
-                        <i
-                          class="fas fa-lightbulb text-2xl text-t86-green-accent"
-                        ></i>
-                      </div>
-                      <div>
-                        <h3 class="font-bold text-white">
-                          Đổi mới và linh hoạt
-                        </h3>
-                        <p class="text-white/70 text-sm mt-1">
-                          Cải tiến công nghệ và quy trình, cung cấp sản phẩm tới
-                          tay khách hàng nhanh chóng và thuận tiện.
-                        </p>
-                        <p class="text-white/90 text-sm italic mt-2">
-                          "Giải pháp linh hoạt, trải nghiệm tối ưu"
-                        </p>
-                      </div>
-                    </div>
-                    <div class="flex items-start space-x-4">
-                      <div
-                        class="flex-shrink-0 w-12 h-12 rounded-full bg-t86-green-accent/20 flex items-center justify-center"
-                      >
-                        <i
-                          class="fas fa-user-graduate text-2xl text-t86-green-accent"
-                        ></i>
-                      </div>
-                      <div>
-                        <h3 class="font-bold text-white">
-                          Phát triển con người
-                        </h3>
-                        <p class="text-white/70 text-sm mt-1">
-                          Môi trường làm việc tích cực, nơi mỗi cá nhân đều được
-                          học hỏi, phát triển và mang lại giá trị.
-                        </p>
-                        <p class="text-white/90 text-sm italic mt-2">
-                          "Nhân viên là tài sản, đội ngũ là sức mạnh"
-                        </p>
+                      <div class="flex items-start space-x-4">
+                        <div
+                          class="flex-shrink-0 w-12 h-12 rounded-full bg-t86-green-accent/20 flex items-center justify-center"
+                        >
+                          <i
+                            class="fas fa-user-graduate text-2xl text-t86-green-accent"
+                          ></i>
+                        </div>
+                        <div>
+                          <h3 class="font-bold text-white">
+                            Phát triển con người
+                          </h3>
+                          <p class="text-white/70 text-sm mt-1">
+                            Môi trường làm việc tích cực, nơi mỗi cá nhân đều
+                            được học hỏi, phát triển và mang lại giá trị.
+                          </p>
+                          <p class="text-white/90 text-sm italic mt-2">
+                            "Nhân viên là tài sản, đội ngũ là sức mạnh"
+                          </p>
+                        </div>
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
-          </div>
-        </div>
 
-        <div
-          class="absolute bottom-10 left-1/2 -translate-x-1/2 flex space-x-3 z-20"
-        >
-          <button
-            data-slide="0"
-            class="slide-indicator h-2 w-8 bg-t86-green-accent rounded-full transition-all"
-          ></button>
+            <div
+              class="swiper-slide bg-cover bg-center"
+              style="
+                background-image: url('https://images.unsplash.com/photo-1556742502-ec7c0e2f34b1?q=80&w=2070&auto=format&fit=crop');
+              "
+            >
+              <div
+                class="w-full h-full flex items-center justify-center bg-black/50 text-white text-center p-4"
+              >
+                <div class="max-w-3xl">
+                  <h2
+                    class="text-4xl md:text-6xl font-raleway font-bold tracking-wider"
+                  >
+                    Sản Phẩm Vượt Trội
+                  </h2>
+                  <p class="mt-4 text-lg md:text-xl">
+                    Tìm kiếm giải pháp tài chính phù hợp nhất cho bạn.
+                  </p>
+                  <a
+                    href="#products"
+                    class="mt-8 inline-block bg-t86-green-accent text-t86-blue font-bold px-8 py-3 rounded-full hover:bg-opacity-90 transition-all transform hover:scale-105 ripple"
+                  >
+                    Khám Phá Sản Phẩm
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <div
+              class="swiper-slide bg-cover bg-center"
+              style="
+                background-image: url('https://images.unsplash.com/photo-1543269865-cbf427effbad?q=80&w=2070&auto=format&fit=crop');
+              "
+            >
+              <div
+                class="w-full h-full flex items-center justify-center bg-black/50 text-white text-center p-4"
+              >
+                <div class="max-w-3xl">
+                  <h2
+                    class="text-4xl md:text-6xl font-raleway font-bold tracking-wider"
+                  >
+                    Đối Tác Tin Cậy
+                  </h2>
+                  <p class="mt-4 text-lg md:text-xl">
+                    Cùng nhau phát triển bền vững và thành công.
+                  </p>
+                  <a
+                    href="#partners"
+                    class="mt-8 inline-block bg-t86-green-accent text-t86-blue font-bold px-8 py-3 rounded-full hover:bg-opacity-90 transition-all transform hover:scale-105 ripple"
+                  >
+                    Xem Đối Tác
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="swiper-button-prev"></div>
+          <div class="swiper-button-next"></div>
+          <div class="swiper-pagination"></div>
         </div>
       </section>
 
@@ -571,6 +633,7 @@
                   </li>
                 </ul>
                 <button
+                  onclick="location.href='products.html'"
                   class="mt-8 bg-t86-green text-white font-bold px-8 py-3 rounded-full hover:bg-t86-green-light transition-all transform hover:scale-105 ripple"
                 >
                   VAY NGAY
@@ -749,7 +812,10 @@
         </div>
       </section>
 
-      <section id="stats" class="py-20 bg-t86-blue text-white">
+      <section
+        id="stats"
+        class="py-20 text-white bg-gradient-to-r from-t86-green to-t86-blue"
+      >
         <div class="container mx-auto px-4">
           <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
             <div>
@@ -896,6 +962,7 @@
               cùng bạn.
             </p>
             <button
+              onclick="location.href='about.html'"
               class="mt-6 bg-t86-green text-white font-bold px-8 py-3 rounded-full hover:bg-t86-green-light transition-colors ripple"
             >
               Khám phá câu chuyện
@@ -1022,9 +1089,27 @@
 
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/parallax/3.1.0/parallax.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 
     <script>
       document.addEventListener('DOMContentLoaded', function () {
+        // --- Initialize Swiper for the Hero Section ---
+        const swiper = new Swiper('.hero-swiper', {
+          loop: true,
+          effect: 'fade',
+          autoplay: {
+            delay: 8000,
+            disableOnInteraction: false,
+          },
+          pagination: {
+            el: '.swiper-pagination',
+            clickable: true,
+          },
+          navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
+          },
+        });
         // --- Khởi tạo hiệu ứng hạt bay (Particles.js) ---
         const particlesContainer = document.getElementById(
           'particles-js-slide1'
@@ -1055,21 +1140,17 @@
           const parallaxInstance = new Parallax(scene);
         }
 
-        // --- Logic cho Slider chung ---
+        // --- Logic cho Slider TÙY CHỈNH (CHO SẢN PHẨM) ---
         function setupSlider(
           containerSelector,
           slideSelector,
-          indicatorSelector,
-          prevBtnSelector,
-          nextBtnSelector
+          indicatorSelector
         ) {
           const container = document.querySelector(containerSelector);
           if (!container) return;
 
           const slides = container.querySelectorAll(slideSelector);
-          const indicators = container.querySelectorAll(indicatorSelector);
-          const nextBtn = container.querySelector(nextBtnSelector);
-          const prevBtn = container.querySelector(prevBtnSelector);
+          const indicators = document.querySelectorAll(indicatorSelector);
 
           if (slides.length === 0) return;
 
@@ -1093,51 +1174,28 @@
           }
 
           function startSlideShow() {
+            clearInterval(slideInterval);
             slideInterval = setInterval(() => {
               showSlide(currentSlide + 1);
             }, 7000);
           }
 
-          if (nextBtn) {
-            nextBtn.addEventListener('click', () => {
-              clearInterval(slideInterval);
-              showSlide(currentSlide + 1);
-              startSlideShow();
-            });
-          }
-
-          if (prevBtn) {
-            prevBtn.addEventListener('click', () => {
-              clearInterval(slideInterval);
-              showSlide(currentSlide - 1);
-              startSlideShow();
-            });
-          }
-
           indicators.forEach((indicator, index) => {
             indicator.addEventListener('click', function () {
-              clearInterval(slideInterval);
               showSlide(index);
               startSlideShow();
             });
           });
 
+          showSlide(0);
           startSlideShow();
         }
 
+        // This call remains for the custom product slider.
         setupSlider(
-          '#home',
-          '.hero-slide',
-          '.slide-indicator',
-          '#prev-slide',
-          '#next-slide'
-        );
-        setupSlider(
-          '#products',
+          '#products .product-slides-container',
           '.product-slide',
-          '.product-indicator',
-          null,
-          null
+          '.product-indicator'
         );
 
         // --- Logic cho hiệu ứng gõ chữ ---
@@ -1197,12 +1255,12 @@
 
         // --- Logic cho hiệu ứng đếm số ---
         const counters = document.querySelectorAll('[data-counter]');
-        const speed = 200; // Tốc độ đếm
+        const speed = 200;
 
         const animateCounter = (counter) => {
           const target = +counter.getAttribute('data-counter');
           const updateCount = () => {
-            const count = +counter.innerText.replace(/\./g, ''); // Xóa dấu chấm để tính toán
+            const count = +counter.innerText.replace(/\./g, '');
             const increment = target / speed;
 
             if (count < target) {
@@ -1211,7 +1269,7 @@
               );
               setTimeout(updateCount, 1);
             } else {
-              counter.innerText = target.toLocaleString('vi-VN'); // Format số
+              counter.innerText = target.toLocaleString('vi-VN');
             }
           };
           updateCount();
