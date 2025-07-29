@@ -26,20 +26,72 @@
     />
 
     <style>
+      /* --- Base Body and Font Styles --- */
       body {
         font-family: 'Montserrat', sans-serif;
         background-color: #ffffff;
         color: #212529;
+        line-height: 1.65; /* Improves readability of paragraphs */
       }
+
+      /* --- Font Family Classes (for specific overrides) --- */
       .font-raleway {
         font-family: 'Raleway', sans-serif;
       }
       .font-dancing-script {
         font-family: 'Dancing Script', cursive;
       }
+
+      /* --- Typographic Hierarchy (h1-h6, p) --- */
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6 {
+        font-family: 'Raleway', sans-serif;
+        font-weight: 700; /* Consistent bold for headings */
+        letter-spacing: 1px; /* Adds a clean, airy feel */
+      }
+
+      /* --- Responsive Font Sizes --- */
+      h1 {
+        font-size: 2.5rem; /* 40px */
+      }
+      h2 {
+        font-size: 2rem; /* 32px */
+      }
+      h3 {
+        font-size: 1.5rem; /* 24px */
+      }
+
+      @media (min-width: 768px) {
+        h1 {
+          font-size: 3.5rem; /* 56px */
+        }
+        h2 {
+          font-size: 2.75rem; /* 44px */
+        }
+      }
+
+      /* --- Hero Section --- */
       .hero-swiper {
         height: 100vh;
       }
+      .gradient-hero-top {
+        /* Lồng ảnh skyline lên trên lớp màu gradient */
+        background-image: url('static/background-1.jpg'),
+          linear-gradient(105deg, #00833e 0%, #005f73 70%, #002d5b 100%);
+
+        background-size: cover; /* Đảm bảo ảnh nền che phủ toàn bộ khu vực */
+        background-position: center bottom; /* Căn ảnh skyline ở giữa và phía dưới */
+        background-repeat: no-repeat; /* Không lặp lại ảnh */
+      }
+      .bg-hero-bottom {
+        background-color: #002d5b;
+      }
+
+      /* --- Swiper Navigation & Product Slider --- */
       .swiper-pagination-bullet-active {
         background-color: #c2d436 !important;
       }
@@ -66,6 +118,8 @@
       .product-indicator.active {
         background-color: #00833e;
       }
+
+      /* --- Animations --- */
       @keyframes floating {
         0% {
           transform: translateY(0px);
@@ -80,6 +134,7 @@
       .floating {
         animation: floating 6s ease-in-out infinite;
       }
+
       @keyframes marquee {
         from {
           transform: translateX(0);
@@ -88,25 +143,21 @@
           transform: translateX(-50%);
         }
       }
+      .marquee {
+        min-height: 8rem; /* 128px - Đặt chiều cao tối thiểu cho khu vực marquee */
+        display: flex;
+        align-items: center;
+      }
       .marquee-content {
         animation: marquee 40s linear infinite;
+        position: relative; /* Thêm dòng này */
+        z-index: 1; /* Và dòng này */
       }
       .marquee:hover .marquee-content {
         animation-play-state: paused;
       }
-      /* REVERTED: Restored original hero background styles */
-      .gradient-hero-top {
-        background: linear-gradient(
-          105deg,
-          #00833e 0%,
-          #005f73 70%,
-          #002d5b 100%
-        );
-      }
-      .bg-hero-bottom {
-        background-color: #002d5b;
-      }
 
+      /* --- Button & Product Animations --- */
       .btn-hover-effect {
         transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
       }
@@ -135,31 +186,24 @@
         transform: translateY(20px);
         transition: opacity 0.6s ease-out, transform 0.6s ease-out;
       }
-
       .product-slide .product-ul li {
         opacity: 0;
       }
-
-      .product-slide .btn-product {
-        transition: transform 0.2s ease-in-out;
-      }
-
       .product-slide.active .anim-el {
         opacity: 1;
         transform: translateY(0);
       }
-
       .product-slide.active .product-ul li {
         animation: pulse-in 1s ease-out forwards;
       }
 
+      /* --- Staggered Animation Delays --- */
       .product-slide.active .anim-el.product-p {
         transition-delay: 0.1s;
       }
       .product-slide.active .anim-el.product-h2 {
         transition-delay: 0.2s;
       }
-
       .product-slide.active .product-ul li:nth-child(1) {
         animation-delay: 0.4s;
       }
@@ -178,7 +222,6 @@
       .product-slide.active .product-ul li:nth-child(6) {
         animation-delay: 1.4s;
       }
-
       .product-slide.active .anim-el.product-btn-wrapper {
         transition-delay: 1.6s;
       }
@@ -186,6 +229,7 @@
         transition-delay: 0.3s;
       }
 
+      /* --- Contact Section Background --- */
       #contact {
         position: relative;
         background-image: url('https://images.unsplash.com/photo-1521791136064-7986c2920216?q=80&w=2070&auto=format&fit=crop');
@@ -193,6 +237,76 @@
         background-position: center;
         background-attachment: fixed;
       }
+      /* --- START: Pulse Animation for Product Images --- */
+      .pulse-animation {
+        animation: pulse-image 1.5s ease-in-out infinite alternate;
+        transform-origin: center; /* Ensures the zoom is centered */
+      }
+
+      @keyframes pulse-image {
+        from {
+          transform: scale(1);
+        }
+        to {
+          transform: scale(1.1); /* A subtle 3% zoom */
+        }
+      }
+      /* --- END: Pulse Animation for Product Images --- */
+
+      /* --- START: Custom Feature List for Product Slide --- */
+      .feature-list {
+        display: flex;
+        flex-direction: column;
+        gap: 2rem; /* Adds space between feature items */
+      }
+
+      .feature-item {
+        display: flex;
+        align-items: flex-start; /* Aligns icon with the first line of text */
+        gap: 1rem; /* Space between indicator and text */
+      }
+
+      .feature-indicator {
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        flex-shrink: 0; /* Prevents the circle from shrinking */
+        margin-top: 4px; /* Adjust vertical alignment with text */
+      }
+      /* --- END: Custom Feature List for Product Slide --- */
+
+      /* --- START: Product Slide Optimization --- */
+      .product-content-wrapper {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        min-height: 60vh; /* This ensures both columns have a consistent minimum height */
+      }
+      /* --- END: Product Slide Optimization --- */
+
+      /* --- START: Partner Logo Optimization --- */
+      .partner-logo-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 8rem; /* Tăng kích thước từ 6rem (128px) */
+        width: 8rem; /* Tăng kích thước từ 12rem (208px) */
+        padding: 1rem;
+      }
+
+      .partner-logo-img {
+        max-height: 100%;
+        max-width: 100%;
+        object-fit: contain;
+        /* Thay đổi transition từ opacity sang transform để tạo hiệu ứng mượt mà */
+        transition: transform 0.5s ease-in-out;
+      }
+
+      .partner-logo-img:hover {
+        /* Thay đổi hiệu ứng từ làm mờ sang phóng to 10% */
+        transform: scale(2.1);
+      }
+      /* --- END: Partner Logo Optimization --- */
     </style>
 
     <script>
@@ -319,12 +433,12 @@
                       data-depth="0.2"
                     >
                       <div class="relative">
-                        <span
+                        <!-- <span
                           class="absolute -top-8 -left-4 text-8xl md:text-9xl font-raleway font-black opacity-10 text-white z-0"
                           >T86</span
-                        >
+                        > -->
                         <h1
-                          class="relative z-10 text-4xl md:text-6xl font-raleway font-bold tracking-wider leading-tight"
+                          class="relative z-10 text-4xl md:text-6xl font-bold tracking-wider leading-tight"
                         >
                           TÀI CHÍNH CÁ NHÂN
                         </h1>
@@ -350,23 +464,7 @@
                       >
                         <div
                           class="relative w-64 h-64 flex items-center justify-center"
-                        >
-                          <svg
-                            class="absolute inset-0 w-full h-full"
-                            viewBox="0 0 200 200"
-                            xmlns="http://www.w3.org/2000/svg"
-                          >
-                            <path
-                              fill="#00A651"
-                              opacity="0.2"
-                              d="M52.7,-69.1C67.8,-59.8,79.3,-44.5,82.7,-27.8C86.1,-11.1,81.4,7.1,73.1,22.8C64.9,38.5,53.1,51.8,39.2,62.2C25.3,72.6,9.3,80.1,-6.1,81.2C-21.5,82.3,-42.4,77,-56.6,65.6C-70.8,54.2,-78.3,36.7,-79.9,18.7C-81.5,0.7,-77.1,-17.8,-67.2,-32.9C-57.3,-48,-41.9,-59.7,-27.1,-68.8C-12.3,-77.9,2.1,-84.4,17.4,-82.9C32.7,-81.4,48.9,-72.1,52.7,-69.1Z"
-                              transform="translate(100 100)"
-                            />
-                          </svg>
-                          <span class="text-6xl font-bold text-white opacity-90"
-                            >T86</span
-                          >
-                        </div>
+                        ></div>
                       </div>
                     </div>
                   </div>
@@ -378,7 +476,7 @@
                     <div class="flex items-center mb-6">
                       <div class="h-0.5 w-8 bg-t86-green-accent mr-3"></div>
                       <h2
-                        class="text-xl md:text-2xl font-raleway font-light tracking-wider"
+                        class="text-4xl md:text-5xl font-bold tracking-tight leading-tight uppercase anim-el product-h2"
                       >
                         Giá trị cốt lõi
                       </h2>
@@ -487,7 +585,7 @@
               >
                 <div class="max-w-3xl">
                   <h2
-                    class="text-4xl md:text-6xl font-raleway font-bold tracking-wider"
+                    class="text-4xl md:text-5xl font-bold tracking-tight leading-tight uppercase anim-el product-h2"
                   >
                     Sản Phẩm Vượt Trội
                   </h2>
@@ -515,7 +613,7 @@
               >
                 <div class="max-w-3xl">
                   <h2
-                    class="text-4xl md:text-6xl font-raleway font-bold tracking-wider"
+                    class="text-4xl md:text-5xl font-bold tracking-tight leading-tight uppercase anim-el product-h2"
                   >
                     Đối Tác Tin Cậy
                   </h2>
@@ -540,7 +638,7 @@
       <div
         class="bg-t86-blue text-white py-3 overflow-hidden whitespace-nowrap"
       >
-        <div class="news-ticker-content inline-block">
+        <div class="marquee-content inline-block">
           <span class="mx-8"
             ><span
               class="bg-t86-green-light text-white text-xs font-bold px-2 py-1 rounded-md mr-2"
@@ -583,14 +681,14 @@
             <div
               class="container mx-auto px-4 lg:px-6 grid grid-cols-1 md:grid-cols-2 gap-8 items-center h-full"
             >
-              <div class="text-center md:text-left">
+              <div class="product-content-wrapper text-center md:text-left">
                 <p
                   class="font-raleway text-lg text-t86-dark mb-1 anim-el product-p"
                 >
                   VAY MUA
                 </p>
                 <h2
-                  class="text-4xl md:text-5xl font-raleway font-bold tracking-tight leading-tight uppercase anim-el product-h2"
+                  class="text-4xl md:text-5xl font-bold tracking-tight leading-tight uppercase anim-el product-h2"
                 >
                   <span class="text-t86-green-light">iPhone</span> trả góp
                 </h2>
@@ -600,9 +698,8 @@
                     ngân tại quầy
                   </li>
                   <li class="flex items-center justify-center md:justify-start">
-                    <i class="fas fa-check text-t86-green-light mr-3"></i>
-                    Khoản vay lên đến
-                    <span class="font-bold mx-1">15 triệu</span>
+                    <i class="fas fa-check text-t86-green-light mr-3"></i> Khoản
+                    vay lên đến <span class="font-bold mx-1">15 triệu</span>
                   </li>
                   <li class="flex items-center justify-center md:justify-start">
                     <i class="fas fa-check text-t86-green-light mr-3"></i> Linh
@@ -627,18 +724,15 @@
                   </button>
                 </div>
               </div>
-              <div class="anim-el product-visuals">
+              <div class="product-content-wrapper">
                 <div
-                  class="flex flex-col lg:flex-row justify-center items-center space-y-8 lg:space-y-0 lg:space-x-8 mt-8 md:mt-0"
+                  class="anim-el product-visuals grid grid-cols-1 lg:grid-cols-2 gap-8 items-center"
                 >
-                  <div
-                    class="relative w-64 md:w-72 h-[32rem] md:h-[36rem] flex-shrink-0"
-                  >
+                  <div class="flex justify-center">
                     <img
-                      src="static/iphone1.jpg"
-                      class="w-full h-full object-contain"
+                      src="static/iphone-3.png"
+                      class="max-h-[30rem] md:max-h-[36rem] object-contain pulse-animation"
                       alt="iPhone Wallpaper"
-                      onerror="this.onerror=null;this.src='https://placehold.co/400x800/000000/FFFFFF?text=iPhone';"
                     />
                   </div>
                   <div>
@@ -678,7 +772,7 @@
             <div
               class="container mx-auto px-4 lg:px-6 grid grid-cols-1 md:grid-cols-2 gap-8 items-center h-full"
             >
-              <div class="text-center md:text-left">
+              <div class="product-content-wrapper text-center md:text-left">
                 <p
                   class="font-raleway text-lg text-t86-dark mb-1 anim-el product-p"
                 >
@@ -712,10 +806,6 @@
                     <i class="fas fa-check text-t86-green-light mr-3"></i> Thủ
                     tục <span class="font-bold mx-1">nhanh gọn</span>
                   </li>
-                  <li class="flex items-center justify-center md:justify-start">
-                    <i class="fas fa-check text-t86-green-light mr-3"></i> Hỗ
-                    trợ tối đa giới hạn về lịch sử tín dụng
-                  </li>
                 </ul>
                 <div class="mt-8 anim-el product-btn-wrapper">
                   <button
@@ -726,15 +816,48 @@
                   </button>
                 </div>
               </div>
-              <div
-                class="flex justify-center items-center mt-8 md:mt-0 anim-el product-visuals"
-              >
-                <img
-                  src="static/iphone.jpg"
-                  class="max-h-[30rem] md:max-h-[36rem] object-contain"
-                  alt="Supermarket"
-                  onerror="this.onerror=null;this.src='https://placehold.co/600x800/CCCCCC/FFFFFF?text=Image';"
-                />
+              <div class="product-content-wrapper">
+                <div
+                  class="anim-el product-visuals grid grid-cols-1 lg:grid-cols-2 gap-8 items-center"
+                >
+                  <div class="flex justify-center">
+                    <img
+                      src="static/iphone-shopping.png"
+                      class="max-h-[30rem] md:max-h-[36rem] object-contain pulse-animation"
+                      alt="Mua sắm"
+                    />
+                  </div>
+                  <div class="feature-list">
+                    <div class="feature-item">
+                      <div
+                        class="feature-indicator"
+                        style="background-color: #52c41a"
+                      ></div>
+                      <div>
+                        <h3 class="font-bold text-lg text-t86-dark">
+                          Cần gì đắn đo?
+                        </h3>
+                        <p class="text-t86-gray">
+                          Thanh xuân không chờ, vay liền không ngại
+                        </p>
+                      </div>
+                    </div>
+                    <div class="feature-item">
+                      <div
+                        class="feature-indicator"
+                        style="background-color: #faad14"
+                      ></div>
+                      <div>
+                        <h3 class="font-bold text-lg text-t86-dark">
+                          Mua sắm cực chill
+                        </h3>
+                        <p class="text-t86-gray">
+                          Tiền về tức thì, mua gì cũng tiện
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -743,14 +866,14 @@
             <div
               class="container mx-auto px-4 lg:px-6 grid grid-cols-1 md:grid-cols-2 gap-8 items-center h-full"
             >
-              <div class="text-center md:text-left">
+              <div class="product-content-wrapper text-center md:text-left">
                 <p
                   class="font-raleway text-lg text-t86-dark mb-1 anim-el product-p"
                 >
                   VAY MUA
                 </p>
                 <h2
-                  class="text-4xl md:text-5xl font-raleway font-bold tracking-tight leading-tight uppercase text-t86-green-light anim-el product-h2"
+                  class="text-4xl md:text-5xl font-bold tracking-tight leading-tight uppercase anim-el product-h2"
                 >
                   Xe máy
                 </h2>
@@ -777,10 +900,6 @@
                     <i class="fas fa-check text-t86-green-light mr-3"></i> Thủ
                     tục <span class="font-bold mx-1">nhanh gọn</span>
                   </li>
-                  <li class="flex items-center justify-center md:justify-start">
-                    <i class="fas fa-check text-t86-green-light mr-3"></i> Chi
-                    phí vay hợp lý
-                  </li>
                 </ul>
                 <div class="mt-8 anim-el product-btn-wrapper">
                   <button
@@ -791,15 +910,48 @@
                   </button>
                 </div>
               </div>
-              <div
-                class="flex justify-center items-center h-full w-full mt-8 md:mt-0 anim-el product-visuals"
-              >
-                <img
-                  src="static/motorbike.jpg"
-                  class="w-full h-full object-contain max-h-[24rem] md:max-h-[30rem]"
-                  alt="Motorbike"
-                  onerror="this.onerror=null;this.src='https://placehold.co/800x600/CCCCCC/FFFFFF?text=Image';"
-                />
+
+              <div class="product-content-wrapper">
+                <div
+                  class="anim-el product-visuals grid grid-cols-1 lg:grid-cols-2 gap-8 items-center"
+                >
+                  <div class="flex justify-center">
+                    <img
+                      src="static/motorbike.jpg"
+                      class="max-h-[24rem] md:max-h-[30rem] object-contain pulse-animation"
+                      alt="Motorbike"
+                    />
+                  </div>
+
+                  <div>
+                    <p class="font-dancing-script text-3xl text-t86-green mb-4">
+                      Chinh phục mọi nẻo đường
+                    </p>
+                    <h3 class="text-2xl font-bold text-t86-dark mb-6">
+                      Hỗ trợ đa dạng dòng xe
+                    </h3>
+                    <div
+                      class="grid grid-cols-2 gap-x-8 gap-y-4 text-t86-gray font-medium"
+                    >
+                      <div>
+                        <p class="font-bold text-t86-dark">Honda</p>
+                        <p>Vision, Air Blade, SH</p>
+                      </div>
+                      <div>
+                        <p class="font-bold text-t86-dark">Yamaha</p>
+                        <p>Exciter, Sirius, Janus</p>
+                      </div>
+                      <div>
+                        <p class="font-bold text-t86-dark">Suzuki</p>
+                        <p>Raider, Satria</p>
+                      </div>
+                      <div>
+                        <p class="font-bold text-t86-dark">Các hãng khác</p>
+                        <p>Piaggio, SYM,...</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -871,77 +1023,10 @@
             </p>
           </div>
           <div class="relative w-full overflow-hidden marquee">
-            <div class="flex whitespace-nowrap marquee-content">
-              <div
-                class="flex-shrink-0 flex items-center justify-around w-full space-x-16"
-              >
-                <img
-                  src="https://logo.clearbit.com/fpt.vn"
-                  alt="FPT Shop Logo"
-                  class="h-12 lg:h-16 transition-all duration-300 grayscale hover:grayscale-0"
-                />
-                <img
-                  src="https://logo.clearbit.com/thegioididong.com"
-                  alt="The Gioi Di Dong Logo"
-                  class="h-12 lg:h-16 transition-all duration-300 grayscale hover:grayscale-0"
-                />
-                <img
-                  src="https://logo.clearbit.com/samsung.com"
-                  alt="Samsung Logo"
-                  class="h-12 lg:h-16 transition-all duration-300 grayscale hover:grayscale-0"
-                />
-                <img
-                  src="https://logo.clearbit.com/oppo.com"
-                  alt="Oppo Logo"
-                  class="h-12 lg:h-16 transition-all duration-300 grayscale hover:grayscale-0"
-                />
-                <img
-                  src="https://logo.clearbit.com/xiami.com"
-                  alt="Xiaomi Logo"
-                  class="h-12 lg:h-16 transition-all duration-300 grayscale hover:grayscale-0"
-                />
-                <img
-                  src="https://logo.clearbit.com/apple.com"
-                  alt="Apple Logo"
-                  class="h-12 lg:h-16 transition-all duration-300 grayscale hover:grayscale-0"
-                />
-              </div>
-              <div
-                class="flex-shrink-0 flex items-center justify-around w-full space-x-16"
-                aria-hidden="true"
-              >
-                <img
-                  src="https://logo.clearbit.com/fpt.vn"
-                  alt="FPT Shop Logo"
-                  class="h-12 lg:h-16 transition-all duration-300 grayscale hover:grayscale-0"
-                />
-                <img
-                  src="https://logo.clearbit.com/thegioididong.com"
-                  alt="The Gioi Di Dong Logo"
-                  class="h-12 lg:h-16 transition-all duration-300 grayscale hover:grayscale-0"
-                />
-                <img
-                  src="https://logo.clearbit.com/samsung.com"
-                  alt="Samsung Logo"
-                  class="h-12 lg:h-16 transition-all duration-300 grayscale hover:grayscale-0"
-                />
-                <img
-                  src="https://logo.clearbit.com/oppo.com"
-                  alt="Oppo Logo"
-                  class="h-12 lg:h-16 transition-all duration-300 grayscale hover:grayscale-0"
-                />
-                <img
-                  src="https://logo.clearbit.com/xiami.com"
-                  alt="Xiaomi Logo"
-                  class="h-12 lg:h-16 transition-all duration-300 grayscale hover:grayscale-0"
-                />
-                <img
-                  src="https://logo.clearbit.com/apple.com"
-                  alt="Apple Logo"
-                  class="h-12 lg:h-16 transition-all duration-300 grayscale hover:grayscale-0"
-                />
-              </div>
-            </div>
+            <div
+              id="partner-logos-wrapper"
+              class="flex whitespace-nowrap"
+            ></div>
           </div>
         </div>
       </section>
@@ -950,17 +1035,9 @@
         <div
           class="container mx-auto px-4 flex flex-col md:flex-row items-center gap-12"
         >
+          <!-- <div class="md:w-1/2 flex justify-center items-center"></div> -->
           <div class="md:w-1/2">
-            <img
-              src="https://images.unsplash.com/photo-1556740738-b6a63e27c4df?q=80&w=2070&auto=format&fit=crop"
-              alt="Về chúng tôi"
-              class="rounded-lg shadow-2xl"
-            />
-          </div>
-          <div class="md:w-1/2">
-            <h2 class="text-3xl font-bold text-t86-blue mb-4 font-raleway">
-              Về T86
-            </h2>
+            <h2 class="text-3xl font-bold text-t86-blue mb-4">Về T86</h2>
             <p class="text-t86-gray mb-4">
               T86 được thành lập với sứ mệnh mang đến các giải pháp tài chính
               minh bạch, linh hoạt và dễ tiếp cận cho người tiêu dùng Việt Nam.
@@ -977,51 +1054,6 @@
             >
               Khám phá câu chuyện
             </button>
-          </div>
-        </div>
-      </section>
-
-      <section id="contact" class="py-20">
-        <div class="absolute inset-0 bg-t86-light" style="opacity: 0.95"></div>
-
-        <div class="container mx-auto px-4 relative z-10">
-          <div class="text-center mb-12">
-            <h2 class="text-3xl font-bold text-t86-blue mb-4 font-raleway">
-              Liên hệ với chúng tôi
-            </h2>
-            <p class="text-t86-gray max-w-2xl mx-auto">
-              Có câu hỏi? Đừng ngần ngại liên hệ. Đội ngũ của chúng tôi luôn sẵn
-              sàng hỗ trợ bạn.
-            </p>
-          </div>
-          <div class="max-w-4xl mx-auto bg-white p-8 rounded-lg shadow-lg">
-            <form>
-              <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-                <input
-                  type="text"
-                  placeholder="Họ và tên"
-                  class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-t86-green-light"
-                />
-                <input
-                  type="email"
-                  placeholder="Email của bạn"
-                  class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-t86-green-light"
-                />
-              </div>
-              <textarea
-                placeholder="Nội dung tin nhắn..."
-                rows="5"
-                class="w-full p-3 border border-gray-300 rounded-lg mb-6 focus:outline-none focus:ring-2 focus:ring-t86-green-light"
-              ></textarea>
-              <div class="text-center">
-                <button
-                  type="submit"
-                  class="bg-t86-green-light text-white font-bold px-10 py-3 rounded-full hover:bg-t86-green transition-all ripple btn-hover-effect"
-                >
-                  Gửi tin nhắn
-                </button>
-              </div>
-            </form>
           </div>
         </div>
       </section>
@@ -1106,6 +1138,83 @@
 
     <script>
       document.addEventListener('DOMContentLoaded', function () {
+        // --- START: Tự động tải logo đối tác (ĐÃ SỬA LỖI HOVER) ---
+
+        // Danh sách tên tệp logo của bạn
+        const logoFiles = [
+          'logo-24-alo-store.png',
+          'logo-2nam-store.png',
+          'logo-alodidong.png',
+          'logo-andylong.png',
+          'logo-centerphone.png',
+          'logo-chang-trai-ban-tao.jpg',
+          'logo-dai-viet.png',
+          'logo-di-dong-360.png',
+          'logo-didongmy.png',
+          'logo-ha-store.png',
+          'logo-hi-tao-thom.png',
+          'logo-hoang-kien.webp',
+          'logo-huy-hoang.jpg',
+          'logo-hvh76-store.png',
+          'logo-khang-huy-apple.jpg',
+          'logo-ldl-phone.png',
+          'logo-le-quan.png',
+          'logo-lock-mall.png',
+          'logo-minh-hao-store.png',
+          'logo-minh-thang-store.jpg',
+          'logo-mobile-world.png',
+          'logo-ngoc-thanh.png',
+          'logo-nha-tao.png',
+          'logo-phat-thanh.png',
+          'logo-phu-gia.png',
+          'logo-phu-vuong-mobile.png',
+          'logo-renew-zone.png',
+          'logo-sang-apple.png',
+          'logo-taozin.png',
+          'logo-thang-tao.png',
+          'logo-thanh-luxury-mobile.png',
+          'logo-the-gioi-tao.png',
+          'logo-tt-mobile.png',
+          'logo-vien-quang.svg',
+          'logo-vphone.svg',
+          'logo-zen-store.png',
+        ];
+
+        const logoDirectory = './static/logo-partners/';
+        const wrapper = document.getElementById('partner-logos-wrapper');
+
+        // Hàm để tạo một bộ logo
+        function createLogoSet() {
+          const logoSet = document.createElement('div');
+          logoSet.className =
+            'flex-shrink-0 flex items-center justify-around w-full space-x-4';
+
+          logoFiles.forEach((file) => {
+            const logoContainer = document.createElement('div');
+            logoContainer.className = 'partner-logo-container';
+
+            const img = document.createElement('img');
+            img.src = logoDirectory + file;
+            img.alt = file.split('.')[0].replace(/-/g, ' ') + ' Logo';
+
+            // THAY ĐỔI QUAN TRỌNG: Chỉ cần gán class cơ bản
+            img.className = 'partner-logo-img';
+
+            logoContainer.appendChild(img);
+            logoSet.appendChild(logoContainer);
+          });
+          return logoSet;
+        }
+
+        if (wrapper) {
+          wrapper.appendChild(createLogoSet());
+          wrapper.appendChild(createLogoSet());
+
+          setTimeout(() => {
+            wrapper.classList.add('marquee-content');
+          }, 10);
+        }
+        // --- END: Tự động tải logo đối tác ---
         // --- Initialize Swiper for the Hero Section ---
         const swiper = new Swiper('.hero-swiper', {
           loop: true,
