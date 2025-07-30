@@ -24,290 +24,7 @@
       href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&family=Raleway:wght@300;400;500;900&family=Dancing+Script:wght@700&display=swap"
       rel="stylesheet"
     />
-
-    <style>
-      /* --- Base Body and Font Styles --- */
-      body {
-        font-family: 'Montserrat', sans-serif;
-        background-color: #ffffff;
-        color: #212529;
-        line-height: 1.65; /* Improves readability of paragraphs */
-      }
-
-      /* --- Font Family Classes (for specific overrides) --- */
-      .font-raleway {
-        font-family: 'Raleway', sans-serif;
-      }
-      .font-dancing-script {
-        font-family: 'Dancing Script', cursive;
-      }
-
-      /* --- Typographic Hierarchy (h1-h6, p) --- */
-      h1,
-      h2,
-      h3,
-      h4,
-      h5,
-      h6 {
-        font-family: 'Raleway', sans-serif;
-        font-weight: 700; /* Consistent bold for headings */
-        letter-spacing: 1px; /* Adds a clean, airy feel */
-      }
-
-      /* --- Responsive Font Sizes --- */
-      h1 {
-        font-size: 2.5rem; /* 40px */
-      }
-      h2 {
-        font-size: 2rem; /* 32px */
-      }
-      h3 {
-        font-size: 1.5rem; /* 24px */
-      }
-
-      @media (min-width: 768px) {
-        h1 {
-          font-size: 3.5rem; /* 56px */
-        }
-        h2 {
-          font-size: 2.75rem; /* 44px */
-        }
-      }
-
-      /* --- Hero Section --- */
-      .hero-swiper {
-        height: 100vh;
-      }
-      .gradient-hero-top {
-        /* Lồng ảnh skyline lên trên lớp màu gradient */
-        background-image: url('static/background-1.jpg'),
-          linear-gradient(105deg, #00833e 0%, #005f73 70%, #002d5b 100%);
-
-        background-size: cover; /* Đảm bảo ảnh nền che phủ toàn bộ khu vực */
-        background-position: center bottom; /* Căn ảnh skyline ở giữa và phía dưới */
-        background-repeat: no-repeat; /* Không lặp lại ảnh */
-      }
-      .bg-hero-bottom {
-        background-color: #002d5b;
-      }
-
-      /* --- Swiper Navigation & Product Slider --- */
-      .swiper-pagination-bullet-active {
-        background-color: #c2d436 !important;
-      }
-      .swiper-button-next,
-      .swiper-button-prev {
-        color: #c2d436 !important;
-      }
-      .product-slides-container {
-        display: grid;
-        place-items: center;
-      }
-      .product-slide {
-        grid-area: 1 / 1;
-        opacity: 0;
-        visibility: hidden;
-        transition: opacity 1s ease-in-out, visibility 1s;
-        width: 100%;
-      }
-      .product-slide.active {
-        opacity: 1;
-        visibility: visible;
-        z-index: 10;
-      }
-      .product-indicator.active {
-        background-color: #00833e;
-      }
-
-      /* --- Animations --- */
-      @keyframes floating {
-        0% {
-          transform: translateY(0px);
-        }
-        50% {
-          transform: translateY(-20px);
-        }
-        100% {
-          transform: translateY(0px);
-        }
-      }
-      .floating {
-        animation: floating 6s ease-in-out infinite;
-      }
-
-      @keyframes marquee {
-        from {
-          transform: translateX(0);
-        }
-        to {
-          transform: translateX(-50%);
-        }
-      }
-      .marquee {
-        min-height: 8rem; /* 128px - Đặt chiều cao tối thiểu cho khu vực marquee */
-        display: flex;
-        align-items: center;
-      }
-      .marquee-content {
-        animation: marquee 40s linear infinite;
-        position: relative; /* Thêm dòng này */
-        z-index: 1; /* Và dòng này */
-      }
-      .marquee:hover .marquee-content {
-        animation-play-state: paused;
-      }
-
-      /* --- Button & Product Animations --- */
-      .btn-hover-effect {
-        transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
-      }
-      .btn-hover-effect:hover {
-        transform: translateY(-3px);
-        box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
-      }
-
-      @keyframes pulse-in {
-        0% {
-          opacity: 0;
-          transform: translateY(15px) scale(0.95);
-        }
-        70% {
-          opacity: 1;
-          transform: translateY(0) scale(1.02);
-        }
-        100% {
-          opacity: 1;
-          transform: translateY(0) scale(1);
-        }
-      }
-
-      .product-slide .anim-el {
-        opacity: 0;
-        transform: translateY(20px);
-        transition: opacity 0.6s ease-out, transform 0.6s ease-out;
-      }
-      .product-slide .product-ul li {
-        opacity: 0;
-      }
-      .product-slide.active .anim-el {
-        opacity: 1;
-        transform: translateY(0);
-      }
-      .product-slide.active .product-ul li {
-        animation: pulse-in 1s ease-out forwards;
-      }
-
-      /* --- Staggered Animation Delays --- */
-      .product-slide.active .anim-el.product-p {
-        transition-delay: 0.1s;
-      }
-      .product-slide.active .anim-el.product-h2 {
-        transition-delay: 0.2s;
-      }
-      .product-slide.active .product-ul li:nth-child(1) {
-        animation-delay: 0.4s;
-      }
-      .product-slide.active .product-ul li:nth-child(2) {
-        animation-delay: 0.6s;
-      }
-      .product-slide.active .product-ul li:nth-child(3) {
-        animation-delay: 0.8s;
-      }
-      .product-slide.active .product-ul li:nth-child(4) {
-        animation-delay: 1s;
-      }
-      .product-slide.active .product-ul li:nth-child(5) {
-        animation-delay: 1.2s;
-      }
-      .product-slide.active .product-ul li:nth-child(6) {
-        animation-delay: 1.4s;
-      }
-      .product-slide.active .anim-el.product-btn-wrapper {
-        transition-delay: 1.6s;
-      }
-      .product-slide.active .anim-el.product-visuals {
-        transition-delay: 0.3s;
-      }
-
-      /* --- Contact Section Background --- */
-      #contact {
-        position: relative;
-        background-image: url('https://images.unsplash.com/photo-1521791136064-7986c2920216?q=80&w=2070&auto=format&fit=crop');
-        background-size: cover;
-        background-position: center;
-        background-attachment: fixed;
-      }
-      /* --- START: Pulse Animation for Product Images --- */
-      .pulse-animation {
-        animation: pulse-image 1.5s ease-in-out infinite alternate;
-        transform-origin: center; /* Ensures the zoom is centered */
-      }
-
-      @keyframes pulse-image {
-        from {
-          transform: scale(1);
-        }
-        to {
-          transform: scale(1.1); /* A subtle 3% zoom */
-        }
-      }
-      /* --- END: Pulse Animation for Product Images --- */
-
-      /* --- START: Custom Feature List for Product Slide --- */
-      .feature-list {
-        display: flex;
-        flex-direction: column;
-        gap: 2rem; /* Adds space between feature items */
-      }
-
-      .feature-item {
-        display: flex;
-        align-items: flex-start; /* Aligns icon with the first line of text */
-        gap: 1rem; /* Space between indicator and text */
-      }
-
-      .feature-indicator {
-        width: 20px;
-        height: 20px;
-        border-radius: 50%;
-        flex-shrink: 0; /* Prevents the circle from shrinking */
-        margin-top: 4px; /* Adjust vertical alignment with text */
-      }
-      /* --- END: Custom Feature List for Product Slide --- */
-
-      /* --- START: Product Slide Optimization --- */
-      .product-content-wrapper {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        min-height: 60vh; /* This ensures both columns have a consistent minimum height */
-      }
-      /* --- END: Product Slide Optimization --- */
-
-      /* --- START: Partner Logo Optimization --- */
-      .partner-logo-container {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 8rem; /* Tăng kích thước từ 6rem (128px) */
-        width: 8rem; /* Tăng kích thước từ 12rem (208px) */
-        padding: 1rem;
-      }
-
-      .partner-logo-img {
-        max-height: 100%;
-        max-width: 100%;
-        object-fit: contain;
-        /* Thay đổi transition từ opacity sang transform để tạo hiệu ứng mượt mà */
-        transition: transform 0.5s ease-in-out;
-      }
-
-      .partner-logo-img:hover {
-        /* Thay đổi hiệu ứng từ làm mờ sang phóng to 10% */
-        transform: scale(2.1);
-      }
-      /* --- END: Partner Logo Optimization --- */
-    </style>
+    <link rel="stylesheet" href="/t86/css/style.css" />
 
     <script>
       tailwind.config = {
@@ -330,303 +47,82 @@
     </script>
   </head>
   <body class="bg-white">
-    <header class="fixed top-0 left-0 w-full bg-white shadow-md z-50">
-      <nav class="container mx-auto px-4 lg:px-6 py-3">
-        <div class="flex justify-between items-center">
-          <a href="#" class="text-3xl font-bold">
-            <span class="bg-t86-green text-white px-2 py-1 rounded">T</span
-            ><span class="text-t86-green">86</span>
-          </a>
-          <div class="hidden md:flex items-center space-x-8 font-medium">
-            <a
-              href="#home"
-              class="text-t86-dark hover:text-t86-green-light transition-colors"
-              >Trang chủ</a
-            >
-            <a
-              href="#about"
-              class="text-t86-dark hover:text-t86-green-light transition-colors"
-              >Về chúng tôi</a
-            >
-            <a
-              href="#products"
-              class="text-t86-dark hover:text-t86-green-light transition-colors"
-              >Sản phẩm vay</a
-            >
-            <a
-              href="#contact"
-              class="text-t86-dark hover:text-t86-green-light transition-colors"
-              >Chúng tôi gần bạn</a
-            >
-            <a
-              href="#partners"
-              class="text-t86-dark hover:text-t86-green-light transition-colors"
-              >Đối tác</a
-            >
-            <button
-              class="bg-t86-green text-white font-bold px-6 py-2 rounded-full hover:bg-t86-green-light transition-colors ripple btn-hover-effect"
-            >
-              Đăng nhập
-            </button>
-          </div>
-          <button
-            id="mobile-menu-button"
-            class="md:hidden text-2xl text-t86-green"
-          >
-            <i class="fas fa-bars"></i>
-          </button>
-        </div>
-        <div id="mobile-menu" class="hidden md:hidden mt-4 space-y-2">
-          <a
-            href="#home"
-            class="block text-t86-dark hover:text-t86-green-light transition-colors py-2"
-            >Trang chủ</a
-          >
-          <a
-            href="#products"
-            class="block text-t86-dark hover:text-t86-green-light transition-colors py-2"
-            >Sản phẩm</a
-          >
-          <a
-            href="#partners"
-            class="block text-t86-dark hover:text-t86-green-light transition-colors py-2"
-            >Đối tác</a
-          >
-          <a
-            href="#about"
-            class="block text-t86-dark hover:text-t86-green-light transition-colors py-2"
-            >Về chúng tôi</a
-          >
-          <a
-            href="#contact"
-            class="block text-t86-dark hover:text-t86-green-light transition-colors py-2"
-            >Liên hệ</a
-          >
-          <button
-            class="w-full mt-2 bg-t86-green text-white font-bold px-6 py-2 rounded-full hover:bg-t86-green-light transition-colors ripple btn-hover-effect"
-          >
-            Đăng nhập
-          </button>
-        </div>
-      </nav>
-    </header>
+    <header
+      id="header-placeholder"
+      class="fixed top-0 left-0 w-full bg-white shadow-md z-50"
+    ></header>
 
     <main>
       <section id="home" class="relative h-screen">
         <div class="swiper hero-swiper">
           <div class="swiper-wrapper">
-            <div class="swiper-slide">
-              <div class="h-full flex flex-col">
-                <div
-                  class="h-3/5 gradient-hero-top relative text-white flex items-center overflow-hidden"
+            <div
+              id="hero-slide-1"
+              class="swiper-slide w-full h-full flex items-center justify-center md:justify-start text-center md:text-left px-8 md:px-24"
+            >
+              <div id="particles-js-slide1" class="absolute inset-0 z-0"></div>
+
+              <div class="max-w-3xl relative z-10">
+                <h1
+                  class="hero-title text-4xl md:text-6xl font-bold tracking-wider leading-tight"
                 >
-                  <div
-                    id="particles-js-slide1"
-                    class="absolute inset-0 z-0"
-                  ></div>
-                  <div
-                    id="scene"
-                    class="container mx-auto px-4 lg:px-6 z-20 flex justify-between items-center w-full"
-                  >
-                    <div
-                      class="w-full md:w-3/5 text-center md:text-left"
-                      data-depth="0.2"
-                    >
-                      <div class="relative">
-                        <!-- <span
-                          class="absolute -top-8 -left-4 text-8xl md:text-9xl font-raleway font-black opacity-10 text-white z-0"
-                          >T86</span
-                        > -->
-                        <h1
-                          class="relative z-10 text-4xl md:text-6xl font-bold tracking-wider leading-tight"
-                        >
-                          TÀI CHÍNH CÁ NHÂN
-                        </h1>
-                      </div>
-                      <p
-                        id="typing-text"
-                        class="text-lg md:text-2xl font-raleway font-light mt-4 text-white h-16 md:h-8 border-l-4 border-t86-green-accent pl-4"
-                      ></p>
-                      <a
-                        href="about.html"
-                        class="mt-8 bg-t86-green-accent text-t86-blue font-bold px-8 py-3 rounded-full hover:bg-opacity-90 transition-all ripple flex items-center space-x-2 w-fit mx-auto md:mx-0 btn-hover-effect"
-                      >
-                        <span href="about.html">Tìm hiểu thêm</span>
-                        <span>→</span>
-                      </a>
-                    </div>
-                    <div
-                      class="hidden md:block w-2/5 relative"
-                      data-depth="0.4"
-                    >
-                      <div
-                        class="absolute right-0 top-1/2 transform -translate-y-1/2 floating"
-                      >
-                        <div
-                          class="relative w-64 h-64 flex items-center justify-center"
-                        ></div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div
-                  class="h-2/5 bg-hero-bottom relative text-white flex items-center"
+                  TÀI CHÍNH CÁ NHÂN
+                </h1>
+                <p
+                  id="typing-text"
+                  class="hero-subtitle text-lg md:text-2xl font-raleway font-light mt-4 text-white"
+                ></p>
+
+                <a
+                  href="about.html"
+                  class="hero-button mt-8 inline-block bg-t86-green-accent text-t86-blue font-bold px-8 py-3 rounded-full hover:bg-opacity-90 transition-all ripple"
                 >
-                  <div class="container mx-auto px-4 lg:px-6 z-10">
-                    <div class="flex items-center mb-6">
-                      <div class="h-0.5 w-8 bg-t86-green-accent mr-3"></div>
-                      <h2
-                        class="text-4xl md:text-5xl font-bold tracking-tight leading-tight uppercase anim-el product-h2"
-                      >
-                        Giá trị cốt lõi
-                      </h2>
-                    </div>
-                    <div
-                      class="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-8"
-                    >
-                      <div class="flex items-start space-x-4">
-                        <div
-                          class="flex-shrink-0 w-12 h-12 rounded-full bg-t86-green-accent/20 flex items-center justify-center"
-                        >
-                          <i
-                            class="fas fa-users-cog text-2xl text-t86-green-accent"
-                          ></i>
-                        </div>
-                        <div>
-                          <h3 class="font-bold text-white">
-                            Khách hàng là trọng tâm
-                          </h3>
-                          <p class="text-white/70 text-sm mt-1">
-                            T86 cam kết lắng nghe, thấu hiểu và hỗ trợ mọi nhu
-                            cầu của khách hàng với sự chân thành và tận tâm.
-                          </p>
-                          <p class="text-white/90 text-sm italic mt-2">
-                            "Luôn luôn lắng nghe, luôn luôn thấu hiểu"
-                          </p>
-                        </div>
-                      </div>
-                      <div class="flex items-start space-x-4">
-                        <div
-                          class="flex-shrink-0 w-12 h-12 rounded-full bg-t86-green-accent/20 flex items-center justify-center"
-                        >
-                          <i
-                            class="fas fa-shield-alt text-2xl text-t86-green-accent"
-                          ></i>
-                        </div>
-                        <div>
-                          <h3 class="font-bold text-white">
-                            Minh bạch và trách nhiệm
-                          </h3>
-                          <p class="text-white/70 text-sm mt-1">
-                            Quy trình dịch vụ và điều kiện cho vay dễ hiểu, rõ
-                            ràng giúp khách hàng an tâm với mỗi lựa chọn.
-                          </p>
-                          <p class="text-white/90 text-sm italic mt-2">
-                            "Uy tín là nền tảng, trách nhiệm là nguyên tắc"
-                          </p>
-                        </div>
-                      </div>
-                      <div class="flex items-start space-x-4">
-                        <div
-                          class="flex-shrink-0 w-12 h-12 rounded-full bg-t86-green-accent/20 flex items-center justify-center"
-                        >
-                          <i
-                            class="fas fa-lightbulb text-2xl text-t86-green-accent"
-                          ></i>
-                        </div>
-                        <div>
-                          <h3 class="font-bold text-white">
-                            Đổi mới và linh hoạt
-                          </h3>
-                          <p class="text-white/70 text-sm mt-1">
-                            Cải tiến công nghệ và quy trình, cung cấp sản phẩm
-                            tới tay khách hàng nhanh chóng và thuận tiện.
-                          </p>
-                          <p class="text-white/90 text-sm italic mt-2">
-                            "Giải pháp linh hoạt, trải nghiệm tối ưu"
-                          </p>
-                        </div>
-                      </div>
-                      <div class="flex items-start space-x-4">
-                        <div
-                          class="flex-shrink-0 w-12 h-12 rounded-full bg-t86-green-accent/20 flex items-center justify-center"
-                        >
-                          <i
-                            class="fas fa-user-graduate text-2xl text-t86-green-accent"
-                          ></i>
-                        </div>
-                        <div>
-                          <h3 class="font-bold text-white">
-                            Phát triển con người
-                          </h3>
-                          <p class="text-white/70 text-sm mt-1">
-                            Môi trường làm việc tích cực, nơi mỗi cá nhân đều
-                            được học hỏi, phát triển và mang lại giá trị.
-                          </p>
-                          <p class="text-white/90 text-sm italic mt-2">
-                            "Nhân viên là tài sản, đội ngũ là sức mạnh"
-                          </p>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+                  Tìm hiểu thêm →
+                </a>
               </div>
             </div>
 
             <div
-              class="swiper-slide bg-cover bg-center"
-              style="
-                background-image: url('https://images.unsplash.com/photo-1556742502-ec7c0e2f34b1?q=80&w=2070&auto=format&fit=crop');
-              "
+              id="hero-slide-2"
+              class="swiper-slide w-full h-full flex items-center justify-center text-white text-center p-4"
             >
-              <div
-                class="w-full h-full flex items-center justify-center bg-black/50 text-white text-center p-4"
-              >
-                <div class="max-w-3xl">
-                  <h2
-                    class="text-4xl md:text-5xl font-bold tracking-tight leading-tight uppercase anim-el product-h2"
-                  >
-                    Sản Phẩm Vượt Trội
-                  </h2>
-                  <p class="mt-4 text-lg md:text-xl">
-                    Tìm kiếm giải pháp tài chính phù hợp nhất cho bạn.
-                  </p>
-                  <a
-                    href="#products"
-                    class="mt-8 inline-block bg-t86-green-accent text-t86-blue font-bold px-8 py-3 rounded-full hover:bg-opacity-90 transition-all ripple btn-hover-effect"
-                  >
-                    Khám Phá Sản Phẩm
-                  </a>
-                </div>
+              <div class="max-w-3xl relative z-10">
+                <h2
+                  class="hero-title text-4xl md:text-5xl font-bold tracking-tight leading-tight uppercase"
+                >
+                  Sản Phẩm Vượt Trội
+                </h2>
+                <p class="hero-subtitle mt-4 text-lg md:text-xl">
+                  Tìm kiếm giải pháp tài chính phù hợp nhất cho bạn.
+                </p>
+                <a
+                  href="#products"
+                  class="hero-button mt-8 inline-block bg-t86-green-accent text-t86-blue font-bold px-8 py-3 rounded-full hover:bg-opacity-90 transition-all ripple"
+                >
+                  Khám Phá Sản Phẩm
+                </a>
               </div>
             </div>
 
             <div
-              class="swiper-slide bg-cover bg-center"
-              style="
-                background-image: url('https://images.unsplash.com/photo-1543269865-cbf427effbad?q=80&w=2070&auto=format&fit=crop');
-              "
+              id="hero-slide-3"
+              class="swiper-slide w-full h-full flex items-center justify-center text-white text-center p-4"
             >
-              <div
-                class="w-full h-full flex items-center justify-center bg-black/50 text-white text-center p-4"
-              >
-                <div class="max-w-3xl">
-                  <h2
-                    class="text-4xl md:text-5xl font-bold tracking-tight leading-tight uppercase anim-el product-h2"
-                  >
-                    Đối Tác Tin Cậy
-                  </h2>
-                  <p class="mt-4 text-lg md:text-xl">
-                    Cùng nhau phát triển bền vững và thành công.
-                  </p>
-                  <a
-                    href="#partners"
-                    class="mt-8 inline-block bg-t86-green-accent text-t86-blue font-bold px-8 py-3 rounded-full hover:bg-opacity-90 transition-all ripple btn-hover-effect"
-                  >
-                    Xem Đối Tác
-                  </a>
-                </div>
+              <div class="max-w-3xl relative z-10">
+                <h2
+                  class="hero-title text-4xl md:text-5xl font-bold tracking-tight leading-tight uppercase"
+                >
+                  Đối Tác Tin Cậy
+                </h2>
+                <p class="hero-subtitle mt-4 text-lg md:text-xl">
+                  Cùng nhau phát triển bền vững và thành công.
+                </p>
+                <a
+                  href="#partners"
+                  class="hero-button mt-8 inline-block bg-t86-green-accent text-t86-blue font-bold px-8 py-3 rounded-full hover:bg-opacity-90 transition-all"
+                >
+                  Xem Đối Tác
+                </a>
               </div>
             </div>
           </div>
@@ -724,10 +220,8 @@
                   </button>
                 </div>
               </div>
-              <div class="product-content-wrapper">
-                <div
-                  class="anim-el product-visuals grid grid-cols-1 lg:grid-cols-2 gap-8 items-center"
-                >
+              <div class="product-content-wrapper anim-el product-visuals">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
                   <div class="flex justify-center">
                     <img
                       src="static/iphone-3.png"
@@ -785,25 +279,24 @@
                 </h2>
                 <ul class="mt-6 space-y-3 text-md text-t86-dark/90 product-ul">
                   <li class="flex items-center justify-center md:justify-start">
-                    <i class="fas fa-check text-t86-green-light mr-3"></i>
-                    <span class="font-bold mr-1">15 phút</span> giải ngân
+                    <i class="fas fa-check text-t86-green-light mr-3"></i
+                    ><span class="font-bold mr-1">15 phút</span> giải ngân
                   </li>
                   <li class="flex items-center justify-center md:justify-start">
-                    <i class="fas fa-check text-t86-green-light mr-3"></i>
-                    Khoản vay lên đến
-                    <span class="font-bold mx-1">15 triệu</span>
+                    <i class="fas fa-check text-t86-green-light mr-3"></i>Khoản
+                    vay lên đến <span class="font-bold mx-1">15 triệu</span>
                   </li>
                   <li class="flex items-center justify-center md:justify-start">
-                    <i class="fas fa-check text-t86-green-light mr-3"></i> Linh
+                    <i class="fas fa-check text-t86-green-light mr-3"></i>Linh
                     hoạt kỳ hạn vay từ
                     <span class="font-bold mx-1">1 đến 6 tháng</span>
                   </li>
                   <li class="flex items-center justify-center md:justify-start">
-                    <i class="fas fa-check text-t86-green-light mr-3"></i>
-                    Không cần tài sản thế chấp
+                    <i class="fas fa-check text-t86-green-light mr-3"></i>Không
+                    cần tài sản thế chấp
                   </li>
                   <li class="flex items-center justify-center md:justify-start">
-                    <i class="fas fa-check text-t86-green-light mr-3"></i> Thủ
+                    <i class="fas fa-check text-t86-green-light mr-3"></i>Thủ
                     tục <span class="font-bold mx-1">nhanh gọn</span>
                   </li>
                 </ul>
@@ -816,10 +309,8 @@
                   </button>
                 </div>
               </div>
-              <div class="product-content-wrapper">
-                <div
-                  class="anim-el product-visuals grid grid-cols-1 lg:grid-cols-2 gap-8 items-center"
-                >
+              <div class="product-content-wrapper anim-el product-visuals">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
                   <div class="flex justify-center">
                     <img
                       src="static/iphone-shopping.png"
@@ -879,25 +370,24 @@
                 </h2>
                 <ul class="mt-6 space-y-3 text-md text-t86-dark/90 product-ul">
                   <li class="flex items-center justify-center md:justify-start">
-                    <i class="fas fa-check text-t86-green-light mr-3"></i>
-                    <span class="font-bold mr-1">15 phút</span> giải ngân
+                    <i class="fas fa-check text-t86-green-light mr-3"></i
+                    ><span class="font-bold mr-1">15 phút</span> giải ngân
                   </li>
                   <li class="flex items-center justify-center md:justify-start">
-                    <i class="fas fa-check text-t86-green-light mr-3"></i>
-                    Khoản vay lên đến
-                    <span class="font-bold mx-1">30 triệu</span>
+                    <i class="fas fa-check text-t86-green-light mr-3"></i>Khoản
+                    vay lên đến <span class="font-bold mx-1">30 triệu</span>
                   </li>
                   <li class="flex items-center justify-center md:justify-start">
-                    <i class="fas fa-check text-t86-green-light mr-3"></i> Linh
+                    <i class="fas fa-check text-t86-green-light mr-3"></i>Linh
                     hoạt kỳ hạn vay từ
                     <span class="font-bold mx-1">1 đến 6 tháng</span>
                   </li>
                   <li class="flex items-center justify-center md:justify-start">
-                    <i class="fas fa-check text-t86-green-light mr-3"></i>
-                    Không cần tài sản thế chấp
+                    <i class="fas fa-check text-t86-green-light mr-3"></i>Không
+                    cần tài sản thế chấp
                   </li>
                   <li class="flex items-center justify-center md:justify-start">
-                    <i class="fas fa-check text-t86-green-light mr-3"></i> Thủ
+                    <i class="fas fa-check text-t86-green-light mr-3"></i>Thủ
                     tục <span class="font-bold mx-1">nhanh gọn</span>
                   </li>
                 </ul>
@@ -910,11 +400,8 @@
                   </button>
                 </div>
               </div>
-
-              <div class="product-content-wrapper">
-                <div
-                  class="anim-el product-visuals grid grid-cols-1 lg:grid-cols-2 gap-8 items-center"
-                >
+              <div class="product-content-wrapper anim-el product-visuals">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
                   <div class="flex justify-center">
                     <img
                       src="static/motorbike.jpg"
@@ -922,7 +409,6 @@
                       alt="Motorbike"
                     />
                   </div>
-
                   <div>
                     <p class="font-dancing-script text-3xl text-t86-green mb-4">
                       Chinh phục mọi nẻo đường
@@ -974,43 +460,50 @@
         </div>
       </section>
 
-      <section
-        id="stats"
-        class="py-20 text-white bg-gradient-to-r from-t86-green to-t86-blue"
-      >
-        <div class="container mx-auto px-4">
+      <section id="stats" class="relative text-white overflow-hidden">
+        <div id="stats-background-grid" class="absolute inset-0 z-0">
+          <div class="stats-bg-column"></div>
+          <div class="stats-bg-column"></div>
+          <div class="stats-bg-column"></div>
+          <div class="stats-bg-column"></div>
+        </div>
+
+        <div
+          class="absolute inset-0 bg-gradient-to-r from-t86-green to-t86-blue opacity-80 z-1"
+        ></div>
+
+        <div class="container mx-auto px-4 relative z-10">
           <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
             <div>
               <h3
-                class="text-5xl font-bold text-t86-green-accent mb-2"
+                class="text-7xl font-bold text-t86-green-accent mb-2"
                 data-counter="10000"
               >
                 0
               </h3>
-              <p class="font-semibold text-white/70">Khách hàng hài lòng</p>
+              <p class="font-semibold text-white/80">Khách hàng hài lòng</p>
             </div>
             <div>
               <h3
-                class="text-5xl font-bold text-t86-green-accent mb-2"
-                data-counter="50"
+                class="text-7xl font-bold text-t86-green-accent mb-2"
+                data-counter="979"
               >
                 0
               </h3>
-              <p class="font-semibold text-white/70">Đối tác tin cậy</p>
+              <p class="font-semibold text-white/80">Đối tác tin cậy</p>
             </div>
             <div>
               <h3
-                class="text-5xl font-bold text-t86-green-accent mb-2"
-                data-counter="20"
+                class="text-7xl font-bold text-t86-green-accent mb-2"
+                data-counter="300"
               >
                 0
               </h3>
-              <p class="font-semibold text-white/70">Chi nhánh toàn quốc</p>
+              <p class="font-semibold text-white/80">Chi nhánh toàn quốc</p>
             </div>
           </div>
         </div>
       </section>
-
       <section id="partners" class="py-20 bg-white">
         <div class="container mx-auto px-4">
           <div class="text-center mb-12">
@@ -1031,11 +524,10 @@
         </div>
       </section>
 
-      <section id="about" class="py-20">
+      <!-- <section id="about" class="py-20">
         <div
           class="container mx-auto px-4 flex flex-col md:flex-row items-center gap-12"
         >
-          <!-- <div class="md:w-1/2 flex justify-center items-center"></div> -->
           <div class="md:w-1/2">
             <h2 class="text-3xl font-bold text-t86-blue mb-4">Về T86</h2>
             <p class="text-t86-gray mb-4">
@@ -1056,360 +548,15 @@
             </button>
           </div>
         </div>
-      </section>
+      </section> -->
     </main>
 
-    <footer class="bg-t86-blue text-white">
-      <div class="container mx-auto px-4 py-12">
-        <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
-          <div>
-            <h3 class="text-2xl font-bold mb-4">
-              <span class="bg-white text-t86-green px-2 py-1 rounded">T</span>86
-            </h3>
-            <p class="text-white/70">
-              Giải pháp tài chính cá nhân tin cậy và minh bạch.
-            </p>
-          </div>
-          <div>
-            <h4 class="font-bold text-lg mb-4">Sản phẩm</h4>
-            <ul>
-              <li class="mb-2">
-                <a href="#" class="text-white/70 hover:text-white"
-                  >Vay mua xe</a
-                >
-              </li>
-              <li class="mb-2">
-                <a href="#" class="text-white/70 hover:text-white"
-                  >Vay sinh viên</a
-                >
-              </li>
-              <li class="mb-2">
-                <a href="#" class="text-white/70 hover:text-white"
-                  >Vay tiêu dùng</a
-                >
-              </li>
-            </ul>
-          </div>
-          <div>
-            <h4 class="font-bold text-lg mb-4">Công ty</h4>
-            <ul>
-              <li class="mb-2">
-                <a href="#" class="text-white/70 hover:text-white"
-                  >Về chúng tôi</a
-                >
-              </li>
-              <li class="mb-2">
-                <a href="#" class="text-white/70 hover:text-white"
-                  >Tuyển dụng</a
-                >
-              </li>
-              <li class="mb-2">
-                <a href="#" class="text-white/70 hover:text-white">Đối tác</a>
-              </li>
-            </ul>
-          </div>
-          <div>
-            <h4 class="font-bold text-lg mb-4">Kết nối</h4>
-            <div class="flex space-x-4">
-              <a href="#" class="text-2xl text-white/70 hover:text-white"
-                ><i class="fab fa-facebook-f"></i
-              ></a>
-              <a href="#" class="text-2xl text-white/70 hover:text-white"
-                ><i class="fab fa-instagram"></i
-              ></a>
-              <a href="#" class="text-2xl text-white/70 hover:text-white"
-                ><i class="fab fa-linkedin-in"></i
-              ></a>
-            </div>
-          </div>
-        </div>
-        <div
-          class="border-t border-white/20 mt-8 pt-6 text-center text-white/50 text-sm"
-        >
-          <p>&copy; 2025 T86 Finance. All Rights Reserved.</p>
-        </div>
-      </div>
-    </footer>
+    <footer id="footer-placeholder"></footer>
 
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/parallax/3.1.0/parallax.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
-
-    <script>
-      document.addEventListener('DOMContentLoaded', function () {
-        // --- START: Tự động tải logo đối tác (ĐÃ SỬA LỖI HOVER) ---
-
-        // Danh sách tên tệp logo của bạn
-        const logoFiles = [
-          'logo-24-alo-store.png',
-          'logo-2nam-store.png',
-          'logo-alodidong.png',
-          'logo-andylong.png',
-          'logo-centerphone.png',
-          'logo-chang-trai-ban-tao.jpg',
-          'logo-dai-viet.png',
-          'logo-di-dong-360.png',
-          'logo-didongmy.png',
-          'logo-ha-store.png',
-          'logo-hi-tao-thom.png',
-          'logo-hoang-kien.webp',
-          'logo-huy-hoang.jpg',
-          'logo-hvh76-store.png',
-          'logo-khang-huy-apple.jpg',
-          'logo-ldl-phone.png',
-          'logo-le-quan.png',
-          'logo-lock-mall.png',
-          'logo-minh-hao-store.png',
-          'logo-minh-thang-store.jpg',
-          'logo-mobile-world.png',
-          'logo-ngoc-thanh.png',
-          'logo-nha-tao.png',
-          'logo-phat-thanh.png',
-          'logo-phu-gia.png',
-          'logo-phu-vuong-mobile.png',
-          'logo-renew-zone.png',
-          'logo-sang-apple.png',
-          'logo-taozin.png',
-          'logo-thang-tao.png',
-          'logo-thanh-luxury-mobile.png',
-          'logo-the-gioi-tao.png',
-          'logo-tt-mobile.png',
-          'logo-vien-quang.svg',
-          'logo-vphone.svg',
-          'logo-zen-store.png',
-        ];
-
-        const logoDirectory = './static/logo-partners/';
-        const wrapper = document.getElementById('partner-logos-wrapper');
-
-        // Hàm để tạo một bộ logo
-        function createLogoSet() {
-          const logoSet = document.createElement('div');
-          logoSet.className =
-            'flex-shrink-0 flex items-center justify-around w-full space-x-4';
-
-          logoFiles.forEach((file) => {
-            const logoContainer = document.createElement('div');
-            logoContainer.className = 'partner-logo-container';
-
-            const img = document.createElement('img');
-            img.src = logoDirectory + file;
-            img.alt = file.split('.')[0].replace(/-/g, ' ') + ' Logo';
-
-            // THAY ĐỔI QUAN TRỌNG: Chỉ cần gán class cơ bản
-            img.className = 'partner-logo-img';
-
-            logoContainer.appendChild(img);
-            logoSet.appendChild(logoContainer);
-          });
-          return logoSet;
-        }
-
-        if (wrapper) {
-          wrapper.appendChild(createLogoSet());
-          wrapper.appendChild(createLogoSet());
-
-          setTimeout(() => {
-            wrapper.classList.add('marquee-content');
-          }, 10);
-        }
-        // --- END: Tự động tải logo đối tác ---
-        // --- Initialize Swiper for the Hero Section ---
-        const swiper = new Swiper('.hero-swiper', {
-          loop: true,
-          effect: 'fade',
-          autoplay: {
-            delay: 8000,
-            disableOnInteraction: false,
-          },
-          pagination: {
-            el: '.swiper-pagination',
-            clickable: true,
-          },
-          navigation: {
-            nextEl: '.swiper-button-next',
-            prevEl: '.swiper-button-prev',
-          },
-        });
-        // --- Khởi tạo hiệu ứng hạt bay (Particles.js) ---
-        const particlesContainer = document.getElementById(
-          'particles-js-slide1'
-        );
-        if (particlesContainer && typeof particlesJS !== 'undefined') {
-          particlesJS('particles-js-slide1', {
-            particles: {
-              number: { value: 50 },
-              color: { value: '#ffffff' },
-              shape: { type: 'circle' },
-              opacity: { value: 0.3, random: true },
-              size: { value: 2, random: true },
-              line_linked: { enable: false },
-              move: {
-                enable: true,
-                speed: 1,
-                direction: 'none',
-                out_mode: 'out',
-              },
-            },
-            retina_detect: true,
-          });
-        }
-
-        // --- Khởi tạo hiệu ứng Parallax ---
-        const scene = document.getElementById('scene');
-        if (scene) {
-          const parallaxInstance = new Parallax(scene);
-        }
-
-        // --- Logic cho Slider TÙY CHỈNH (CHO SẢN PHẨM) ---
-        function setupSlider(
-          containerSelector,
-          slideSelector,
-          indicatorSelector
-        ) {
-          const container = document.querySelector(containerSelector);
-          if (!container) return;
-
-          const slides = container.querySelectorAll(slideSelector);
-          const indicators = document.querySelectorAll(indicatorSelector);
-
-          if (slides.length === 0) return;
-
-          let currentSlide = 0;
-          let slideInterval;
-
-          function showSlide(index) {
-            if (index >= slides.length) index = 0;
-            if (index < 0) index = slides.length - 1;
-
-            slides.forEach((slide) => slide.classList.remove('active'));
-            indicators.forEach((indicator) =>
-              indicator.classList.remove('active')
-            );
-
-            currentSlide = index;
-
-            slides[currentSlide].classList.add('active');
-            if (indicators.length > 0)
-              indicators[currentSlide].classList.add('active');
-          }
-
-          function startSlideShow() {
-            clearInterval(slideInterval);
-            slideInterval = setInterval(() => {
-              showSlide(currentSlide + 1);
-            }, 7000);
-          }
-
-          indicators.forEach((indicator, index) => {
-            indicator.addEventListener('click', function () {
-              showSlide(index);
-              startSlideShow();
-            });
-          });
-
-          showSlide(0);
-          startSlideShow();
-        }
-
-        // This call remains for the custom product slider.
-        setupSlider(
-          '#products .product-slides-container',
-          '.product-slide',
-          '.product-indicator'
-        );
-
-        // --- Logic cho hiệu ứng gõ chữ ---
-        const typingElement = document.getElementById('typing-text');
-        const texts = ['Tài chính nhanh gọn, sản phẩm trong tầm tay.'];
-        let textIndex = 0;
-        let charIndex = 0;
-
-        function type() {
-          if (typingElement && charIndex < texts[textIndex].length) {
-            typingElement.innerHTML =
-              texts[textIndex].substring(0, charIndex + 1) +
-              '<span class="typing-cursor"></span>';
-            charIndex++;
-            setTimeout(type, 100);
-          } else {
-            // No erase, just keep the text
-          }
-        }
-        if (typingElement) type();
-
-        // --- Logic cho hiệu ứng Ripple ---
-        const rippleButtons = document.querySelectorAll('.ripple');
-        rippleButtons.forEach((button) => {
-          button.addEventListener('click', function (e) {
-            const rect = this.getBoundingClientRect();
-            const circle = document.createElement('span');
-            const diameter = Math.max(this.clientWidth, this.clientHeight);
-            const radius = diameter / 2;
-
-            circle.style.width = circle.style.height = `${diameter}px`;
-            circle.style.left = `${e.clientX - rect.left - radius}px`;
-            circle.style.top = `${e.clientY - rect.top - radius}px`;
-            circle.classList.add('ripple-effect');
-
-            const ripple = this.getElementsByClassName('ripple-effect')[0];
-            if (ripple) {
-              ripple.remove();
-            }
-            this.appendChild(circle);
-          });
-        });
-
-        // --- Logic cho hiệu ứng đếm số ---
-        const counters = document.querySelectorAll('[data-counter]');
-        const speed = 200;
-
-        const animateCounter = (counter) => {
-          const target = +counter.getAttribute('data-counter');
-          const updateCount = () => {
-            const count = +counter.innerText.replace(/\./g, '');
-            const increment = target / speed;
-
-            if (count < target) {
-              counter.innerText = Math.ceil(count + increment).toLocaleString(
-                'vi-VN'
-              );
-              setTimeout(updateCount, 1);
-            } else {
-              counter.innerText = target.toLocaleString('vi-VN');
-            }
-          };
-          updateCount();
-        };
-
-        const observer = new IntersectionObserver(
-          (entries, observer) => {
-            entries.forEach((entry) => {
-              if (entry.isIntersecting) {
-                animateCounter(entry.target);
-                observer.unobserve(entry.target);
-              }
-            });
-          },
-          { threshold: 0.5 }
-        );
-
-        counters.forEach((counter) => {
-          observer.observe(counter);
-        });
-        // --- Logic cho Mobile Menu ---
-        const mobileMenuButton = document.getElementById('mobile-menu-button');
-        const mobileMenu = document.getElementById('mobile-menu');
-        mobileMenuButton.addEventListener('click', () => {
-          mobileMenu.classList.toggle('hidden');
-        });
-      });
-
-      AOS.init({
-        duration: 1000, // Animation duration in milliseconds
-        once: true, // Whether animation should happen only once - while scrolling down
-      });
-    </script>
+    <script src="js/main.js"></script>
   </body>
 </html>

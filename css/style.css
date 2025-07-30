@@ -1,0 +1,401 @@
+/* --- Base Body and Font Styles --- */
+body {
+  font-family: 'Montserrat', sans-serif;
+  background-color: #ffffff;
+  color: #212529;
+  line-height: 1.65;
+}
+
+/* --- Typographic Hierarchy --- */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: 'Raleway', sans-serif;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+h1 {
+  font-size: 2.5rem;
+}
+h2 {
+  font-size: 2rem;
+}
+h3 {
+  font-size: 1.5rem;
+}
+.font-dancing-script {
+  font-family: 'Dancing Script', cursive;
+}
+
+@media (min-width: 768px) {
+  h1 {
+    font-size: 3.5rem;
+  }
+  h2 {
+    font-size: 2.75rem;
+  }
+}
+
+/* === HERO SECTION STYLES === */
+.hero-swiper {
+  height: 100vh;
+}
+
+/* --- Ken Burns Background Effect --- */
+@keyframes kenburns {
+  0% {
+    transform: scale(1) translate(0, 0);
+  }
+  100% {
+    transform: scale(1.1) translate(-2%, 2%);
+  }
+}
+
+.hero-swiper .swiper-slide {
+  overflow: hidden;
+}
+#hero-slide-1::before,
+#hero-slide-2::before,
+#hero-slide-3::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  animation: kenburns 20s ease-in-out infinite alternate;
+}
+
+/* --- Slide-specific Backgrounds --- */
+#hero-slide-1::before {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),
+    url('static/background-1.jpg'),
+    linear-gradient(105deg, #00833e 0%, #005f73 70%, #002d5b 100%);
+  background-position: center bottom, center;
+}
+#hero-slide-2::before {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+    url('https://images.unsplash.com/photo-1556742502-ec7c0e2f34b1?q=80&w=2070&auto=format&fit=crop');
+}
+#hero-slide-3::before {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+    url('https://images.unsplash.com/photo-1543269865-cbf4text-reveal7effbad?q=80&w=2070&auto=format&fit=crop');
+}
+
+/* --- Text Reveal Animation --- */
+@keyframes text-reveal {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.hero-title,
+.hero-subtitle,
+.hero-button {
+  opacity: 0;
+}
+.swiper-slide-active .hero-title {
+  animation: text-reveal 0.8s ease-out forwards 0.3s;
+}
+.swiper-slide-active .hero-subtitle {
+  animation: text-reveal 0.8s ease-out forwards 0.5s;
+}
+.swiper-slide-active .hero-button {
+  animation: text-reveal 0.8s ease-out forwards 0.7s;
+}
+
+/* --- **NEW** Vibrant Styles for Hero Slide 1 --- */
+#hero-slide-1 .hero-title {
+  color: #c2d436; /* Màu xanh lá mạ nổi bật */
+  text-shadow: 1px 1px 8px rgba(0, 0, 0, 0.5); /* Thêm bóng đổ để chữ rõ hơn */
+}
+#hero-slide-1 .hero-subtitle {
+  color: #f0f0f0; /* Màu trắng ngà, dịu mắt hơn */
+  font-weight: 300;
+}
+#hero-slide-1 .hero-button {
+  background-color: #c2d436; /* Đồng bộ màu với tiêu đề */
+  color: #002d5b; /* Chữ màu xanh đậm để tương phản */
+  box-shadow: 0 4px 20px rgba(194, 212, 54, 0.4);
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+#hero-slide-1 .hero-button:hover {
+  background-color: #00a651;
+  transform: scale(1.05);
+  cursor: pointer;
+}
+/* === END HERO SECTION STYLES === */
+
+/* === SLIDER & ANIMATION FIXES === */
+.swiper-pagination-bullet-active {
+  background-color: #c2d436 !important;
+}
+.swiper-button-next,
+.swiper-button-prev {
+  color: #c2d436 !important;
+}
+
+/* Fix for overlapping slides */
+.hero-swiper .swiper-slide {
+  opacity: 0;
+  transition-property: opacity;
+}
+.hero-swiper .swiper-slide-active {
+  opacity: 1;
+  z-index: 1;
+}
+
+/* --- PRODUCT SECTION --- */
+.product-slides-container {
+  display: grid;
+  place-items: center;
+}
+.product-slide {
+  grid-area: 1 / 1;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 1s ease-in-out, visibility 1s;
+  width: 100%;
+}
+.product-slide.active {
+  opacity: 1;
+  visibility: visible;
+  z-index: 10;
+}
+.product-indicator.active {
+  background-color: #00833e;
+}
+.product-content-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 60vh;
+}
+
+/* Product Animations */
+@keyframes pulse-in {
+  0% {
+    opacity: 0;
+    transform: translateY(15px) scale(0.95);
+  }
+  70% {
+    opacity: 1;
+    transform: translateY(0) scale(1.02);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+.product-slide .anim-el {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+.product-slide .product-ul li {
+  opacity: 0;
+}
+.product-slide.active .anim-el {
+  opacity: 1;
+  transform: translateY(0);
+}
+.product-slide.active .anim-el.product-p {
+  transition-delay: 0.1s;
+}
+.product-slide.active .anim-el.product-h2 {
+  transition-delay: 0.2s;
+}
+.product-slide.active .anim-el.product-visuals {
+  transition-delay: 0.3s;
+}
+.product-slide.active .anim-el.product-btn-wrapper {
+  transition-delay: 1.6s;
+}
+.product-slide.active .product-ul li {
+  animation: pulse-in 0.8s ease-out forwards;
+}
+.product-slide.active .product-ul li:nth-child(1) {
+  animation-delay: 0.4s;
+}
+.product-slide.active .product-ul li:nth-child(2) {
+  animation-delay: 0.6s;
+}
+.product-slide.active .product-ul li:nth-child(3) {
+  animation-delay: 0.8s;
+}
+.product-slide.active .product-ul li:nth-child(4) {
+  animation-delay: 1s;
+}
+.product-slide.active .product-ul li:nth-child(5) {
+  animation-delay: 1.2s;
+}
+
+@keyframes pulse-image {
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(1.1);
+  }
+}
+.pulse-animation {
+  animation: pulse-image 1.5s ease-in-out infinite alternate;
+  transform-origin: center;
+}
+
+/* --- MARQUEE --- */
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+.marquee {
+  min-height: 8rem;
+  display: flex;
+  align-items: center;
+}
+.marquee-content {
+  animation: marquee 40s linear infinite;
+  position: relative;
+  z-index: 1;
+}
+.marquee:hover .marquee-content {
+  animation-play-state: paused;
+}
+
+/* --- PARTNER LOGOS --- */
+.partner-logo-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 8rem;
+  width: 13rem;
+  padding: 1rem;
+}
+.partner-logo-img {
+  max-height: 100%;
+  max-width: 100%;
+  object-fit: contain;
+  transition: transform 0.3s ease-in-out;
+}
+.partner-logo-img:hover {
+  transform: scale(2.1);
+}
+
+/* --- FOOTER --- */
+.footer-separator {
+  width: 1px;
+  height: 80px;
+  background-color: #d1d5db;
+}
+
+/* --- STAR CURSOR --- */
+.star-cursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  font-size: 1.5rem;
+  color: #c2d436;
+  transition: transform 1s ease-out, opacity 1s ease-out;
+  z-index: 9999;
+}
+/* === PRODUCT SECTION CONTENT STYLING === */
+
+/* --- Styling for the main title (e.g., "TIÊU DÙNG LINH HOẠT") --- */
+.product-slide .product-h2 {
+  color: #00833e; /* Màu xanh lá cây đậm cho tiêu đề chính */
+  font-weight: 900; /* Làm cho font chữ dày và ấn tượng hơn */
+}
+
+/* --- Styling for the sub-title (e.g., "VAY NHANH") --- */
+.product-slide .product-p {
+  color: #6c757d; /* Màu xám cho tiêu đề phụ */
+  font-weight: 500;
+  letter-spacing: 1px;
+}
+
+/* --- Styling for the list items (ul) --- */
+.product-slide .product-ul li {
+  color: #212529; /* Màu chữ đen cho nội dung danh sách */
+  font-weight: 500;
+}
+
+/* Styling for the bold text inside list items */
+.product-slide .product-ul li .font-bold {
+  color: #00833e; /* Đồng bộ màu xanh lá cây đậm cho các phần chữ in đậm */
+}
+
+/* --- Styling for the checkmark icon --- */
+.product-slide .product-ul li .fa-check {
+  color: #00a651; /* Màu xanh lá cây sáng hơn cho dấu tick */
+}
+
+/* --- Styling for the main button ("VAY NGAY") --- */
+.product-slide .btn-product {
+  background-color: #00833e;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.product-slide .btn-product:hover {
+  background-color: #00a651; /* Sáng lên khi hover */
+  transform: scale(1.05);
+}
+
+/* === STATS SECTION BACKGROUND EFFECT === */
+@keyframes scroll-background {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(-50%);
+  }
+}
+
+#stats-background-grid {
+  display: flex;
+  gap: 1rem; /* Khoảng cách giữa các cột ảnh */
+  width: 100%;
+  height: 200%; /* Gấp đôi chiều cao để tạo hiệu ứng lặp lại */
+  position: absolute;
+  top: 0;
+  left: 0;
+  animation: scroll-background 120s linear infinite;
+}
+
+.stats-bg-column {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem; /* Khoảng cách giữa các ảnh trong cột */
+}
+
+/* Đảo ngược hướng và thay đổi tốc độ cho các cột chẵn */
+.stats-bg-column:nth-child(even) {
+  animation-direction: reverse;
+  animation-duration: 150s;
+}
+
+.stats-bg-column img {
+  width: 100%;
+  aspect-ratio: 4 / 3; /* Tỷ lệ ảnh 4:3 */
+  object-fit: cover; /* Đảm bảo ảnh phủ đầy khung */
+  border-radius: 0.5rem;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+/* === STATS SECTION SIZE UPGRADE === */
+#stats {
+  min-height: 50vh; /* Đặt chiều cao tối thiểu bằng 70% chiều cao màn hình */
+  display: flex;
+  align-items: center; /* Căn giữa nội dung theo chiều dọc */
+}
