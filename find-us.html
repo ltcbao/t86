@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Chúng tôi gần bạn - T86</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link rel="stylesheet" href="css/style.css" />
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              t86: {
+                green: '#00833E',
+                'green-light': '#00A651',
+                'green-accent': '#C2D436',
+                blue: '#002D5B',
+                light: '#F8F9FA',
+                dark: '#212529',
+                gray: '#6C757D',
+              },
+            },
+          },
+        },
+      };
+    </script>
+  </head>
+  <body class="bg-gray-50">
+    <header
+      id="header-placeholder"
+      class="fixed top-0 left-0 w-full bg-white shadow-md z-50"
+    ></header>
+
+    <main class="pt-24">
+      <div class="container mx-auto px-4">
+        <h1 class="text-4xl font-bold text-t86-blue mb-8 text-center">
+          Tìm cửa hàng gần bạn
+        </h1>
+
+        <div
+          class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8 p-6 bg-white rounded-lg shadow"
+        >
+          <div>
+            <label
+              for="city-filter"
+              class="block text-sm font-medium text-gray-700"
+              >Thành phố</label
+            >
+            <select
+              id="city-filter"
+              class="mt-1 block w-full p-2 border border-gray-300 rounded-md"
+            >
+              <option value="">Tất cả thành phố</option>
+            </select>
+          </div>
+          <div>
+            <label
+              for="district-filter"
+              class="block text-sm font-medium text-gray-700"
+              >Khu vực (Quận)</label
+            >
+            <select
+              id="district-filter"
+              class="mt-1 block w-full p-2 border border-gray-300 rounded-md"
+            >
+              <option value="">Tất cả khu vực</option>
+            </select>
+          </div>
+          <div>
+            <label
+              for="partner-filter"
+              class="block text-sm font-medium text-gray-700"
+              >Đối tác</label
+            >
+            <select
+              id="partner-filter"
+              class="mt-1 block w-full p-2 border border-gray-300 rounded-md"
+            >
+              <option value="">Tất cả đối tác</option>
+            </select>
+          </div>
+        </div>
+
+        <div id="loading" class="text-center py-10" style="display: none">
+          <i class="fas fa-spinner fa-spin text-4xl text-t86-green"></i>
+          <p class="mt-2">Đang tải danh sách...</p>
+        </div>
+
+        <div
+          id="results-container"
+          class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+        ></div>
+        <p
+          id="no-results"
+          class="text-center py-10 text-gray-500"
+          style="display: none"
+        >
+          Không tìm thấy cửa hàng nào phù hợp.
+        </p>
+      </div>
+    </main>
+
+    <footer id="footer-placeholder" class="mt-20"></footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/papaparse/5.3.2/papaparse.min.js"></script>
+    <script src="js/main.js"></script>
+
+    <script>
+      document.addEventListener('DOMContentLoaded', function () {
+        const loadingEl = document.getElementById('loading');
+        const resultsContainer = document.getElementById('results-container');
+        const noResultsEl = document.getElementById('no-results');
+        const cityFilter = document.getElementById('city-filter');
+        const districtFilter = document.getElementById('district-filter');
+        const partnerFilter = document.getElementById('partner-filter');
+
+        let allStores = [];
+
+        // --- QUAN TRỌNG: ĐIỀU CHỈNH CÁC TÊN CỘT DƯỚI ĐÂY ---
+        // Thay thế các chuỗi trong ngoặc kép để khớp với tên cột trong file Excel của bạn
+        const COLUMN_NAMES = {
+          CITY: 'Tỉnh thành',
+          DISTRICT: 'Khu vực',
+          PARTNER: 'Tên đối tác',
+          //   STORE_NAME: 'Tên cửa hàng',
+          ADDRESS: 'Địa chỉ',
+        };
+        // ---------------------------------------------------------
+
+        function populateFilters(stores) {
+          const cities = [
+            ...new Set(
+              stores.map((store) => store[COLUMN_NAMES.CITY]).filter(Boolean)
+            ),
+          ];
+          const districts = [
+            ...new Set(
+              stores
+                .map((store) => store[COLUMN_NAMES.DISTRICT])
+                .filter(Boolean)
+            ),
+          ];
+          const partners = [
+            ...new Set(
+              stores.map((store) => store[COLUMN_NAMES.PARTNER]).filter(Boolean)
+            ),
+          ];
+
+          cities.sort().forEach((city) => {
+            cityFilter.innerHTML += `<option value="${city}">${city}</option>`;
+          });
+          districts.sort().forEach((district) => {
+            districtFilter.innerHTML += `<option value="${district}">${district}</option>`;
+          });
+          partners.sort().forEach((partner) => {
+            partnerFilter.innerHTML += `<option value="${partner}">${partner}</option>`;
+          });
+        }
+
+        function renderResults(stores) {
+          resultsContainer.innerHTML = '';
+          if (stores.length === 0) {
+            noResultsEl.style.display = 'block';
+          } else {
+            noResultsEl.style.display = 'none';
+          }
+
+          stores.forEach((store) => {
+            const storeCard = `
+                        <div class="bg-white p-6 rounded-lg shadow hover:shadow-lg transition-shadow">
+                            <h3 class="text-lg font-bold text-t86-blue">${
+                              store[COLUMN_NAMES.STORE_NAME] || 'N/A'
+                            }</h3>
+                            <p class="text-sm text-t86-green font-semibold mt-1">${
+                              store[COLUMN_NAMES.PARTNER] || 'N/A'
+                            }</p>
+                            <p class="text-gray-600 mt-2">
+                                <i class="fas fa-map-marker-alt mr-2 text-t86-gray"></i>
+                                ${store[COLUMN_NAMES.ADDRESS] || 'N/A'}, ${
+              store[COLUMN_NAMES.DISTRICT] || ''
+            }, ${store[COLUMN_NAMES.CITY] || ''}
+                            </p>
+                        </div>
+                    `;
+            resultsContainer.innerHTML += storeCard;
+          });
+        }
+
+        function filterStores() {
+          const selectedCity = cityFilter.value;
+          const selectedDistrict = districtFilter.value;
+          const selectedPartner = partnerFilter.value;
+
+          const filteredStores = allStores.filter((store) => {
+            const cityMatch =
+              !selectedCity || store[COLUMN_NAMES.CITY] === selectedCity;
+            const districtMatch =
+              !selectedDistrict ||
+              store[COLUMN_NAMES.DISTRICT] === selectedDistrict;
+            const partnerMatch =
+              !selectedPartner ||
+              store[COLUMN_NAMES.PARTNER] === selectedPartner;
+            return cityMatch && districtMatch && partnerMatch;
+          });
+
+          renderResults(filteredStores);
+        }
+
+        // --- MAIN EXECUTION ---
+        loadingEl.style.display = 'block';
+        // Đặt file CSV của bạn vào cùng thư mục gốc với index.html
+        Papa.parse('static/partner.xlsx', {
+          download: true,
+          header: true,
+          skipEmptyLines: true,
+          complete: function (results) {
+            allStores = results.data;
+            populateFilters(allStores);
+            renderResults(allStores);
+            loadingEl.style.display = 'none';
+          },
+          error: function (err) {
+            console.error('Lỗi khi đọc file CSV:', err);
+            loadingEl.innerText = 'Không thể tải danh sách cửa hàng.';
+          },
+        });
+
+        cityFilter.addEventListener('change', filterStores);
+        districtFilter.addEventListener('change', filterStores);
+        partnerFilter.addEventListener('change', filterStores);
+      });
+    </script>
+  </body>
+</html>

@@ -1,287 +1,385 @@
 document.addEventListener('DOMContentLoaded', function () {
-  // --- START: Tải Header & Footer ---
   const loadComponent = (selector, url) => {
-    fetch(url)
-      .then((response) => {
-        if (!response.ok) throw new Error(`Could not load ${url}`);
-        return response.text();
-      })
-      .then((data) => {
-        const element = document.querySelector(selector);
-        if (element) element.innerHTML = data;
-      })
-      .catch((error) => console.error(error));
+    if (document.querySelector(selector)) {
+      return fetch(url)
+        .then((response) => {
+          if (!response.ok) throw new Error(`Không thể tải file: ${url}`);
+          return response.text();
+        })
+        .then((data) => {
+          document.querySelector(selector).innerHTML = data;
+        });
+    }
+    return Promise.resolve();
   };
 
-  loadComponent('#header-placeholder', 'header.html');
-  loadComponent('#footer-placeholder', 'footer.html');
-  // --- END: Tải Header & Footer ---
-
-  // --- START: Hiệu ứng gõ chữ ---
-  const typingElement = document.getElementById('typing-text');
-  if (typingElement) {
-    const textToType = 'Tài chính nhanh gọn, sản phẩm trong tầm tay.';
-    let charIndex = 0;
-    typingElement.innerHTML = ''; // Clear initial text
-
-    function type() {
-      if (charIndex < textToType.length) {
-        typingElement.textContent += textToType.charAt(charIndex);
-        charIndex++;
-        setTimeout(type, 80);
-      }
-    }
-    type();
-  }
-  // --- END: Hiệu ứng gõ chữ ---
-
-  // --- START: Hiệu ứng đếm số (ĐÃ THÊM) ---
-  const counters = document.querySelectorAll('[data-counter]');
-  if (counters.length > 0) {
-    const speed = 200;
-
-    const animateCounter = (counter) => {
-      const target = +counter.getAttribute('data-counter');
-      const updateCount = () => {
-        const count = +counter.innerText.replace(/\./g, '');
-        const increment = target / speed;
-
-        if (count < target) {
-          counter.innerText = Math.ceil(count + increment).toLocaleString(
-            'vi-VN'
-          );
-          setTimeout(updateCount, 15);
-        } else {
-          counter.innerText = target.toLocaleString('vi-VN');
-        }
-      };
-      updateCount();
-    };
-
-    const observer = new IntersectionObserver(
-      (entries, observer) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            animateCounter(entry.target);
-            observer.unobserve(entry.target);
-          }
-        });
-      },
-      {
-        threshold: 0.5, // Kích hoạt sớm hơn, khi 10% hiện ra
-      }
-    );
-
-    counters.forEach((counter) => {
-      observer.observe(counter);
-    });
-  }
-  // --- END: Hiệu ứng đếm số ---
-
-  // --- START: Swiper Initialization (ĐÃ CẬP NHẬT) ---
-  const swiper = new Swiper('.hero-swiper', {
-    loop: true,
-    effect: 'fade',
-    autoplay: {
-      delay: 8000,
-      disableOnInteraction: false,
-    },
-    pagination: {
-      el: '.swiper-pagination',
-      clickable: true,
-    },
-    navigation: {
-      nextEl: '.swiper-button-next',
-      prevEl: '.swiper-button-prev',
-    },
-    // THÊM SỰ KIỆN ĐỂ KHẮC PHỤC LỖI
-    on: {
-      // Khởi tạo hiệu ứng lần đầu tiên
-      init: function () {
-        initParticles();
-      },
-      // Khởi tạo lại hiệu ứng mỗi khi chuyển slide xong
-      transitionEnd: function () {
-        // Chỉ chạy lại hiệu ứng nếu slide hiện tại là slide đầu tiên
-        if (this.realIndex === 0) {
-          initParticles();
-        }
-      },
-    },
-  });
-  // --- END: Swiper Initialization ---
-
-  // --- START: Product Slider ---
-  const productSlidesContainer = document.querySelector(
-    '.product-slides-container'
-  );
-  if (productSlidesContainer) {
-    const slides = productSlidesContainer.querySelectorAll('.product-slide');
-    const indicators = document.querySelectorAll('.product-indicator');
-    let currentSlide = 0;
-    let slideInterval;
-
-    function showSlide(index) {
-      if (index >= slides.length) index = 0;
-      if (index < 0) index = slides.length - 1;
-      slides.forEach((slide) => slide.classList.remove('active'));
-      indicators.forEach((indicator) => indicator.classList.remove('active'));
-      currentSlide = index;
-      slides[currentSlide].classList.add('active');
-      if (indicators.length > 0)
-        indicators[currentSlide].classList.add('active');
-    }
-
-    function startSlideShow() {
-      clearInterval(slideInterval);
-      slideInterval = setInterval(() => {
-        showSlide(currentSlide + 1);
-      }, 7000);
-    }
-
-    indicators.forEach((indicator, index) => {
-      indicator.addEventListener('click', function () {
-        showSlide(index);
-        startSlideShow();
-      });
-    });
-
-    if (slides.length > 0) {
-      showSlide(0);
-      startSlideShow();
-    }
-  }
-  // --- END: Product Slider ---
-
-  // --- START: Tự động tải logo đối tác ---
-  const logoFiles = [
-    'logo-24-alo-store.png',
-    'logo-2nam-store.png',
-    'logo-alodidong.png',
-    'logo-andylong.png',
-    'logo-centerphone.png',
-    'logo-chang-trai-ban-tao.jpg',
-    'logo-dai-viet.png',
-    'logo-di-dong-360.png',
-    'logo-didongmy.png',
-    'logo-ha-store.png',
-    'logo-hi-tao-thom.png',
-    'logo-hoang-kien.webp',
-    'logo-huy-hoang.jpg',
-    'logo-hvh76-store.png',
-    'logo-khang-huy-apple.jpg',
-    'logo-ldl-phone.png',
-    'logo-le-quan.png',
-    'logo-lock-mall.png',
-    'logo-minh-hao-store.png',
-    'logo-minh-thang-store.jpg',
-    'logo-mobile-world.png',
-    'logo-ngoc-thanh.png',
-    'logo-nha-tao.png',
-    'logo-phat-thanh.png',
-    'logo-phu-gia.png',
-    'logo-phu-vuong-mobile.png',
-    'logo-renew-zone.png',
-    'logo-sang-apple.png',
-    'logo-taozin.png',
-    'logo-thang-tao.png',
-    'logo-thanh-luxury-mobile.png',
-    'logo-the-gioi-tao.png',
-    'logo-tt-mobile.png',
-    'logo-vien-quang.svg',
-    'logo-vphone.svg',
-    'logo-zen-store.png',
+  const componentsToLoad = [
+    loadComponent('#header-placeholder', 'header.html'),
+    loadComponent('#footer-placeholder', 'footer.html'),
+    loadComponent('#hero-placeholder', 'hero.html'),
+    loadComponent('#news-ticker-placeholder', 'news-ticker.html'),
+    loadComponent('#products-placeholder', 'products.html'),
+    loadComponent('#stats-placeholder', 'stats.html'),
+    loadComponent('#partners-placeholder', 'partners.html'),
+    loadComponent('#product-content-placeholder', 'product-content.html'),
   ];
 
-  const logoDirectory = 'static/logo-partners/';
-  const wrapper = document.getElementById('partner-logos-wrapper');
-
-  function createLogoSet() {
-    const logoSet = document.createElement('div');
-    logoSet.className =
-      'flex-shrink-0 flex items-center justify-around w-full space-x-4';
-    logoFiles.forEach((file) => {
-      const logoContainer = document.createElement('div');
-      logoContainer.className = 'partner-logo-container';
-      const img = document.createElement('img');
-      img.src = logoDirectory + file;
-      img.alt = file.split('.')[0].replace(/-/g, ' ') + ' Logo';
-      img.className = 'partner-logo-img';
-      logoContainer.appendChild(img);
-      logoSet.appendChild(logoContainer);
+  Promise.all(componentsToLoad)
+    .then(() => {
+      console.log('All components loaded, initializing scripts...');
+      initializeAllScripts();
+    })
+    .catch((error) => {
+      console.error('Lỗi khi tải các thành phần của trang:', error);
     });
-    return logoSet;
-  }
 
-  if (wrapper) {
-    wrapper.appendChild(createLogoSet());
-    wrapper.appendChild(createLogoSet());
-    setTimeout(() => {
-      wrapper.classList.add('marquee-content');
-    }, 10);
-  }
-  // --- END: Tự động tải logo đối tác ---
-});
-// --- START: Particles.js Logic ---
-// Đóng gói logic vào một hàm để có thể gọi lại
-function initParticles() {
-  const particlesContainer = document.getElementById('particles-js-slide1');
-  if (particlesContainer && typeof particlesJS !== 'undefined') {
-    particlesJS('particles-js-slide1', {
-      particles: {
-        number: { value: 100 },
-        color: { value: '#ffffff' },
-        shape: { type: 'circle' },
-        opacity: { value: 1, random: true },
-        size: { value: 2, random: true },
-        line_linked: { enable: false },
-        move: {
-          enable: true,
-          speed: 1,
-          direction: 'none',
-          out_mode: 'out',
+  function initializeAllScripts() {
+    // --- Swiper Initialization for Hero ---
+    if (document.querySelector('.hero-swiper')) {
+      const swiper = new Swiper('.hero-swiper', {
+        loop: true,
+        autoplay: {
+          delay: 8000,
+          disableOnInteraction: false,
         },
-      },
-      retina_detect: true,
-    });
+        pagination: {
+          el: '.swiper-pagination',
+          clickable: true,
+        },
+        navigation: {
+          nextEl: '.swiper-button-next',
+          prevEl: '.swiper-button-prev',
+        },
+        // --- THÊM PHẦN NÀY ĐỂ KÍCH HOẠT LẠI ANIMATION ---
+        on: {
+          slideChange: function () {
+            // Lấy slide đang hoạt động
+            const activeSlide = this.slides[this.activeIndex];
+
+            // Tìm các phần tử AOS trong slide đó
+            const aosElements = activeSlide.querySelectorAll('[data-aos]');
+
+            // Nếu có, làm mới AOS để kích hoạt lại animation
+            if (aosElements.length > 0) {
+              AOS.refreshHard();
+            }
+          },
+        },
+      });
+    }
+
+    // --- Particles.js for Hero Slide 1 ---
+    if (
+      document.getElementById('particles-js-slide1') &&
+      typeof particlesJS !== 'undefined'
+    ) {
+      particlesJS('particles-js-slide1', {
+        particles: {
+          number: { value: 100 },
+          color: { value: '#ffffff' },
+          shape: { type: 'circle' },
+          opacity: { value: 1, random: true },
+          size: { value: 2, random: true },
+          line_linked: { enable: false },
+          move: {
+            enable: true,
+            speed: 1,
+            direction: 'none',
+            out_mode: 'out',
+          },
+        },
+        retina_detect: true,
+      });
+    }
+
+    // --- START: Swiper Initialization for Products (Replaces custom slider) ---
+    const productContainer = document.querySelector(
+      '.product-slides-container'
+    );
+    if (productContainer) {
+      // 1. Lấy tất cả các slide và các nút điều hướng cũ
+      const slides = productContainer.querySelectorAll('.product-slide');
+      const oldIndicators = productContainer.nextElementSibling; // Lấy container của các nút indicators
+
+      if (slides.length > 0) {
+        // 2. Thêm class 'swiper' vào container chính
+        productContainer.classList.add('product-swiper');
+
+        // 3. Tạo một div 'swiper-wrapper' mới
+        const swiperWrapper = document.createElement('div');
+        swiperWrapper.className = 'swiper-wrapper';
+
+        // 4. Chuyển tất cả các slide vào trong wrapper và thêm class 'swiper-slide'
+        slides.forEach((slide) => {
+          slide.className = 'swiper-slide'; // Ghi đè class cũ để loại bỏ 'active'
+          swiperWrapper.appendChild(slide);
+        });
+
+        // 5. Xóa các slide cũ khỏi container và thêm wrapper mới vào
+        productContainer.innerHTML = '';
+        productContainer.appendChild(swiperWrapper);
+
+        // 6. Tạo và thêm các element cho pagination và navigation
+        const pagination = document.createElement('div');
+        pagination.className = 'swiper-pagination product-pagination'; // Thêm class để có thể style riêng
+
+        const navPrev = document.createElement('div');
+        navPrev.className = 'swiper-button-prev product-nav-prev';
+
+        const navNext = document.createElement('div');
+        navNext.className = 'swiper-button-next product-nav-next';
+
+        productContainer.appendChild(pagination); // Pagination vẫn ở trong
+        productContainer.parentElement.appendChild(navPrev); // Đưa nút ra ngoài
+        productContainer.parentElement.appendChild(navNext); // Đưa nút ra ngoài
+        // 7. Xóa các nút indicators cũ đi
+        if (
+          oldIndicators &&
+          oldIndicators.querySelectorAll('.product-indicator').length > 0
+        ) {
+          oldIndicators.remove();
+        }
+
+        // 8. Khởi tạo Swiper
+        const productSwiper = new Swiper('.product-swiper', {
+          loop: true,
+          spaceBetween: 30,
+          // --- THAY ĐỔI Ở ĐÂY ---
+          // effect: 'fade', // Chuyển hiệu ứng từ 'slide' (mặc định) sang 'fade'
+          // fadeEffect: {
+          //   crossFade: true, // Cho phép hiệu ứng mờ dần đẹp hơn
+          // },
+          speed: 1000, // Tăng tốc độ chuyển cảnh (1000ms = 1 giây)
+          // --- KẾT THÚC THAY ĐỔI ---
+          autoplay: {
+            delay: 7000,
+            disableOnInteraction: false,
+          },
+          pagination: {
+            el: '.product-pagination',
+            clickable: true,
+          },
+          navigation: {
+            nextEl: '.product-nav-next',
+            prevEl: '.product-nav-prev',
+          },
+        });
+      }
+    }
+
+    // --- Partner Logos Marquee ---
+    if (document.getElementById('partner-logos-wrapper')) {
+      const logoFiles = [
+        'logo-24-alo-store.png',
+        'logo-2nam-store.png',
+        'logo-alodidong.png',
+        'logo-andylong.png',
+        'logo-centerphone.png',
+        'logo-chang-trai-ban-tao.jpg',
+        'logo-dai-viet.png',
+        'logo-di-dong-360.png',
+        'logo-didongmy.png',
+        'logo-ha-store.png',
+        'logo-hi-tao-thom.png',
+        'logo-hoang-kien.webp',
+        'logo-huy-hoang.jpg',
+        'logo-hvh76-store.png',
+        'logo-khang-huy-apple.jpg',
+        'logo-ldl-phone.png',
+        'logo-le-quan.png',
+        'logo-lock-mall.png',
+        'logo-minh-hao-store.png',
+        'logo-minh-thang-store.jpg',
+        'logo-mobile-world.png',
+        'logo-ngoc-thanh.png',
+        'logo-nha-tao.png',
+        'logo-phat-thanh.png',
+        'logo-phu-gia.png',
+        'logo-phu-vuong-mobile.png',
+        'logo-renew-zone.png',
+        'logo-sang-apple.png',
+        'logo-taozin.png',
+        'logo-thang-tao.png',
+        'logo-thanh-luxury-mobile.png',
+        'logo-the-gioi-tao.png',
+        'logo-tt-mobile.png',
+        'logo-vien-quang.svg',
+        'logo-vphone.svg',
+        'logo-zen-store.png',
+      ];
+      const logoDirectory = 'static/logo-partners/';
+      const wrapper = document.getElementById('partner-logos-wrapper');
+      function createLogoSet() {
+        const logoSet = document.createElement('div');
+        logoSet.className =
+          'flex-shrink-0 flex items-center justify-around w-full space-x-4';
+        logoFiles.forEach((file) => {
+          const logoContainer = document.createElement('div');
+          logoContainer.className = 'partner-logo-container';
+          const img = document.createElement('img');
+          img.src = logoDirectory + file;
+          img.alt = file.split('.')[0].replace(/-/g, ' ') + ' Logo';
+          img.className = 'partner-logo-img';
+          logoContainer.appendChild(img);
+          logoSet.appendChild(logoContainer);
+        });
+        return logoSet;
+      }
+      if (wrapper) {
+        wrapper.appendChild(createLogoSet());
+        wrapper.appendChild(createLogoSet());
+        setTimeout(() => {
+          wrapper.classList.add('marquee-content');
+        }, 10);
+      }
+    }
+
+    // --- Counter Animation ---
+    if (document.querySelector('[data-counter]')) {
+      const counters = document.querySelectorAll('[data-counter]');
+      function animateCounter(counter) {
+        const target = +counter.getAttribute('data-counter');
+        const speed = 200;
+        const updateCount = () => {
+          const count = +counter.innerText.replace(/\./g, '');
+          const increment = target / speed;
+          if (count < target) {
+            counter.innerText = Math.ceil(count + increment).toLocaleString(
+              'vi-VN'
+            );
+            setTimeout(updateCount, 15);
+          } else {
+            counter.innerText = target.toLocaleString('vi-VN');
+          }
+        };
+        updateCount();
+      }
+      const observer = new IntersectionObserver(
+        (entries, observer) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              animateCounter(entry.target);
+              observer.unobserve(entry.target);
+            }
+          });
+        },
+        { threshold: 0.1 }
+      );
+      counters.forEach((counter) => {
+        observer.observe(counter);
+      });
+    }
+
+    // --- Stats Background Effect ---
+    function shuffleArray(array) {
+      for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+      }
+    }
+
+    function populateStatsBackground() {
+      const statsImageFiles = [
+        '0009eb79ccac45f21cbd71.jpg',
+        '00bedbcdfc1875462c0974.jpg',
+        '055492d6b7033e5d671230.jpg',
+        '0860971db0c8399660d969.jpg',
+        '0a3a51b77462fd3ca47328.jpg',
+        '0ba0739f564adf14865b22.jpg',
+        '0e3aaa058fd0068e5fc110.jpg',
+        '12754a866d53e40dbd4278.jpg',
+        '147572619472483770961.jpg',
+        '14786a474f92c6cc9f8313.jpg',
+        '1504b73a92ef1bb142fe17.jpg',
+        '169be0ebc73e4e60172f62.jpg',
+        '1733f94ede9b57c50e8a59.jpg',
+        '1e1a39241cf195afcce07.jpg',
+        '288ac7f7e022697c303364.jpg',
+        '292cf2aed77b5e25076a37.jpg',
+        '2d66b258978d1ed3479c15.jpg',
+        '30a283d0a4052d5b741467.jpg',
+        '3bf31f0e38dbb185e8ca80.jpg',
+        '3cd5312716f29facc6e388.jpg',
+        '3e63da5dff8876d62f996.jpg',
+        '3ed4f1edd4385d6604298.jpg',
+        '3eeefd6cd8b951e708a826.jpg',
+        '4214ab998e4c07125e5d34.jpg',
+        '4366f65fd38a5ad4039b2.jpg',
+        '45f3260101d4888ad1c581.jpg',
+        '4ed82a550f8086dedf9131.jpg',
+        '54d2cdece8396167382818.jpg',
+        '55469bc4be11374f6e0038.jpg',
+        '579a72a45771de2f876012.jpg',
+        '5a3de8cfcf1a46441f0b90.jpg',
+        '6344acb98b6c02325b7d76.jpg',
+        '698e30fd17289e76c73973.jpg',
+        '6aff440c63d9ea87b3c887.jpg',
+        '6b89a17b86ae0ff056bf77.jpg',
+        '6c4e13c33616bf48e60735.jpg',
+        '745f67ad4078c926906979.jpg',
+        '7de3256e00bb89e5d0aa32.jpg',
+        '836bde9bf94e7010295f75.jpg',
+        '8379358b125e9b00c24f84.jpg',
+        '844744c56110e84eb10136.jpg',
+        '85daa22785f20cac55e386.jpg',
+        '889d4dee6a3be365ba2a58.jpg',
+        '893c250300d68988d0c73.jpg',
+        '8bf1b20c95d91c8745c885.jpg',
+        '93b37ac35d16d4488d0768.jpg',
+        '9464a95b8c8e05d05c9f4.jpg',
+        'a49449e96e3ce762be2d65.jpg',
+        'a4d66cef493ac064992b14.jpg',
+        'a6a5189b3d4eb410ed5f20.jpg',
+        'a7d0d92dfef877a62ee991.jpg',
+        'b9230ad12d04a45afd1583.jpg',
+        'c2766f494a9cc3c29a8d25.jpg',
+        'c8ed33d316069f58c61721.jpg',
+        'ce044f3a6aefe3b1bafe1.jpg',
+        'd1238bd0ac05255b7c1482.jpg',
+        'd29e80a7a5722c2c756324.jpg',
+        'd4df2ee10b34826adb255.jpg',
+        'd4e7d76bf2be7be022af27.jpg',
+        'd6bc8b85ae50270e7e4123.jpg',
+        'd79568ab4d7ec4209d6f19.jpg',
+        'd8ee319316469f18c65760.jpg',
+        'da0b107937acbef2e7bd66.jpg',
+        'dbb44fc9681ce142b80d63.jpg',
+        'df1b2fe40931806fd920.jpg',
+        'df4199ccbc1935476c0840.jpg',
+        'df8fa0b085650c3b55749.jpg',
+        'e8201a193fccb692efdd16.jpg',
+        'ec06238406518f0fd64033.jpg',
+        'ece9261401c1889fd1d092.jpg',
+        'ed1e2b9c0e498717de5829.jpg',
+        'f02e6cac4979c027996839.jpg',
+        'fa4dd0bff76a7e34277b89.jpg',
+        'fb13fa2bdffe56a00fef11.jpg',
+        'fcabf2d8d50d5c53051c72.jpg',
+        'ff348146a6932fcd768270.jpg',
+        'image1.jpg',
+        'image2.jpg',
+      ];
+      shuffleArray(statsImageFiles);
+      const imageDirectory = 'static/stats-images/';
+      const columns = document.querySelectorAll('.stats-bg-column');
+      if (columns.length === 0) return;
+      const fullImageList = [...statsImageFiles, ...statsImageFiles];
+      columns.forEach((column, colIndex) => {
+        const imageList = [
+          ...fullImageList.slice(colIndex),
+          ...fullImageList.slice(0, colIndex),
+        ];
+        imageList.forEach((fileName) => {
+          const img = document.createElement('img');
+          img.src = imageDirectory + fileName;
+          img.alt = 'Stats background image';
+          column.appendChild(img);
+        });
+      });
+    }
+    populateStatsBackground();
+
+    // --- Initialize AOS ---
+    AOS.init({ duration: 1000, once: true });
   }
-}
-// --- END: Particles.js Logic ---
-// --- START: Hiệu ứng nền cho phần Stats ---
-function populateStatsBackground() {
-  // QUAN TRỌNG: Hãy thay thế danh sách này bằng tên các tệp ảnh của bạn
-  const statsImageFiles = ['image1.jpg', 'image2.jpg'];
-
-  const imageDirectory = 'static/stats-images/'; // Đặt ảnh của bạn trong thư mục này
-  const columns = document.querySelectorAll('.stats-bg-column');
-  if (columns.length === 0) return;
-
-  // Nhân đôi danh sách ảnh để đảm bảo lấp đầy và lặp lại mượt mà
-  const fullImageList = [
-    ...statsImageFiles,
-    ...statsImageFiles,
-    ...statsImageFiles,
-  ];
-
-  columns.forEach((column, colIndex) => {
-    // Xoay vòng danh sách ảnh cho mỗi cột để tạo sự đa dạng
-    const imageList = [
-      ...fullImageList.slice(colIndex),
-      ...fullImageList.slice(0, colIndex),
-    ];
-
-    imageList.forEach((fileName) => {
-      const img = document.createElement('img');
-      img.src = imageDirectory + fileName;
-      img.alt = 'Stats background image';
-      column.appendChild(img);
-    });
-  });
-}
-populateStatsBackground();
-// --- END: Hiệu ứng nền cho phần Stats ---
-// --- AOS Initialization ---
-AOS.init({
-  duration: 1000,
-  once: true,
 });
