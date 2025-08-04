@@ -27,20 +27,26 @@ document.addEventListener('DOMContentLoaded', function () {
    * This function finds the current page and highlights the correct link.
    */
   function highlightActiveNav() {
-    // Use a more specific page name check for reliability
-    const currentPath = 'find-us.html';
+    // Get the current URL path, e.g., "/about/" or "/find-us.html"
+    let currentPath = window.location.pathname;
+
+    // If it's the homepage, the path is just "/"
+    if (currentPath === '/') {
+      currentPath = '/index.html';
+    }
+
     const navLinks = document.querySelectorAll('#header-placeholder .nav-link');
 
     navLinks.forEach((link) => {
       const linkHref = link.getAttribute('href');
-      if (linkHref === currentPath) {
-        // Apply active styles
+
+      // This checks if the link's href is contained within the current URL path.
+      // This works for both "/about/" and "about.html".
+      if (currentPath.includes(linkHref)) {
         link.classList.add('text-t86-green', 'font-bold');
-        // Remove default styles
+        link.classList.remove('text-t86-dark');
         if (link.classList.contains('text-white')) {
           link.classList.remove('opacity-80');
-        } else {
-          link.classList.remove('text-t86-dark');
         }
       }
     });

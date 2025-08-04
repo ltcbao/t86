@@ -41,15 +41,27 @@ document.addEventListener('DOMContentLoaded', function () {
    * ✅ NEW: This function highlights the active navigation link.
    */
   function highlightActiveNav() {
-    const currentPath =
-      window.location.pathname.split('/').pop() || 'index.html';
-    const navLinks = document.querySelectorAll(
-      '#header-placeholder a.nav-link'
-    ); // Added .nav-link for specificity
+    // Get the current URL path, e.g., "/about/" or "/find-us.html"
+    let currentPath = window.location.pathname;
+
+    // If it's the homepage, the path is just "/"
+    if (currentPath === '/') {
+      currentPath = '/index.html';
+    }
+
+    const navLinks = document.querySelectorAll('#header-placeholder .nav-link');
+
     navLinks.forEach((link) => {
-      if (link.getAttribute('href') === currentPath) {
+      const linkHref = link.getAttribute('href');
+
+      // This checks if the link's href is contained within the current URL path.
+      // This works for both "/about/" and "about.html".
+      if (currentPath.includes(linkHref)) {
         link.classList.add('text-t86-green', 'font-bold');
         link.classList.remove('text-t86-dark');
+        if (link.classList.contains('text-white')) {
+          link.classList.remove('opacity-80');
+        }
       }
     });
   }
