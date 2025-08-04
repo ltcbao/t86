@@ -637,3 +637,31 @@ section#home::before {
   opacity: 1;
   color: #c2d436; /* Use the vibrant accent green for active links */
 }
+
+/* ================================================== */
+/* === BLURRED BACKGROUND FOR FIND-US PAGE === */
+/* ================================================== */
+
+/* This targets ONLY the body of the find-us page */
+body#find-us-page {
+  position: relative;
+  z-index: 0;
+}
+
+body#find-us-page::before {
+  content: '';
+  position: fixed; /* Stays in place when scrolling */
+  inset: 0; /* Covers the entire screen */
+  z-index: -1; /* Pushes it behind all other content */
+
+  /* Make sure the image path is correct */
+  background-image: url('../static/together.jpg');
+  background-size: cover;
+  background-position: center;
+
+  /* Apply the blur effect. You can change 8px to be more or less blurry. */
+  filter: blur(1px);
+
+  /* Optional: Prevents the blur from fading at the edges */
+  transform: scale(1.1);
+}
