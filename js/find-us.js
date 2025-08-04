@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', function () {
   console.log('Find-Us page script loaded.');
 
   // Function to load header and footer
-  const loadComponent = (selector, url) => {
+  const loadComponent = (selector, url, callback) => {
     const element = document.querySelector(selector);
     if (element) {
       fetch(url)
@@ -13,12 +13,38 @@ document.addEventListener('DOMContentLoaded', function () {
         )
         .then((data) => {
           if (data) element.innerHTML = data;
+          if (callback) {
+            setTimeout(callback, 0);
+          }
         });
     }
   };
-  loadComponent('#header-placeholder', 'header.html');
+  loadComponent('#header-placeholder', 'header.html', highlightActiveNav);
   loadComponent('#footer-placeholder', 'footer.html');
   loadComponent('#find-us-placeholder', 'find-us.html');
+
+  /**
+   * This function finds the current page and highlights the correct link.
+   */
+  function highlightActiveNav() {
+    // Use a more specific page name check for reliability
+    const currentPath = 'find-us.html';
+    const navLinks = document.querySelectorAll('#header-placeholder .nav-link');
+
+    navLinks.forEach((link) => {
+      const linkHref = link.getAttribute('href');
+      if (linkHref === currentPath) {
+        // Apply active styles
+        link.classList.add('text-t86-green', 'font-bold');
+        // Remove default styles
+        if (link.classList.contains('text-white')) {
+          link.classList.remove('opacity-80');
+        } else {
+          link.classList.remove('text-t86-dark');
+        }
+      }
+    });
+  }
 
   // --- Logic for the Find Us Page ---
   const searchBox = document.getElementById('search-box');
@@ -26,6 +52,8 @@ document.addEventListener('DOMContentLoaded', function () {
   const districtFilter = document.getElementById('district-filter');
   const partnerList = document.getElementById('partner-list');
   const loadingIndicator = document.getElementById('loading-indicator');
+  const resetButton = document.getElementById('reset-button');
+
   let allPartners = [];
 
   Papa.parse('partner_utf8.csv', {
@@ -35,13 +63,15 @@ document.addEventListener('DOMContentLoaded', function () {
     encoding: 'UTF-8',
     transformHeader: (header) => header.trim(),
     complete: function (results) {
-      // ✅ UPDATED to use the correct Vietnamese key
       allPartners = results.data.filter(
         (p) => p['Tên đối tác'] && p['Tên đối tác'].trim() !== ''
       );
       populateCityFilter(allPartners);
-      renderPartners(allPartners);
-      if (loadingIndicator) loadingIndicator.style.display = 'none';
+
+      // ✅ CHANGE: Instead of showing all partners, show an empty list initially.
+      renderPartners([]);
+
+      loadingIndicator.style.display = 'none';
 
       searchBox.addEventListener('keyup', applyFilters);
       cityFilter.addEventListener('change', () => {
@@ -49,11 +79,16 @@ document.addEventListener('DOMContentLoaded', function () {
         applyFilters();
       });
       districtFilter.addEventListener('change', applyFilters);
+      resetButton.addEventListener('click', () => {
+        searchBox.value = '';
+        cityFilter.selectedIndex = 0;
+        // Manually trigger the change event to reset the district filter
+        cityFilter.dispatchEvent(new Event('change'));
+        renderPartners([]); // Clear the results
+      });
     },
   });
-
   function populateCityFilter(partners) {
-    // ✅ UPDATED to use the correct Vietnamese key: 'Thành phố'
     const cities = [
       ...new Set(partners.map((p) => p['Tỉnh thành']).filter(Boolean)),
     ].sort();
@@ -87,12 +122,20 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
   function renderPartners(partners) {
+    const searchTerm = searchBox.value;
+    const selectedCity = cityFilter.value;
+    const selectedDistrict = districtFilter.value;
     partnerList.innerHTML = '';
     if (partners.length === 0) {
-      partnerList.innerHTML =
-        '<p class="text-center text-t86-gray col-span-full">Không tìm thấy đối tác phù hợp.</p>';
+      if (!searchTerm && !selectedCity && !selectedDistrict) {
+        partnerList.innerHTML = '';
+      } else {
+        partnerList.innerHTML =
+          '<p class="text-center text-t86-blue col-span-full">Không tìm thấy đối tác phù hợp.</p>';
+      }
       return;
     }
+
     partners.forEach((partner) => {
       // ✅ UPDATED to use all correct Vietnamese keys
       const partnerCard = `
