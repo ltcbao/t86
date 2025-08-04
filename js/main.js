@@ -1,16 +1,18 @@
 document.addEventListener('DOMContentLoaded', function () {
+  // --- Function to load HTML components ---
   const loadComponent = (selector, url) => {
-    if (document.querySelector(selector)) {
+    const element = document.querySelector(selector);
+    if (element) {
       return fetch(url)
         .then((response) => {
-          if (!response.ok) throw new Error(`Không thể tải file: ${url}`);
+          if (!response.ok) throw new Error(`Cannot load file: ${url}`);
           return response.text();
         })
         .then((data) => {
-          document.querySelector(selector).innerHTML = data;
+          element.innerHTML = data;
         });
     }
-    return Promise.resolve();
+    return Promise.resolve(); // Resolve immediately if placeholder doesn't exist
   };
 
   const componentsToLoad = [
@@ -30,7 +32,7 @@ document.addEventListener('DOMContentLoaded', function () {
       initializeAllScripts();
     })
     .catch((error) => {
-      console.error('Lỗi khi tải các thành phần của trang:', error);
+      console.error('Error loading page components:', error);
     });
 
   function initializeAllScripts() {
@@ -68,30 +70,47 @@ document.addEventListener('DOMContentLoaded', function () {
       });
     }
 
-    // --- Particles.js for Hero Slide 1 ---
-    if (
-      document.getElementById('particles-js-slide1') &&
-      typeof particlesJS !== 'undefined'
-    ) {
-      particlesJS('particles-js-slide1', {
+    if (document.getElementById('particles-js')) {
+      particlesJS('particles-js', {
         particles: {
-          number: { value: 100 },
+          number: { value: 80, density: { enable: true, value_area: 800 } },
           color: { value: '#ffffff' },
           shape: { type: 'circle' },
-          opacity: { value: 1, random: true },
-          size: { value: 2, random: true },
-          line_linked: { enable: false },
+          opacity: { value: 0.5, random: false },
+          size: { value: 3, random: true },
+          line_linked: {
+            enable: true,
+            distance: 150,
+            color: '#ffffff',
+            opacity: 0.4,
+            width: 1,
+          },
           move: {
             enable: true,
-            speed: 1,
+            speed: 2,
             direction: 'none',
+            random: false,
+            straight: false,
             out_mode: 'out',
+            bounce: false,
+          },
+        },
+        interactivity: {
+          // ✅ THIS IS THE FIX
+          detect_on: 'window', // Changed to 'window' to detect mouse over all content
+          events: {
+            onhover: { enable: true, mode: 'grab' },
+            onclick: { enable: true, mode: 'push' },
+            resize: true,
+          },
+          modes: {
+            grab: { distance: 140, line_linked: { opacity: 1 } },
+            push: { particles_nb: 4 },
           },
         },
         retina_detect: true,
       });
     }
-
     // --- START: Swiper Initialization for Products (Replaces custom slider) ---
     const productContainer = document.querySelector(
       '.product-slides-container'
@@ -378,6 +397,111 @@ document.addEventListener('DOMContentLoaded', function () {
       });
     }
     populateStatsBackground();
+
+    const typingSubtitle = document.querySelector(
+      '#hero-slide-1 .hero-subtitle'
+    );
+    const subtitleText = 'Tài chính nhanh gọn, Sản phẩm trong tầm tay';
+    let charIndex = 0;
+
+    function typeWriter() {
+      if (charIndex < subtitleText.length) {
+        typingSubtitle.textContent = subtitleText.substring(0, charIndex + 1);
+        charIndex++;
+        setTimeout(typeWriter, 50); // Adjust the delay (milliseconds) for typing speed
+      }
+    }
+
+    // Start the typing effect only on the first slide's subtitle
+    if (typingSubtitle) {
+      // Optionally, you can add a slight delay before starting the typing
+      setTimeout(typeWriter, 500);
+    }
+
+    function initializeHeroScripts() {
+      // 1. Swiper Initialization
+      new Swiper('.hero-swiper', {
+        loop: true,
+        effect: 'fade',
+        pagination: {
+          el: '.swiper-pagination',
+          clickable: true,
+        },
+      });
+
+      // 2. Particle.js Initialization
+      if (document.getElementById('particles-js')) {
+        particlesJS('particles-js', {
+          particles: {
+            number: { value: 60, density: { enable: true, value_area: 800 } },
+            color: { value: '#ffffff' },
+            shape: { type: 'circle' },
+            opacity: { value: 0.4, random: true },
+            size: { value: 2, random: true },
+            move: {
+              enable: true,
+              speed: 1,
+              direction: 'none',
+              random: true,
+              straight: false,
+              out_mode: 'out',
+            },
+          },
+          interactivity: {
+            detect_on: 'canvas',
+            events: {
+              onhover: { enable: false },
+              onclick: { enable: false },
+              resize: true,
+            },
+          },
+          retina_detect: true,
+        });
+      }
+
+      // 3. Typing Effect
+      const subtitleEl = document.getElementById('hero-subtitle');
+      if (subtitleEl) {
+        const text = 'Tài chính nhanh gọn, Sản phẩm trong tầm tay.';
+        let index = 0;
+        subtitleEl.innerHTML = ''; // Clear initial text
+
+        function typeWriter() {
+          if (index < text.length) {
+            subtitleEl.innerHTML += text.charAt(index);
+            index++;
+            setTimeout(typeWriter, 55); // Typing speed
+          }
+        }
+        setTimeout(typeWriter, 1200); // Delay before typing starts
+      }
+
+      // 4. Magnetic Button Effect
+      const magneticBtn = document.getElementById('magnetic-btn');
+      if (magneticBtn) {
+        const effectEl = document.createElement('span');
+        effectEl.classList.add('magnetic-effect');
+        magneticBtn.prepend(effectEl);
+
+        magneticBtn.addEventListener('mouseenter', function (e) {
+          effectEl.style.width = '225px';
+          effectEl.style.height = '225px';
+        });
+
+        magneticBtn.addEventListener('mousemove', function (e) {
+          const rect = magneticBtn.getBoundingClientRect();
+          const x = e.clientX - rect.left;
+          const y = e.clientY - rect.top;
+          effectEl.style.left = `${x}px`;
+          effectEl.style.top = `${y}px`;
+        });
+
+        magneticBtn.addEventListener('mouseleave', function (e) {
+          effectEl.style.width = '0px';
+          effectEl.style.height = '0px';
+        });
+      }
+    }
 
     // --- Initialize AOS ---
     AOS.init({ duration: 1000, once: true });

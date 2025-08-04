@@ -39,52 +39,68 @@ h3 {
   }
 }
 
-/* === HERO SECTION STYLES === */
-.hero-swiper {
-  height: 100vh;
+/* ================================================== */
+/* === HERO SECTION STYLES (CONSOLIDATED & FIXED) === */
+/* ================================================== */
+
+/* --- Main hero section container --- */
+section#home {
+  position: relative;
+  /* This z-index helps prevent other page sections from overlapping the hero */
+  z-index: 20;
 }
 
-/* --- Ken Burns Background Effect --- */
+/* --- Background Image --- */
+/* Applied to the main section, placed at the very back */
+section#home::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 0; /* Layer 0: The absolute bottom */
+
+  /* Make sure the path is correct relative to your css file */
+  background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
+    url('../static/background-1.jpg');
+  background-size: cover;
+  background-position: center;
+
+  /* Ken Burns zoom effect */
+  animation: kenburns 20s ease-in-out infinite alternate;
+}
+
 @keyframes kenburns {
-  0% {
+  from {
     transform: scale(1) translate(0, 0);
   }
-  100% {
+  to {
     transform: scale(1.1) translate(-2%, 2%);
   }
 }
 
-.hero-swiper .swiper-slide {
-  overflow: hidden;
-}
-#hero-slide-1::before,
-#hero-slide-2::before,
-#hero-slide-3::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background-size: cover;
-  background-position: center;
-  animation: kenburns 20s ease-in-out infinite alternate;
+/* --- Particle Effect Canvas --- */
+/* Placed on top of the background */
+/* Note: The #particles-js div in hero.html should have absolute positioning classes */
+#particles-js {
+  /* This z-index is relative to its parent section#home */
+  z-index: 1; /* Layer 1: Above the background */
 }
 
-/* --- Slide-specific Backgrounds --- */
-#hero-slide-1::before {
-  background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),
-    url('static/background-1.jpg'),
-    linear-gradient(105deg, #00833e 0%, #005f73 70%, #002d5b 100%);
-  background-position: center bottom, center;
-}
-#hero-slide-2::before {
-  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
-    url('https://images.unsplash.com/photo-1556742502-ec7c0e2f34b1?q=80&w=2070&auto=format&fit=crop');
-}
-#hero-slide-3::before {
-  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
-    url('static/together.jpg');
+/* --- Swiper Container --- */
+/* Placed on top of the particles, contains all slide content */
+.swiper.hero-swiper {
+  position: relative;
+  height: 100vh;
+  z-index: 2; /* Layer 2: Above the particles */
 }
 
-/* --- Text Reveal Animation --- */
+/* --- Slide Content & Text Animations --- */
+.hero-title,
+.hero-subtitle,
+#magnetic-btn {
+  /* Target the button by ID */
+  opacity: 0;
+}
+
 @keyframes text-reveal {
   from {
     opacity: 0;
@@ -96,42 +112,31 @@ h3 {
   }
 }
 
-.hero-title,
-.hero-subtitle,
-.hero-button {
-  opacity: 0;
-}
 .swiper-slide-active .hero-title {
   animation: text-reveal 0.8s ease-out forwards 0.3s;
 }
 .swiper-slide-active .hero-subtitle {
   animation: text-reveal 0.8s ease-out forwards 0.5s;
 }
-.swiper-slide-active .hero-button {
+.swiper-slide-active #magnetic-btn {
   animation: text-reveal 0.8s ease-out forwards 0.7s;
 }
 
-/* --- **NEW** Vibrant Styles for Hero Slide 1 --- */
+/* --- Specific Slide Styles & Effects --- */
 #hero-slide-1 .hero-title {
-  color: #c2d436; /* Màu xanh lá mạ nổi bật */
-  text-shadow: 1px 1px 8px rgba(0, 0, 0, 0.5); /* Thêm bóng đổ để chữ rõ hơn */
+  color: #c2d436; /* Vibrant lime green */
+  text-shadow: 1px 1px 8px rgba(0, 0, 0, 0.5);
 }
-#hero-slide-1 .hero-subtitle {
-  color: #f0f0f0; /* Màu trắng ngà, dịu mắt hơn */
-  font-weight: 300;
+
+#magnetic-btn .magnetic-effect {
+  position: absolute;
+  border-radius: 50%;
+  background: #00a651; /* Hover color */
+  transform: translate(-50%, -50%);
+  transition: width 0.3s ease, height 0.3s ease;
+  pointer-events: none;
+  z-index: 0;
 }
-#hero-slide-1 .hero-button {
-  background-color: #c2d436; /* Đồng bộ màu với tiêu đề */
-  color: #002d5b; /* Chữ màu xanh đậm để tương phản */
-  box-shadow: 0 4px 20px rgba(194, 212, 54, 0.4);
-  transition: background-color 0.3s ease, transform 0.3s ease;
-}
-#hero-slide-1 .hero-button:hover {
-  background-color: #00a651;
-  transform: scale(1.05);
-  cursor: pointer;
-}
-/* === END HERO SECTION STYLES === */
 
 /* === SLIDER & ANIMATION FIXES === */
 .swiper-pagination-bullet-active {
@@ -141,16 +146,6 @@ h3 {
 .swiper-button-prev {
   color: #c2d436 !important;
 }
-
-/* Fix for overlapping slides */
-/* .hero-swiper .swiper-slide {
-  opacity: 0;
-  transition-property: opacity;
-}
-.hero-swiper .swiper-slide-active {
-  opacity: 1;
-  z-index: 1;
-} */
 
 /* --- PRODUCT SECTION --- */
 
@@ -667,4 +662,17 @@ h3 {
     align-items: flex-start; /* Căn lề trái nội dung */
     text-align: left; /* Căn lề trái chữ */
   }
+}
+/* =============================================== */
+/* === FIX PARTICLE.JS HOVER INTERACTION === */
+/* =============================================== */
+
+/* Make the main content container on each slide 'transparent' to mouse events */
+.swiper-slide .max-w-3xl {
+  pointer-events: none;
+}
+
+/* IMPORTANT: Re-enable mouse events for all buttons inside the slides */
+.swiper-slide a {
+  pointer-events: auto;
 }
