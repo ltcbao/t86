@@ -1,18 +1,21 @@
 document.addEventListener('DOMContentLoaded', function () {
   // --- Function to load HTML components ---
-  const loadComponent = (selector, url) => {
+  // --- Function to load HTML components ---
+  const loadComponent = (selector, url, callback) => {
     const element = document.querySelector(selector);
     if (element) {
       return fetch(url)
-        .then((response) => {
-          if (!response.ok) throw new Error(`Cannot load file: ${url}`);
-          return response.text();
-        })
+        .then((response) =>
+          response.ok
+            ? response.text()
+            : Promise.reject('Cannot load file: ' + url)
+        )
         .then((data) => {
           element.innerHTML = data;
+          if (callback) callback();
         });
     }
-    return Promise.resolve(); // Resolve immediately if placeholder doesn't exist
+    return Promise.resolve();
   };
 
   const componentsToLoad = [
@@ -24,6 +27,7 @@ document.addEventListener('DOMContentLoaded', function () {
     loadComponent('#stats-placeholder', 'stats.html'),
     loadComponent('#partners-placeholder', 'partners.html'),
     loadComponent('#product-content-placeholder', 'product-content.html'),
+    loadComponent('#partners-content-placeholder', 'partners-content.html'),
   ];
 
   Promise.all(componentsToLoad)
@@ -34,7 +38,22 @@ document.addEventListener('DOMContentLoaded', function () {
     .catch((error) => {
       console.error('Error loading page components:', error);
     });
-
+  /**
+   * ✅ NEW: This function highlights the active navigation link.
+   */
+  function highlightActiveNav() {
+    const currentPath =
+      window.location.pathname.split('/').pop() || 'index.html';
+    const navLinks = document.querySelectorAll(
+      '#header-placeholder a.nav-link'
+    ); // Added .nav-link for specificity
+    navLinks.forEach((link) => {
+      if (link.getAttribute('href') === currentPath) {
+        link.classList.add('text-t86-green', 'font-bold');
+        link.classList.remove('text-t86-dark');
+      }
+    });
+  }
   function initializeAllScripts() {
     // --- Swiper Initialization for Hero ---
     if (document.querySelector('.hero-swiper')) {
@@ -106,6 +125,27 @@ document.addEventListener('DOMContentLoaded', function () {
           modes: {
             grab: { distance: 140, line_linked: { opacity: 1 } },
             push: { particles_nb: 4 },
+          },
+        },
+        retina_detect: true,
+      });
+    }
+
+    if (document.getElementById('about-hero')) {
+      particlesJS('particles-js', {
+        // Particle.js config for inner pages
+        particles: {
+          number: { value: 40, density: { enable: true, value_area: 800 } },
+          color: { value: '#ffffff' },
+          shape: { type: 'circle' },
+          opacity: { value: 0.3, random: true },
+          size: { value: 2, random: true },
+          move: {
+            enable: true,
+            speed: 1,
+            direction: 'none',
+            random: true,
+            out_mode: 'out',
           },
         },
         retina_detect: true,
@@ -505,5 +545,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // --- Initialize AOS ---
     AOS.init({ duration: 1000, once: true });
+    highlightActiveNav(); // Highlight the nav link after the header is loaded
   }
 });

@@ -1,17 +1,59 @@
-<section id="partners" class="py-20 bg-white">
-  <div class="container mx-auto px-4">
-    <div class="text-center mb-12">
-      <h2 class="text-3xl font-bold text-t86-blue mb-4 font-raleway">
-        Đối Tác Của Chúng Tôi
-      </h2>
-      <p class="text-t86-gray max-w-2xl mx-auto">
-        Chúng tôi tự hào được hợp tác với các thương hiệu hàng đầu để mang lại
-        giá trị tốt nhất cho khách hàng.
-      </p>
-    </div>
-    <div class="relative w-full overflow-hidden marquee">
-      <div id="partner-logos-wrapper" class="flex whitespace-nowrap"></div>
-    </div>
-  </div>
-</section>
-<script src="js/main.js"></script>
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Đối Tác Của Chúng Tôi</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link rel="icon" type="image/x-icon" href="static/logo-t86.png" />
+
+    <link rel="stylesheet" href="css/style.css" />
+
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              t86: {
+                green: '#00833E',
+                'green-light': '#00A651',
+                'green-accent': '#C2D436',
+                blue: '#002D5B',
+                light: '#F8F9FA',
+                dark: '#212529',
+                gray: '#6C757D',
+              },
+            },
+          },
+        },
+      };
+    </script>
+  </head>
+  <body class="bg-white">
+    <header
+      id="header-placeholder"
+      class="fixed top-0 left-0 w-full bg-white shadow-md z-50"
+    ></header>
+
+    <main class="pt-20">
+      <div id="partners-content-placeholder"></div>
+    </main>
+
+    <footer id="footer-placeholder"></footer>
+
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script src="js/main.js"></script>
+  </body>
+</html>

@@ -4,45 +4,23 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Về Chúng Tôi - T86 Tài Chính</title>
+
     <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
+    />
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
     />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&family=Raleway:wght@300;400;500;900&family=Dancing+Script:wght@700&display=swap"
-      rel="stylesheet"
-    />
-    <style>
-      body {
-        font-family: 'Montserrat', sans-serif;
-        background-color: #ffffff;
-        color: #212529;
-      }
-      .font-raleway {
-        font-family: 'Raleway', sans-serif;
-      }
-      .ripple {
-        position: relative;
-        overflow: hidden;
-      }
-      .ripple-effect {
-        position: absolute;
-        border-radius: 50%;
-        background: rgba(255, 255, 255, 0.5);
-        transform: scale(0);
-        animation: ripple-animation 0.6s linear;
-      }
-      @keyframes ripple-animation {
-        to {
-          transform: scale(4);
-          opacity: 0;
-        }
-      }
-    </style>
+    <link rel="icon" type="image/x-icon" href="static/logo-t86.png" />
+
+    <link rel="stylesheet" href="css/style.css" />
+
     <script>
+      // Global Tailwind config
       tailwind.config = {
         theme: {
           extend: {
@@ -55,9 +33,6 @@
                 light: '#F8F9FA',
                 dark: '#212529',
                 gray: '#6C757D',
-                // --- UPDATED: Added new colors from the image ---
-                'about-dark-green': '#5A6E42',
-                'about-light-green': '#D9EAD3',
               },
             },
           },
@@ -66,113 +41,42 @@
     </script>
   </head>
   <body class="bg-white">
-    <header class="sticky top-0 left-0 w-full bg-white shadow-md z-50">
-      <nav class="container mx-auto px-4 lg:px-6 py-3">
-        <div class="flex justify-between items-center">
-          <a href="index.html" class="text-3xl font-bold">
-            <span class="bg-t86-green text-white px-2 py-1 rounded">T</span
-            ><span class="text-t86-green">86</span>
-          </a>
-          <div class="hidden md:flex items-center space-x-8 font-medium">
-            <a
-              href="index.html"
-              class="text-t86-dark hover:text-t86-green-light transition-colors"
-              >Trang chủ</a
-            >
-            <a
-              href="products.html"
-              class="text-t86-dark hover:text-t86-green-light transition-colors"
-              >Sản phẩm</a
-            >
-            <a
-              href="partners.html"
-              class="text-t86-dark hover:text-t86-green-light transition-colors"
-              >Đối tác</a
-            >
-            <a
-              href="about.html"
-              class="text-t86-green font-bold transition-colors"
-              >Về chúng tôi</a
-            >
-            <a
-              href="contact.html"
-              class="text-t86-dark hover:text-t86-green-light transition-colors"
-              >Liên hệ</a
-            >
-            <button
-              class="bg-t86-green text-white font-bold px-6 py-2 rounded-full hover:bg-t86-green-light transition-colors ripple"
-            >
-              Đăng nhập
-            </button>
-          </div>
-          <button
-            id="mobile-menu-button"
-            class="md:hidden text-2xl text-t86-green"
-          >
-            <i class="fas fa-bars"></i>
-          </button>
-        </div>
-        <div id="mobile-menu" class="hidden md:hidden mt-4 space-y-2">
-          <a
-            href="index.html"
-            class="block text-t86-dark hover:text-t86-green-light transition-colors py-2"
-            >Trang chủ</a
-          >
-          <a
-            href="products.html"
-            class="block text-t86-dark hover:text-t86-green-light transition-colors py-2"
-            >Sản phẩm</a
-          >
-          <a
-            href="partners.html"
-            class="block text-t86-dark hover:text-t86-green-light transition-colors py-2"
-            >Đối tác</a
-          >
-          <a
-            href="about.html"
-            class="block text-t86-green font-bold transition-colors py-2"
-            >Về chúng tôi</a
-          >
-          <a
-            href="contact.html"
-            class="block text-t86-dark hover:text-t86-green-light transition-colors py-2"
-            >Liên hệ</a
-          >
-          <button
-            class="w-full mt-2 bg-t86-green text-white font-bold px-6 py-2 rounded-full hover:bg-t86-green-light transition-colors ripple"
-          >
-            Đăng nhập
-          </button>
-        </div>
-      </nav>
-    </header>
+    <header
+      id="header-placeholder"
+      class="fixed top-0 left-0 w-full bg-white shadow-md z-50"
+    ></header>
 
-    <main>
-      <section
-        class="relative h-80 text-white bg-t86-about-dark-green flex flex-col justify-center items-center text-center px-4"
-      >
-        <p class="text-lg opacity-80">
-          <a href="index.html" class="hover:underline">Trang chủ</a> / Về chúng
-          tôi
-        </p>
-        <h1 class="text-5xl font-bold font-raleway mt-2">Về chúng tôi</h1>
-        <p class="mt-4 text-xl opacity-90">
-          Tài chính linh hoạt, cuộc sống dễ dàng
-        </p>
+    <main class="pt-20">
+      <!-- <div class="about-top-bar text-white p-3 text-center md:text-left">
+        <div class="container mx-auto px-4">
+          <span class="font-bold">Công ty TNHH Kinh doanh T86</span>
+        </div>
+      </div> -->
+
+      <section id="about-hero-new">
+        <div class="overlay"></div>
+        <div class="container mx-auto px-4">
+          <p class="text-lg opacity-80">
+            <a href="index.html" class="hover:underline">Trang chủ</a> / Về
+            chúng tôi
+          </p>
+          <h1>Về chúng tôi</h1>
+          <p class="subtitle-2">Khám phá những điều thú vị về T86</p>
+        </div>
       </section>
 
-      <section id="about-content" class="py-20 bg-t86-about-light-green">
+      <section id="about-content" class="py-20 about-content-bg">
         <div class="container mx-auto px-4">
           <div class="flex flex-col lg:flex-row items-center gap-12 lg:gap-16">
-            <div class="lg:w-1/2">
+            <div class="lg:w-1/2" data-aos="fade-right">
               <img
                 src="https://images.unsplash.com/photo-1556740738-b6a63e27c4df?q=80&w=2070&auto=format&fit=crop"
                 alt="Đội ngũ T86"
                 class="rounded-lg shadow-2xl w-full"
               />
             </div>
-            <div class="lg:w-1/2">
-              <h2 class="text-3xl font-bold text-t86-dark mb-6 font-raleway">
+            <div class="lg:w-1/2" data-aos="fade-left">
+              <h2 class="text-3xl font-bold text-t86-blue mb-6 font-raleway">
                 Công ty TNHH Kinh doanh T86
               </h2>
               <div class="space-y-4 text-t86-dark leading-relaxed">
@@ -205,108 +109,11 @@
       </section>
     </main>
 
-    <footer class="bg-t86-blue text-white">
-      <div class="container mx-auto px-4 py-12">
-        <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
-          <div>
-            <h3 class="text-2xl font-bold mb-4">
-              <span class="bg-white text-t86-green px-2 py-1 rounded">T</span>86
-            </h3>
-            <p class="text-white/70">
-              Giải pháp tài chính cá nhân tin cậy và minh bạch.
-            </p>
-          </div>
-          <div>
-            <h4 class="font-bold text-lg mb-4">Sản phẩm</h4>
-            <ul>
-              <li class="mb-2">
-                <a href="products.html" class="text-white/70 hover:text-white"
-                  >Vay mua xe</a
-                >
-              </li>
-              <li class="mb-2">
-                <a href="products.html" class="text-white/70 hover:text-white"
-                  >Vay sinh viên</a
-                >
-              </li>
-              <li class="mb-2">
-                <a href="products.html" class="text-white/70 hover:text-white"
-                  >Vay tiêu dùng</a
-                >
-              </li>
-            </ul>
-          </div>
-          <div>
-            <h4 class="font-bold text-lg mb-4">Công ty</h4>
-            <ul>
-              <li class="mb-2">
-                <a href="about.html" class="text-white/70 hover:text-white"
-                  >Về chúng tôi</a
-                >
-              </li>
-              <li class="mb-2">
-                <a href="#" class="text-white/70 hover:text-white"
-                  >Tuyển dụng</a
-                >
-              </li>
-              <li class="mb-2">
-                <a href="partners.html" class="text-white/70 hover:text-white"
-                  >Đối tác</a
-                >
-              </li>
-            </ul>
-          </div>
-          <div>
-            <h4 class="font-bold text-lg mb-4">Kết nối</h4>
-            <div class="flex space-x-4">
-              <a href="#" class="text-2xl text-white/70 hover:text-white"
-                ><i class="fab fa-facebook-f"></i
-              ></a>
-              <a href="#" class="text-2xl text-white/70 hover:text-white"
-                ><i class="fab fa-instagram"></i
-              ></a>
-              <a href="#" class="text-2xl text-white/70 hover:text-white"
-                ><i class="fab fa-linkedin-in"></i
-              ></a>
-            </div>
-          </div>
-        </div>
-        <div
-          class="border-t border-white/20 mt-8 pt-6 text-center text-white/50 text-sm"
-        >
-          <p>&copy; 2025 T86 Finance. All Rights Reserved.</p>
-        </div>
-      </div>
-    </footer>
+    <footer id="footer-placeholder"></footer>
 
-    <script>
-      document.addEventListener('DOMContentLoaded', function () {
-        // --- Mobile Menu ---
-        document
-          .getElementById('mobile-menu-button')
-          .addEventListener('click', () => {
-            document.getElementById('mobile-menu').classList.toggle('hidden');
-          });
-
-        // --- Ripple Effect ---
-        document.querySelectorAll('.ripple').forEach((button) => {
-          button.addEventListener('click', function (e) {
-            const rect = this.getBoundingClientRect();
-            const circle = document.createElement('span');
-            const diameter = Math.max(this.clientWidth, this.clientHeight);
-            const radius = diameter / 2;
-            circle.style.width = circle.style.height = `${diameter}px`;
-            circle.style.left = `${e.clientX - rect.left - radius}px`;
-            circle.style.top = `${e.clientY - rect.top - radius}px`;
-            circle.classList.add('ripple-effect');
-            const ripple = this.getElementsByClassName('ripple-effect')[0];
-            if (ripple) {
-              ripple.remove();
-            }
-            this.appendChild(circle);
-          });
-        });
-      });
-    </script>
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script src="js/main.js"></script>
   </body>
 </html>

@@ -1,12 +1,20 @@
-/* --- Base Body and Font Styles --- */
+/* ================================================== */
+/* === BASE & TYPOGRAPHY STYLES === */
+/* ================================================== */
+html {
+  height: 100%;
+}
 body {
   font-family: 'Montserrat', sans-serif;
-  background-color: #ffffff;
   color: #212529;
   line-height: 1.65;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; /* Ensures the body is at least the full height of the screen */
 }
-
-/* --- Typographic Hierarchy --- */
+main {
+  flex-grow: 1; /* Allows the main section to grow and fill available space */
+}
 h1,
 h2,
 h3,
@@ -17,90 +25,149 @@ h6 {
   font-weight: 700;
   letter-spacing: 1px;
 }
-h1 {
-  font-size: 2.5rem;
-}
-h2 {
-  font-size: 2rem;
-}
-h3 {
-  font-size: 1.5rem;
-}
 .font-dancing-script {
   font-family: 'Dancing Script', cursive;
 }
+/* ================================================== */
+/* === CUSTOM COLOR FOR DANCING SCRIPT TEXT === */
+/* ================================================== */
 
-@media (min-width: 768px) {
-  h1 {
-    font-size: 3.5rem;
-  }
-  h2 {
-    font-size: 2.75rem;
-  }
+/* Áp dụng màu đỏ hồng cho dòng chữ "Dễ dàng sở hữu" */
+.text-t86 {
+  color: #e52b50; /* Mã màu cho đỏ hồng (Amaranth) */
 }
 
 /* ================================================== */
-/* === HERO SECTION STYLES (CONSOLIDATED & FIXED) === */
+/* === SHARED SLIDER STYLES (HERO & PRODUCTS) === */
 /* ================================================== */
+.swiper-pagination-bullet-active {
+  background-color: #c2d436 !important;
+}
+.swiper-button-next,
+.swiper-button-prev {
+  width: 50px;
+  height: 50px;
+  background-color: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(4px);
+  border-radius: 50%;
+  color: #ffffff;
+  transition: all 0.3s ease-in-out;
+  z-index: 30;
+}
+.swiper-button-next:hover,
+.swiper-button-prev:hover {
+  background-color: #00a651;
+  transform: scale(1.1);
+}
+.swiper-button-next::after,
+.swiper-button-prev::after {
+  font-size: 20px;
+  font-weight: 900;
+}
 
-/* --- Main hero section container --- */
+/* ================================================== */
+/* === HERO SECTION === */
+/* ================================================== */
 section#home {
   position: relative;
-  /* This z-index helps prevent other page sections from overlapping the hero */
   z-index: 20;
 }
-
-/* --- Background Image --- */
-/* Applied to the main section, placed at the very back */
 section#home::before {
   content: '';
   position: absolute;
   inset: 0;
-  z-index: 0; /* Layer 0: The absolute bottom */
-
-  /* Make sure the path is correct relative to your css file */
+  z-index: 0;
   background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
     url('../static/background-1.jpg');
   background-size: cover;
   background-position: center;
-
-  /* Ken Burns zoom effect */
-  animation: kenburns 20s ease-in-out infinite alternate;
+  /* animation: kenburns 20s ease-in-out infinite alternate; */
 }
-
 @keyframes kenburns {
   from {
-    transform: scale(1) translate(0, 0);
+    transform: scale(1);
   }
   to {
-    transform: scale(1.1) translate(-2%, 2%);
+    transform: scale(1.1);
   }
 }
-
-/* --- Particle Effect Canvas --- */
-/* Placed on top of the background */
-/* Note: The #particles-js div in hero.html should have absolute positioning classes */
 #particles-js {
-  /* This z-index is relative to its parent section#home */
-  z-index: 1; /* Layer 1: Above the background */
+  z-index: 1;
 }
-
-/* --- Swiper Container --- */
-/* Placed on top of the particles, contains all slide content */
 .swiper.hero-swiper {
   position: relative;
   height: 100vh;
-  z-index: 2; /* Layer 2: Above the particles */
+  z-index: 2;
+}
+.hero-features {
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px 0;
+  border-radius: 12px;
+  background: rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(5px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+.hero-features .feature-item {
+  text-align: center;
+  color: #fff;
+  flex: 1;
+  padding: 0 10px;
+}
+.hero-features .feature-icon {
+  width: 60px;
+  height: 60px;
+  margin: 0 auto 15px auto;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(255, 255, 255, 0.1);
+  animation: auto-glow 2s infinite alternate ease-in-out;
+}
+.hero-features .feature-icon i {
+  font-size: 24px;
+  color: #c2d436;
+}
+.hero-features .feature-item h3 {
+  font-family: 'Raleway', sans-serif;
+  font-weight: 600;
+  font-size: 1rem;
+}
+@keyframes auto-glow {
+  from {
+    background-color: rgba(255, 255, 255, 0.1);
+    box-shadow: 0 0 5px rgba(194, 212, 54, 0.2);
+    transform: scale(1);
+  }
+  to {
+    background-color: rgba(255, 255, 255, 0.25);
+    box-shadow: 0 0 20px rgba(194, 212, 54, 0.7);
+    transform: scale(1.1);
+  }
+}
+.hero-features .feature-item:nth-child(1) .feature-icon {
+  animation-delay: 0s;
+}
+.hero-features .feature-item:nth-child(2) .feature-icon {
+  animation-delay: 0.4s;
+}
+.hero-features .feature-item:nth-child(3) .feature-icon {
+  animation-delay: 0.8s;
+}
+.hero-features .feature-item:nth-child(4) .feature-icon {
+  animation-delay: 1.2s;
 }
 
-/* --- Slide Content & Text Animations --- */
+/* --- Hero Animations & Effects --- */
 .hero-title,
 .hero-subtitle,
 #magnetic-btn {
-  /* Target the button by ID */
   opacity: 0;
 }
-
 @keyframes text-reveal {
   from {
     opacity: 0;
@@ -111,7 +178,6 @@ section#home::before {
     transform: translateY(0);
   }
 }
-
 .swiper-slide-active .hero-title {
   animation: text-reveal 0.8s ease-out forwards 0.3s;
 }
@@ -121,73 +187,40 @@ section#home::before {
 .swiper-slide-active #magnetic-btn {
   animation: text-reveal 0.8s ease-out forwards 0.7s;
 }
-
-/* --- Specific Slide Styles & Effects --- */
 #hero-slide-1 .hero-title {
-  color: #c2d436; /* Vibrant lime green */
+  color: #c2d436;
   text-shadow: 1px 1px 8px rgba(0, 0, 0, 0.5);
 }
-
 #magnetic-btn .magnetic-effect {
   position: absolute;
   border-radius: 50%;
-  background: #00a651; /* Hover color */
+  background: #00a651;
   transform: translate(-50%, -50%);
   transition: width 0.3s ease, height 0.3s ease;
   pointer-events: none;
   z-index: 0;
 }
-
-/* === SLIDER & ANIMATION FIXES === */
-.swiper-pagination-bullet-active {
-  background-color: #c2d436 !important;
+.swiper-slide .max-w-3xl {
+  pointer-events: none;
 }
-.swiper-button-next,
-.swiper-button-prev {
-  color: #c2d436 !important;
+.swiper-slide a,
+.swiper-slide button {
+  pointer-events: auto;
 }
 
-/* --- PRODUCT SECTION --- */
-
-.product-slide.active {
-  opacity: 1;
-  visibility: visible;
-  z-index: 10;
-}
-.product-indicator.active {
-  background-color: #00833e;
-}
+/* ================================================== */
+/* === PRODUCT SECTION === */
+/* ================================================== */
 .product-content-wrapper {
   display: flex;
   flex-direction: column;
   justify-content: center;
   min-height: 60vh;
 }
-
-/* Product Animations */
-/* Product Animations (Updated for Swiper) */
-@keyframes pulse-in {
-  0% {
-    opacity: 0;
-    transform: translateY(15px) scale(0.95);
-  }
-  70% {
-    opacity: 1;
-    transform: translateY(0) scale(1.02);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-  }
-}
-
-/* Ẩn các phần tử có hiệu ứng lúc ban đầu */
 .swiper-slide .anim-el,
 .swiper-slide .product-ul li {
   opacity: 0;
 }
-
-/* Kích hoạt hiệu ứng cho slide đang hoạt động */
 .swiper-slide-active .anim-el {
   opacity: 1;
   transform: translateY(0);
@@ -200,10 +233,34 @@ section#home::before {
   transition-delay: 0.2s;
 }
 .swiper-slide-active .anim-el.product-visuals {
+  opacity: 1; /* Fixed visibility */
   transition-delay: 0.3s;
 }
 .swiper-slide-active .anim-el.product-btn-wrapper {
   transition-delay: 1.6s;
+}
+
+@keyframes pulse-in {
+  from {
+    opacity: 0;
+    transform: translateY(15px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+@keyframes pulse-animation {
+  0%,
+  100% {
+    transform: scale(1.1);
+  }
+  50% {
+    transform: scale(1.02);
+  }
+}
+.pulse-animation {
+  animation: pulse-animation 5s infinite ease-in-out;
 }
 .swiper-slide-active .product-ul li {
   animation: pulse-in 0.8s ease-out forwards;
@@ -223,198 +280,110 @@ section#home::before {
 .swiper-slide-active .product-ul li:nth-child(5) {
   animation-delay: 1.2s;
 }
-/* Cập nhật style cho các nút điều hướng */
-.swiper-button-next.product-nav-next,
-.swiper-button-prev.product-nav-prev {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 44px; /* Tăng kích thước một chút cho dễ bấm */
-  height: 44px;
-  background-color: rgba(0, 131, 62, 0.8); /* Giảm độ trong suốt một chút */
-  color: #fff;
-  border-radius: 50%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
-  z-index: 10;
-  transition: background-color 0.3s ease, transform 0.3s ease;
-}
 
-.swiper-button-next.product-nav-next {
-  right: 2rem; /* Đẩy nút ra sát lề phải (điều chỉnh nếu cần) */
-}
-
-.swiper-button-prev.product-nav-prev {
-  left: 2rem; /* Đẩy nút ra sát lề trái (điều chỉnh nếu cần) */
-}
-.swiper-button-next.product-nav-next::after {
-  content: ''; /* Loại bỏ mũi tên mặc định của Swiper */
-}
-
-/* Biểu tượng mũi tên tùy chỉnh (có thể dùng icon font hoặc SVG) */
-.swiper-button-next.product-nav-next::before {
-  content: '\2192'; /* Mã Unicode cho mũi tên phải (→) */
-  font-size: 1.5em;
-  font-weight: bold;
-}
-
-/* Hiệu ứng khi di chuột qua */
-.swiper-button-next.product-nav-next:hover {
-  background-color: #00642d; /* Màu xanh lá cây đậm hơn */
-}
-
-/* Các style tương tự cho nút "prev" (bạn có thể thêm nếu cần) */
-.swiper-button-prev.product-nav-prev {
-  position: absolute;
-  top: 50%;
-  left: 15px;
-  transform: translateY(-50%);
-  width: 40px;
-  height: 40px;
-  background-color: #00833e;
-  color: #fff;
-  border-radius: 50%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 1.2em;
-  cursor: pointer;
-  z-index: 10;
-  transition: background-color 0.3s ease;
-}
-
-.swiper-button-prev.product-nav-prev::after {
-  content: '';
-}
-
-.swiper-button-prev.product-nav-prev::before {
-  content: '\2190'; /* Mã Unicode cho mũi tên trái (←) */
-  font-size: 1.5em;
-  font-weight: bold;
-}
-
-.swiper-button-prev.product-nav-prev:hover {
-  background-color: #00642d;
-}
-
-@keyframes pulse-image {
-  from {
-    transform: scale(1);
-  }
-  to {
-    transform: scale(1.1);
-  }
-}
-.pulse-animation {
-  animation: pulse-image 1.5s ease-in-out infinite alternate;
-  transform-origin: center;
-}
-
-/* --- MARQUEE --- */
-@keyframes marquee {
-  from {
-    transform: translateX(0);
-  }
-  to {
-    transform: translateX(-50%);
-  }
-}
-.marquee {
-  min-height: 8rem;
-  display: flex;
-  align-items: center;
-}
-.marquee-content {
-  animation: marquee 40s linear infinite;
-  position: relative;
-  z-index: 1;
-}
-.marquee:hover .marquee-content {
-  animation-play-state: paused;
-}
-
-/* --- PARTNER LOGOS --- */
-.partner-logo-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 8rem;
-  width: 13rem;
-  padding: 1rem;
-}
-.partner-logo-img {
-  max-height: 100%;
-  max-width: 100%;
-  object-fit: contain;
-  transition: transform 0.3s ease-in-out;
-}
-.partner-logo-img:hover {
-  transform: scale(2.1);
-}
-
-/* --- FOOTER --- */
-.footer-separator {
-  width: 1px;
-  height: 80px;
-  background-color: #d1d5db;
-}
-
-/* --- STAR CURSOR --- */
-.star-cursor {
-  position: fixed;
-  top: 0;
-  left: 0;
-  pointer-events: none;
-  font-size: 1.5rem;
-  color: #c2d436;
-  transition: transform 1s ease-out, opacity 1s ease-out;
-  z-index: 9999;
-}
-/* === PRODUCT SECTION CONTENT STYLING === */
-
-/* --- Styling for the main title (e.g., "TIÊU DÙNG LINH HOẠT") --- */
 .product-slide .product-h2 {
-  color: #00833e; /* Màu xanh lá cây đậm cho tiêu đề chính */
-  font-weight: 900; /* Làm cho font chữ dày và ấn tượng hơn */
+  color: #00833e;
+  font-weight: 900;
 }
-
-/* --- Styling for the sub-title (e.g., "VAY NHANH") --- */
 .product-slide .product-p {
-  color: #6c757d; /* Màu xám cho tiêu đề phụ */
+  color: #6c757d;
   font-weight: 500;
   letter-spacing: 1px;
 }
-
-/* --- Styling for the list items (ul) --- */
 .product-slide .product-ul li {
-  color: #212529; /* Màu chữ đen cho nội dung danh sách */
+  color: #212529;
   font-weight: 500;
 }
-
-/* Styling for the bold text inside list items */
 .product-slide .product-ul li .font-bold {
-  color: #00833e; /* Đồng bộ màu xanh lá cây đậm cho các phần chữ in đậm */
+  color: #00833e;
 }
-
-/* --- Styling for the checkmark icon --- */
 .product-slide .product-ul li .fa-check {
-  color: #00a651; /* Màu xanh lá cây sáng hơn cho dấu tick */
+  color: #00a651;
 }
 
-/* --- Styling for the main button ("VAY NGAY") --- */
+.product-slide .feature-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+.product-slide .feature-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+}
+.product-slide .feature-indicator {
+  flex-shrink: 0;
+  width: 0.75rem;
+  height: 0.75rem;
+  border-radius: 50%;
+  margin-top: 0.4rem;
+}
+/* ================================================== */
+/* === PRODUCT IMAGE UNIFORM SIZE FIX === */
+/* ================================================== */
+
+/* This container will have a fixed height, creating a uniform space for the image */
+.product-image-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 32rem; /* We'll use a consistent height of 32rem for all slides */
+  width: 100%;
+}
+
+/* The image will be scaled to fit inside the container without being cropped or distorted */
+.product-image-container img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+
+@keyframes button-glow-shadow {
+  from {
+    box-shadow: 0 0 5px rgba(0, 166, 81, 0.4);
+  }
+  to {
+    box-shadow: 0 0 20px rgba(0, 166, 81, 0.9);
+  }
+}
 .product-slide .btn-product {
-  background-color: #00833e;
   transition: background-color 0.3s ease, transform 0.3s ease;
+  animation: button-glow-shadow 1.5s infinite alternate ease-in-out;
 }
-
 .product-slide .btn-product:hover {
-  background-color: #00a651; /* Sáng lên khi hover */
+  background-color: #00a651;
   transform: scale(1.05);
 }
+/* Định nghĩa lại animation, chỉ tác động vào box-shadow để tránh xung đột */
+@keyframes button-glow-shadow {
+  from {
+    /* Trạng thái ban đầu */
+    box-shadow: 0 0 5px rgba(0, 166, 81, 0.4);
+  }
+  to {
+    /* Trạng thái sáng nhất */
+    box-shadow: 0 0 20px rgba(0, 166, 81, 0.9);
+  }
+}
 
-/* === STATS SECTION BACKGROUND EFFECT === */
+/* Áp dụng animation đã sửa cho nút */
+.product-slide .btn-product {
+  /* Animation này sẽ không còn xung đột với hiệu ứng scale khi hover */
+  animation: button-glow-shadow 1.5s infinite alternate ease-in-out;
+}
+
+/* ================================================== */
+/* === STATS SECTION === */
+/* ================================================== */
+#stats {
+  min-height: 70vh;
+  display: flex;
+  align-items: center;
+}
+.stats-overlay {
+  background: linear-gradient(to right, #00833e, #002d5b);
+  opacity: 0.8;
+}
 @keyframes scroll-background {
   from {
     transform: translateY(0);
@@ -423,256 +392,248 @@ section#home::before {
     transform: translateY(-50%);
   }
 }
-
 #stats-background-grid {
   display: flex;
-  gap: 1rem; /* Khoảng cách giữa các cột ảnh */
+  gap: 1rem;
   width: 100%;
-  height: 200%; /* Gấp đôi chiều cao để tạo hiệu ứng lặp lại */
+  height: 200%;
   position: absolute;
   top: 0;
   left: 0;
   animation: scroll-background 120s linear infinite;
 }
-
 .stats-bg-column {
   flex: 1;
   display: flex;
   flex-direction: column;
-  gap: 1rem; /* Khoảng cách giữa các ảnh trong cột */
+  gap: 1rem;
 }
-
-/* Đảo ngược hướng và thay đổi tốc độ cho các cột chẵn */
 .stats-bg-column:nth-child(even) {
   animation-direction: reverse;
   animation-duration: 150s;
 }
-
 .stats-bg-column img {
   width: 100%;
-  aspect-ratio: 4 / 3; /* Tỷ lệ ảnh 4:3 */
-  object-fit: cover; /* Đảm bảo ảnh phủ đầy khung */
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
   border-radius: 0.5rem;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
 }
-/* === STATS SECTION SIZE UPGRADE === */
-#stats {
-  min-height: 50vh; /* Đặt chiều cao tối thiểu bằng 70% chiều cao màn hình */
-  display: flex;
-  align-items: center; /* Căn giữa nội dung theo chiều dọc */
-}
-/* === STATS SECTION OVERLAY FIX === */
-.stats-overlay {
-  background: linear-gradient(
-    to right,
-    #00833e,
-    #002d5b
-  ); /* Gradient từ xanh lá sang xanh dương */
-  opacity: 0.8; /* Độ trong suốt 80% */
-}
 
-/* Style cho toàn bộ section */
-#stats {
-  min-height: 70vh;
-  display: flex;
-  align-items: center;
+/* ================================================== */
+/* === ABOUT US PAGE === */
+/* ================================================== */
+.about-top-bar {
+  background-color: #2d5b2d;
 }
-/* === FIX LỖI SECTION CHỒNG LÊN HERO === */
-#home {
-  position: relative;
-  z-index: 20;
-}
-/* === SỬA LỖI NÚT SWIPER KHÔNG CLICK ĐƯỢC === */
-.hero-swiper .swiper-button-next,
-.hero-swiper .swiper-button-prev {
-  z-index: 30; /* Đảm bảo các nút luôn nằm ở lớp trên cùng */
-}
-/* --- Hero Features Styling --- */
-.hero-features {
-  display: flex;
-  justify-content: space-around;
-  width: 100%;
-  max-width: 1200px; /* Giới hạn chiều rộng tối đa */
-  margin: 0 auto; /* Căn giữa */
-  padding: 20px 0;
-  border-radius: 12px;
-  background: rgba(0, 0, 0, 0.2);
-  backdrop-filter: blur(5px); /* Hiệu ứng kính mờ */
-  -webkit-backdrop-filter: blur(5px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.feature-item {
+#about-hero-new {
+  background-color: #c4d3b4;
+  padding: 4rem 2rem;
   text-align: center;
-  color: #fff;
-  opacity: 0; /* Ẩn ban đầu để AOS hoạt động */
-  flex: 1;
-  padding: 0 10px;
+  color: #1a3a1e;
 }
-
-.feature-icon {
-  width: 60px;
-  height: 60px;
-  margin: 0 auto 15px auto;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: rgba(255, 255, 255, 0.1);
-  transition: background-color 0.3s ease;
-}
-
-/* .feature-item:hover .feature-icon {
-  background-color: rgba(255, 255, 255, 0.25);
-} */
-
-.feature-icon i {
-  font-size: 24px;
-  color: #c2d436; /* Màu xanh lá mạ (t86-green-accent) */
-}
-
-.feature-item h3 {
+#about-hero-new h1 {
   font-family: 'Raleway', sans-serif;
-  font-weight: 600;
-  font-size: 1rem;
+  font-size: 3.5rem;
+  font-weight: 700;
+  line-height: 1.2;
+}
+#about-hero-new p {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1.1rem;
+  margin-top: 1rem;
+  opacity: 0.9;
+}
+#about-hero-new a {
+  color: #1a3a1e;
+}
+.about-content-bg {
+  background-color: #f7f7f7;
 }
 
-/* === HIỆU ỨNG TỰ ĐỘNG SÁNG CHO ICON === */
-
-/* 1. Định nghĩa animation "sáng lên" và "to lên" */
-@keyframes auto-glow {
-  from {
-    /* Trạng thái ban đầu */
-    background-color: rgba(255, 255, 255, 0.1);
-    box-shadow: 0 0 5px rgba(194, 212, 54, 0.2);
-    transform: scale(1); /* Kích thước ban đầu */
-  }
-  to {
-    /* Trạng thái sáng và to nhất */
-    background-color: rgba(255, 255, 255, 0.25);
-    box-shadow: 0 0 20px rgba(194, 212, 54, 0.7);
-    transform: scale(1.1); /* Phóng to lên 10% */
-  }
-}
-
-/* 2. Áp dụng animation cho tất cả các icon */
-.feature-icon {
-  animation-name: auto-glow; /* Tên animation */
-  animation-duration: 2s; /* Thời gian cho một chu kỳ sáng-tối */
-  animation-iteration-count: infinite; /* Lặp lại vô hạn */
-  animation-direction: alternate; /* Chạy tới rồi chạy lui (sáng -> tối -> sáng) */
-  animation-timing-function: ease-in-out; /* Kiểu chuyển động mượt mà */
-}
-
-/* 3. Tạo độ trễ lần lượt cho từng icon để có hiệu ứng đuổi nhau */
-.feature-item:nth-child(1) .feature-icon {
-  animation-delay: 0s;
-}
-.feature-item:nth-child(2) .feature-icon {
-  animation-delay: 0.4s;
-}
-.feature-item:nth-child(3) .feature-icon {
-  animation-delay: 0.8s;
-}
-.feature-item:nth-child(4) .feature-icon {
-  animation-delay: 1.2s;
-}
-
-/* === HERO SLIDER NAVIGATION STYLING === */
-/* === SLIDER NAVIGATION STYLING (CHO CẢ HERO VÀ PRODUCT) === */
-
-/* --- Trạng thái mặc định của nút --- */
-.hero-swiper .swiper-button-next,
-.hero-swiper .swiper-button-prev,
-#products-page .swiper-button-next, /* Thêm vào */
-#products-page .swiper-button-prev {
-  /* Thêm vào */
-  width: 50px;
-  height: 50px;
-  background-color: rgba(255, 255, 255, 0.2);
-  backdrop-filter: blur(4px);
-  border-radius: 50%;
-  color: #ffffff;
-  transition: all 0.3s ease-in-out;
-}
-
-/* Ghi đè màu mũi tên mặc định */
-.hero-swiper .swiper-button-next::after,
-.hero-swiper .swiper-button-prev::after,
-#products-page .swiper-button-next::after, /* Thêm vào */
-#products-page .swiper-button-prev::after {
-  /* Thêm vào */
-  font-size: 20px;
-  font-weight: 900;
-}
-
-/* --- Hiệu ứng khi rê chuột vào --- */
-.hero-swiper .swiper-button-next:hover,
-.hero-swiper .swiper-button-prev:hover,
-#products-page .swiper-button-next:hover, /* Thêm vào */
-#products-page .swiper-button-prev:hover {
-  /* Thêm vào */
-  background-color: #00a651;
-  color: #ffffff;
-  transform: scale(1.1);
-  box-shadow: 0 0 15px rgba(0, 166, 81, 0.8);
-}
-/* === MOBILE OPTIMIZATION === */
 @media (max-width: 768px) {
-  /* 1. Thu nhỏ và đặt lại vị trí nút điều hướng slider */
-  .hero-swiper .swiper-button-next,
-  .hero-swiper .swiper-button-prev,
-  #products-page .swiper-button-next,
-  #products-page .swiper-button-prev {
-    width: 36px; /* Thu nhỏ nút */
+  h1 {
+    font-size: 2.5rem;
+  }
+  h2 {
+    font-size: 2rem;
+  }
+
+  .swiper-button-next,
+  .swiper-button-prev {
+    width: 36px;
     height: 36px;
   }
-
-  .hero-swiper .swiper-button-next::after,
-  .hero-swiper .swiper-button-prev::after,
-  #products-page .swiper-button-next::after,
-  #products-page .swiper-button-prev::after {
-    font-size: 16px; /* Thu nhỏ mũi tên */
+  .swiper-button-next::after,
+  .swiper-button-prev::after {
+    font-size: 16px;
+  }
+  .swiper-button-next {
+    right: 10px;
+  }
+  .swiper-button-prev {
+    left: 10px;
   }
 
-  .hero-swiper .swiper-button-next,
-  #products-page .swiper-button-next {
-    right: 10px; /* Đặt lại gần hơn */
-  }
-
-  .hero-swiper .swiper-button-prev,
-  #products-page .swiper-button-prev {
-    left: 10px; /* Đặt lại gần hơn */
-  }
-
-  /* 2. Sắp xếp các feature-item của hero thành cột dọc */
   .hero-features {
-    position: static; /* Bỏ định vị tuyệt đối */
-    flex-direction: column; /* Chuyển sang cột dọc */
-    background: none; /* Bỏ nền để trông gọn hơn */
+    position: static;
+    flex-direction: column;
+    background: none;
     backdrop-filter: none;
     border: none;
     margin-top: 2rem;
-    gap: 1.5rem; /* Thêm khoảng cách giữa các mục */
+    gap: 1.5rem;
   }
-
-  /* 3. Tăng khoảng trống dưới cho slide 1 trên mobile */
   #hero-slide-1 {
     padding-bottom: 20px;
-    align-items: flex-start; /* Căn lề trái nội dung */
-    text-align: left; /* Căn lề trái chữ */
+  }
+
+  /* =============================================== */
+  /* === FINAL MOBILE ALIGNMENT FIX === */
+  /* =============================================== */
+  .product-slide .product-content-wrapper {
+    /* Center the titles and button */
+    text-align: center;
+  }
+
+  .product-slide .product-ul {
+    /* This forces the list itself to be centered */
+    width: -moz-fit-content;
+    width: fit-content;
+    margin-left: auto !important;
+    margin-right: auto !important;
+
+    /* This keeps the text inside the list left-aligned for neatness */
+    text-align: left;
+  }
+  .zalo-icon {
+    width: 2rem;
+    height: 2rem;
+    margin-right: 0.5rem;
+    vertical-align: middle;
   }
 }
-/* =============================================== */
-/* === FIX PARTICLE.JS HOVER INTERACTION === */
-/* =============================================== */
+/* ================================================== */
+/* === PARTNER LOGOS MARQUEE === */
+/* ================================================== */
 
-/* Make the main content container on each slide 'transparent' to mouse events */
-.swiper-slide .max-w-3xl {
-  pointer-events: none;
+/* Keyframes that define the scrolling animation */
+/* --- MARQ================================================== /
+/ === PARTNER LOGOS MARQUEE === /
+/ ================================================== */
+
+/* Keyframes that define the scrolling animation */
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
 }
 
-/* IMPORTANT: Re-enable mouse events for all buttons inside the slides */
-.swiper-slide a {
-  pointer-events: auto;
+.marquee {
+  min-height: 10rem;
+  display: flex;
+  align-items: center;
+}
+
+.marquee-content {
+  animation: marquee 40s linear infinite;
+  position: relative;
+  z-index: 1;
+}
+
+.marquee:hover .marquee-content {
+  animation-play-state: paused;
+}
+
+/* --- PARTNER LOGOS --- */
+
+.partner-logo-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 20rem; /* Increased height  */
+  width: 9rem; /* Reduced width */
+  padding: 1rem;
+}
+
+.partner-logo-img {
+  max-height: 100%;
+  max-width: 100%;
+  object-fit: contain;
+  transition: transform 0.3s ease-in-out;
+}
+
+.partner-logo-img:hover {
+  transform: scale(2.1); /* Adjusted scale for a more subtle hover */
+}
+/* =============================================== */
+/* === TEST CODE FOR BUTTON GLOW === */
+/* =============================================== */
+
+/* This is a test animation. It should be very obvious. */
+@keyframes test-glow-animation {
+  from {
+    box-shadow: 0 0 30px rgba(29, 154, 33, 0.922);
+  }
+  to {
+    box-shadow: 0 0 10px rgb(228, 228, 208);
+  }
+}
+
+/* We will force the animation onto the button to override any conflicts. */
+.btn-product {
+  animation: test-glow-animation 1s infinite alternate !important;
+}
+
+/* ================================================== */
+/* === FOOTER BOTTOM / COPYRIGHT SECTION STYLES === */
+/* ================================================== */
+
+/* Container chính cho phần copyright */
+.financity-copyright-container {
+  display: flex; /* Sử dụng Flexbox để sắp xếp */
+  justify-content: space-between; /* Đẩy 2 phần sang hai bên */
+  align-items: center; /* Căn giữa theo chiều dọc */
+  flex-wrap: wrap; /* Cho phép xuống dòng trên màn hình nhỏ */
+
+  /* Các thuộc tính tương tự lớp .container của Tailwind */
+  max-width: 1280px; /* lg breakpoint */
+  margin-left: auto;
+  margin-right: auto;
+  padding: 1rem; /* 16px */
+}
+
+/* Căn lề cho nội dung bên trái và phải */
+.financity-copyright-left,
+.financity-copyright-right {
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+/* Style cho màn hình mobile: các phần tử sẽ tự động xếp chồng lên nhau */
+@media (max-width: 768px) {
+  .financity-copyright-container {
+    flex-direction: column; /* Xếp chồng theo chiều dọc */
+    justify-content: center; /* Căn giữa */
+    gap: 0.5rem; /* Tạo khoảng cách nhỏ giữa các dòng */
+  }
+}
+
+/* ================================================== */
+/* === HEADER GRADIENT BACKGROUND === */
+/* ================================================== */
+
+#header-placeholder {
+  background-image: linear-gradient(to right, #002d5b, #00833e);
+  /* Remove the shadow, as it's not needed for a dark header */
+  box-shadow: none;
+}
+
+/* Style for the active navigation link on the dark background */
+#header-placeholder a.nav-link.font-bold {
+  opacity: 1;
+  color: #c2d436; /* Use the vibrant accent green for active links */
 }
