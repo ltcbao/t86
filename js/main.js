@@ -24,8 +24,9 @@ document.addEventListener('DOMContentLoaded', function () {
     loadComponent('#product-content-placeholder', 'product-content.html'),
     loadComponent('#partners-content-placeholder', 'partners-content.html'),
     loadComponent('#find-us-placeholder', 'find-us.html'),
-    loadComponent('#about-placeholder ', 'about.html'),
-    loadComponent('#stats-placeholder ', 'stats.html'),
+    loadComponent('#about-placeholder', 'about.html'),
+    loadComponent('#stats-placeholder', 'stats.html'),
+    loadComponent('#news-ticker-placeholder', 'news-ticker.html'),
   ];
 
   Promise.all(componentsToLoad)
