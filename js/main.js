@@ -41,26 +41,22 @@ document.addEventListener('DOMContentLoaded', function () {
    * ✅ NEW: This function highlights the active navigation link.
    */
   function highlightActiveNav() {
-    // Get the current URL path, e.g., "/about/" or "/find-us.html"
-    let currentPath = window.location.pathname;
-
-    // If it's the homepage, the path is just "/"
-    if (currentPath === '/') {
-      currentPath = '/index.html';
-    }
+    // Get the current page filename, defaulting to 'index.html' for the root path
+    const currentPage =
+      window.location.pathname.split('/').pop() || 'index.html';
 
     const navLinks = document.querySelectorAll('#header-placeholder .nav-link');
 
     navLinks.forEach((link) => {
       const linkHref = link.getAttribute('href');
 
-      // This checks if the link's href is contained within the current URL path.
-      // This works for both "/about/" and "about.html".
-      if (currentPath.includes(linkHref)) {
+      // This is a precise check: does the link's href exactly match the current page?
+      if (linkHref === currentPage) {
         link.classList.add('text-t86-green', 'font-bold');
         link.classList.remove('text-t86-dark');
-        if (link.classList.contains('text-white')) {
-          link.classList.remove('opacity-80');
+        // Special handling for the header with a gradient background
+        if (document.querySelector('.header-gradient')) {
+          link.classList.remove('opacity-80', 'text-white');
         }
       }
     });

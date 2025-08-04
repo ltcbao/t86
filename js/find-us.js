@@ -30,11 +30,6 @@ document.addEventListener('DOMContentLoaded', function () {
     // Get the current URL path, e.g., "/about/" or "/find-us.html"
     let currentPath = window.location.pathname;
 
-    // If it's the homepage, the path is just "/"
-    if (currentPath === '/') {
-      currentPath = '/index.html';
-    }
-
     const navLinks = document.querySelectorAll('#header-placeholder .nav-link');
 
     navLinks.forEach((link) => {
