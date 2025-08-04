@@ -1,43 +1,39 @@
 document.addEventListener('DOMContentLoaded', function () {
   // --- Function to load HTML components ---
   // --- Function to load HTML components ---
-  const loadComponent = (selector, url, callback) => {
+  // A robust function to load HTML components. It will not fail if a placeholder is missing.
+  const loadComponent = (selector, url) => {
     const element = document.querySelector(selector);
     if (element) {
       return fetch(url)
         .then((response) =>
-          response.ok
-            ? response.text()
-            : Promise.reject('Cannot load file: ' + url)
-        )
+          response.ok ? response.text() : Promise.resolve('')
+        ) // Silently fail on 404
         .then((data) => {
-          element.innerHTML = data;
-          if (callback) callback();
+          if (data) element.innerHTML = data;
         });
     }
-    return Promise.resolve();
+    return Promise.resolve(); // Silently resolve if placeholder doesn't exist
   };
 
+  // List of all possible components to load across the site
   const componentsToLoad = [
     loadComponent('#header-placeholder', 'header.html'),
     loadComponent('#footer-placeholder', 'footer.html'),
     loadComponent('#hero-placeholder', 'hero.html'),
-    loadComponent('#news-ticker-placeholder', 'news-ticker.html'),
-    loadComponent('#products-placeholder', 'products.html'),
-    loadComponent('#stats-placeholder', 'stats.html'),
-    loadComponent('#partners-placeholder', 'partners.html'),
     loadComponent('#product-content-placeholder', 'product-content.html'),
     loadComponent('#partners-content-placeholder', 'partners-content.html'),
+    loadComponent('#find-us-placeholder', 'find-us.html'),
   ];
 
   Promise.all(componentsToLoad)
     .then(() => {
-      console.log('All components loaded, initializing scripts...');
+      console.log(
+        'All components loaded, initializing page-specific scripts...'
+      );
       initializeAllScripts();
     })
-    .catch((error) => {
-      console.error('Error loading page components:', error);
-    });
+    .catch((error) => console.error('Error loading page components:', error));
   /**
    * ✅ NEW: This function highlights the active navigation link.
    */
