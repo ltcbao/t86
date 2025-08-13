@@ -487,6 +487,20 @@ section#home::before {
   #hero-slide-1 {
     padding-bottom: 20px;
   }
+    #hero-slide-1 .hero-title,
+  #hero-slide-2 .hero-title,
+  #hero-slide-3 .hero-title {
+    white-space: nowrap; /* Đảm bảo tất cả tiêu đề hero không bị xuống dòng */
+  }
+
+  #hero-slide-1 .hero-title {
+    font-size: 2rem; /* Cỡ chữ cho "TÀI CHÍNH CÁ NHÂN" */
+  }
+
+  #hero-slide-2 .hero-title,
+  #hero-slide-3 .hero-title {
+    font-size: 1.75rem; /* Giảm cỡ chữ cho "Sản Phẩm Vượt Trội" & "Đối Tác Tin Cậy" */
+  }
 
   /* =============================================== */
   /* === FINAL MOBILE ALIGNMENT FIX === */
