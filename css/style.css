@@ -187,9 +187,11 @@ section#home::before {
 .swiper-slide-active #magnetic-btn {
   animation: text-reveal 0.8s ease-out forwards 0.7s;
 }
-#hero-slide-1 .hero-title {
-  color: #c2d436;
-  text-shadow: 1px 1px 8px rgba(0, 0, 0, 0.5);
+#hero-slide-1 .hero-title,
+#hero-slide-2 .hero-title,
+#hero-slide-3 .hero-title {
+  color: #c2d436;                               /* Áp dụng màu xanh lá mạ đặc trưng */
+  text-shadow: 1px 1px 8px rgba(0, 0, 0, 0.5); /* Thêm hiệu ứng đổ bóng cho dễ đọc */
 }
 #magnetic-btn .magnetic-effect {
   position: absolute;
@@ -487,20 +489,23 @@ section#home::before {
   #hero-slide-1 {
     padding-bottom: 20px;
   }
-    #hero-slide-1 .hero-title,
+  #hero-slide-1 .hero-title,
   #hero-slide-2 .hero-title,
   #hero-slide-3 .hero-title {
-    white-space: nowrap; /* Đảm bảo tất cả tiêu đề hero không bị xuống dòng */
+    color: #c2d436;                               /* Áp dụng màu xanh lá mạ đặc trưng */
+    text-shadow: 1px 1px 8px rgba(0, 0, 0, 0.5); /* Thêm hiệu ứng đổ bóng cho dễ đọc */
+    font-size: 2rem;                             /* Đặt cùng một kích thước font chữ */
+    white-space: nowrap;                         /* Đảm bảo tất cả đều nằm trên một hàng */
   }
 
-  #hero-slide-1 .hero-title {
+  /* #hero-slide-1 .hero-title {
     font-size: 2rem; /* Cỡ chữ cho "TÀI CHÍNH CÁ NHÂN" */
   }
 
   #hero-slide-2 .hero-title,
   #hero-slide-3 .hero-title {
     font-size: 1.75rem; /* Giảm cỡ chữ cho "Sản Phẩm Vượt Trội" & "Đối Tác Tin Cậy" */
-  }
+  } */
 
   /* =============================================== */
   /* === FINAL MOBILE ALIGNMENT FIX === */
@@ -526,7 +531,7 @@ section#home::before {
     margin-right: 0.5rem;
     vertical-align: middle;
   }
-}
+
 /* ================================================== */
 /* === PARTNER LOGOS MARQUEE === */
 /* ================================================== */
@@ -633,6 +638,18 @@ section#home::before {
     flex-direction: column; /* Xếp chồng theo chiều dọc */
     justify-content: center; /* Căn giữa */
     gap: 0.5rem; /* Tạo khoảng cách nhỏ giữa các dòng */
+  }
+}
+
+/* ================================================== */
+/* === UNIFY HERO FONT SIZE (WEB ONLY) === */
+/* ================================================== */
+@media (min-width: 768px) {
+  #hero-slide-1 .hero-title,
+  #hero-slide-2 .hero-title,
+  #hero-slide-3 .hero-title {
+    font-size: 3.75rem; /* Tương đương text-6xl của Tailwind */
+    line-height: 1.1;   /* Căn chỉnh lại chiều cao dòng cho nhất quán */
   }
 }
 

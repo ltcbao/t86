@@ -1,53 +1,39 @@
-// js/find-us.js
-
 document.addEventListener('DOMContentLoaded', function () {
-  console.log('Find-Us page script loaded.');
-
-  // Function to load header and footer
+  // Hàm để tải các thành phần HTML (header, footer) một cách an toàn
   const loadComponent = (selector, url, callback) => {
     const element = document.querySelector(selector);
     if (element) {
       fetch(url)
-        .then((response) =>
-          response.ok ? response.text() : Promise.resolve('')
-        )
-        .then((data) => {
+        .then(response => response.ok ? response.text() : Promise.resolve(''))
+        .then(data => {
           if (data) element.innerHTML = data;
-          if (callback) {
-            setTimeout(callback, 0);
-          }
+          if (callback) callback();
         });
     }
   };
-  loadComponent('#header-placeholder', 'header.html', highlightActiveNav);
-  loadComponent('#footer-placeholder', 'footer.html');
-  loadComponent('#find-us-placeholder', 'find-us.html');
 
-  /**
-   * This function finds the current page and highlights the correct link.
-   */
+  // Hàm làm nổi bật liên kết điều hướng đang hoạt động
   function highlightActiveNav() {
-    // Get the current URL path, e.g., "/about/" or "/find-us.html"
-    let currentPath = window.location.pathname;
-
+    const currentPage = window.location.pathname.split('/').pop() || 'find-us.html';
     const navLinks = document.querySelectorAll('#header-placeholder .nav-link');
 
-    navLinks.forEach((link) => {
-      const linkHref = link.getAttribute('href');
-
-      // This checks if the link's href is contained within the current URL path.
-      // This works for both "/about/" and "about.html".
-      if (currentPath.includes(linkHref)) {
-        link.classList.add('text-t86-green', 'font-bold');
-        link.classList.remove('text-t86-dark');
+    navLinks.forEach(link => {
+      if (link.getAttribute('href') === currentPage) {
+        link.classList.add('font-bold');
+        link.classList.remove('opacity-80');
+        // Thêm các lớp màu sắc nếu cần
         if (link.classList.contains('text-white')) {
-          link.classList.remove('opacity-80');
+            link.classList.add('text-t86-green-accent'); // Ví dụ: đổi màu cho link active
         }
       }
     });
   }
 
-  // --- Logic for the Find Us Page ---
+  // Tải Header và Footer, sau đó thực thi hàm highlight
+  loadComponent('#header-placeholder', 'header.html', highlightActiveNav);
+  loadComponent('#footer-placeholder', 'footer.html');
+
+  // --- Logic riêng cho trang Find Us ---
   const searchBox = document.getElementById('search-box');
   const cityFilter = document.getElementById('city-filter');
   const districtFilter = document.getElementById('district-filter');
@@ -57,125 +43,135 @@ document.addEventListener('DOMContentLoaded', function () {
 
   let allPartners = [];
 
-  Papa.parse('partner_utf8.csv', {
-    download: true,
-    header: true,
-    skipEmptyLines: true,
-    encoding: 'UTF-8',
-    transformHeader: (header) => header.trim(),
-    complete: function (results) {
-      allPartners = results.data.filter(
-        (p) => p['Tên đối tác'] && p['Tên đối tác'].trim() !== ''
-      );
-      populateCityFilter(allPartners);
+  // Kiểm tra xem các phần tử có tồn tại trước khi thêm sự kiện
+  if (searchBox && cityFilter && partnerList) {
+    Papa.parse('partner_utf8.csv', {
+      download: true,
+      header: true,
+      skipEmptyLines: true,
+      encoding: 'UTF-8',
+      transformHeader: (header) => header.trim(),
+      complete: function (results) {
+        allPartners = results.data.filter(
+          (p) => p['Tên đối tác'] && p['Tên đối tác'].trim() !== ''
+        );
+        
+        populateCityFilter(allPartners);
+        renderPartners([]); // Hiển thị danh sách rỗng ban đầu
 
-      // ✅ CHANGE: Instead of showing all partners, show an empty list initially.
-      renderPartners([]);
+        if (loadingIndicator) loadingIndicator.style.display = 'none';
 
-      loadingIndicator.style.display = 'none';
+        searchBox.addEventListener('keyup', applyFilters);
+        cityFilter.addEventListener('change', () => {
+          populateDistrictFilter(allPartners, cityFilter.value);
+          applyFilters();
+        });
+        if (districtFilter) districtFilter.addEventListener('change', applyFilters);
+        if (resetButton) {
+            resetButton.addEventListener('click', () => {
+                searchBox.value = '';
+                cityFilter.selectedIndex = 0;
+                cityFilter.dispatchEvent(new Event('change')); // Kích hoạt để xóa bộ lọc quận/huyện
+                renderPartners([]); // Xóa kết quả
+            });
+        }
+      },
+      error: function(err) {
+        console.error("Lỗi khi tải file CSV:", err);
+        if (loadingIndicator) loadingIndicator.style.display = 'none';
+        partnerList.innerHTML = '<p class="text-center text-red-500 col-span-full">Không thể tải dữ liệu đối tác. Vui lòng thử lại sau.</p>';
+      }
+    });
+  }
 
-      searchBox.addEventListener('keyup', applyFilters);
-      cityFilter.addEventListener('change', () => {
-        populateDistrictFilter(allPartners, cityFilter.value);
-        applyFilters();
-      });
-      districtFilter.addEventListener('change', applyFilters);
-      resetButton.addEventListener('click', () => {
-        searchBox.value = '';
-        cityFilter.selectedIndex = 0;
-        // Manually trigger the change event to reset the district filter
-        cityFilter.dispatchEvent(new Event('change'));
-        renderPartners([]); // Clear the results
-      });
-    },
-  });
   function populateCityFilter(partners) {
-    const cities = [
-      ...new Set(partners.map((p) => p['Tỉnh thành']).filter(Boolean)),
-    ].sort();
-    cities.forEach((city) => {
-      const option = document.createElement('option');
-      option.value = city;
-      option.textContent = city;
-      cityFilter.appendChild(option);
+    const cities = [...new Set(partners.map(p => p['Tỉnh thành']).filter(Boolean))].sort();
+    // Xóa các lựa chọn cũ trừ cái đầu tiên
+    while (cityFilter.options.length > 1) {
+        cityFilter.remove(1);
+    }
+    cities.forEach(city => {
+        const option = document.createElement('option');
+        option.value = city;
+        option.textContent = city;
+        cityFilter.appendChild(option);
     });
   }
 
   function populateDistrictFilter(partners, selectedCity) {
-    districtFilter.innerHTML =
-      '<option value="">-- Chọn Quận/Huyện --</option>';
+    if (!districtFilter) return;
+    districtFilter.innerHTML = '<option value="">-- Chọn Quận/Huyện --</option>';
     if (!selectedCity) return;
-    // ✅ UPDATED to use the correct Vietnamese keys: 'Thành phố' and 'Quận/Huyện'
-    const districts = [
-      ...new Set(
+    
+    const districts = [...new Set(
         partners
-          .filter((p) => p['Tỉnh thành'] === selectedCity)
-          .map((p) => p['Khu vực'])
-          .filter(Boolean)
-      ),
-    ].sort();
-    districts.forEach((district) => {
-      const option = document.createElement('option');
-      option.value = district;
-      option.textContent = district;
-      districtFilter.appendChild(option);
+            .filter(p => p['Tỉnh thành'] === selectedCity)
+            .map(p => p['Khu vực'])
+            .filter(Boolean)
+    )].sort();
+
+    districts.forEach(district => {
+        const option = document.createElement('option');
+        option.value = district;
+        option.textContent = district;
+        districtFilter.appendChild(option);
     });
   }
 
   function renderPartners(partners) {
+    partnerList.innerHTML = '';
+    
     const searchTerm = searchBox.value;
     const selectedCity = cityFilter.value;
-    const selectedDistrict = districtFilter.value;
-    partnerList.innerHTML = '';
+
     if (partners.length === 0) {
-      if (!searchTerm && !selectedCity && !selectedDistrict) {
-        partnerList.innerHTML = '';
-      } else {
-        partnerList.innerHTML =
-          '<p class="text-center text-t86-blue col-span-full">Không tìm thấy đối tác phù hợp.</p>';
+      // Chỉ hiển thị "Không tìm thấy" nếu người dùng đã bắt đầu tìm kiếm
+      if (searchTerm || selectedCity) {
+        partnerList.innerHTML = '<p class="text-center text-t86-blue col-span-full">Không tìm thấy đối tác phù hợp.</p>';
       }
       return;
     }
 
-    partners.forEach((partner) => {
-      // ✅ UPDATED to use all correct Vietnamese keys
+    partners.forEach(partner => {
       const partnerCard = `
-              <div class="bg-white p-6 rounded-lg shadow-md border border-gray-200 hover:shadow-xl transition-shadow">
-                <h3 class="font-bold text-lg text-t86-blue mb-2">${partner['Tên đối tác']}</h3>
-                <p class="text-t86-dark text-sm mb-1"><i class="fas fa-map-marker-alt w-5 mr-2 text-t86-gray"></i>${partner['Địa chỉ']}</p>
-                <p class="text-t86-dark text-sm mb-3"><i class="fas fa-phone w-5 mr-2 text-t86-gray"></i>${partner['Số điện thoại']}</p>
-                <a href="${partner['Link Google Map']}" target="_blank" rel="noopener noreferrer" class="text-t86-green hover:text-t86-green-light font-semibold text-sm">
-                  Xem trên bản đồ <i class="fas fa-arrow-right ml-1"></i>
-                </a>
-              </div>`;
+        <div class="bg-white p-6 rounded-lg shadow-md border border-gray-200 hover:shadow-xl transition-shadow">
+          <h3 class="font-bold text-lg text-t86-blue mb-2">${partner['Tên đối tác']}</h3>
+          <p class="text-t86-dark text-sm mb-1"><i class="fas fa-map-marker-alt w-5 mr-2 text-t86-gray"></i>${partner['Địa chỉ']}</p>
+          <p class="text-t86-dark text-sm mb-3"><i class="fas fa-phone w-5 mr-2 text-t86-gray"></i>${partner['Số điện thoại']}</p>
+          <a href="${partner['Link Google Map']}" target="_blank" rel="noopener noreferrer" class="text-t86-green hover:text-t86-green-light font-semibold text-sm">
+            Xem trên bản đồ <i class="fas fa-arrow-right ml-1"></i>
+          </a>
+        </div>`;
       partnerList.innerHTML += partnerCard;
     });
   }
 
   function applyFilters() {
-    const searchTerm = searchBox.value.toLowerCase();
+    const searchTerm = searchBox.value.toLowerCase().trim();
     const selectedCity = cityFilter.value;
-    const selectedDistrict = districtFilter.value;
+    const selectedDistrict = districtFilter ? districtFilter.value : '';
+
+    // Nếu không có bộ lọc nào được chọn, không hiển thị gì cả
+    if (!searchTerm && !selectedCity && !selectedDistrict) {
+        renderPartners([]);
+        return;
+    }
+
     let filteredPartners = allPartners;
-    // ✅ UPDATED to use the correct Vietnamese keys
+
     if (selectedCity) {
-      filteredPartners = filteredPartners.filter(
-        (p) => p['Tỉnh thành'] === selectedCity
-      );
+      filteredPartners = filteredPartners.filter(p => p['Tỉnh thành'] === selectedCity);
     }
     if (selectedDistrict) {
-      filteredPartners = filteredPartners.filter(
-        (p) => p['Khu vực'] === selectedDistrict
-      );
+      filteredPartners = filteredPartners.filter(p => p['Khu vực'] === selectedDistrict);
     }
     if (searchTerm) {
-      filteredPartners = filteredPartners.filter(
-        (p) =>
-          (p['Tên đối tác'] &&
-            p['Tên đối tác'].toLowerCase().includes(searchTerm)) ||
-          (p['Địa chỉ'] && p['Địa chỉ'].toLowerCase().includes(searchTerm))
+      filteredPartners = filteredPartners.filter(p =>
+        (p['Tên đối tác'] && p['Tên đối tác'].toLowerCase().includes(searchTerm)) ||
+        (p['Địa chỉ'] && p['Địa chỉ'].toLowerCase().includes(searchTerm))
       );
     }
+    
     renderPartners(filteredPartners);
   }
 });
