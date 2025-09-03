@@ -1,0 +1,53 @@
+[
+  {
+    "preTitle": "VAY MUA",
+    "title": "IPHONE TRẢ GÓP",
+    "features": [
+      "Giải ngân **tại quầy**",
+      "Khoản vay lên đến **15 triệu**",
+      "Linh hoạt kỳ hạn vay từ **3 đến 10 tháng**",
+      "Thủ tục **nhanh gọn**",
+      "**Hỗ trợ tối đa** lịch sử tín dụng"
+    ],
+    "button": {
+      "text": "VAY NGAY →",
+      "link": "products.html"
+    },
+    "imageSrc": "static/iphone-3.png",
+    "visualsHtml": "<p class=\"font-pacifico text-3xl text-t86 mb-4\">Dễ dàng sở hữu</p><h3 class=\"text-2xl font-bold text-t86-dark mb-6\">Dòng sản phẩm iPhone</h3><div class=\"grid grid-cols-2 gap-x-8 gap-y-4 text-t86-gray font-medium\"><div><p class=\"font-bold text-t86-dark\">16 series</p><p>Pro Max, Pro, Plus, E</p></div><div><p class=\"font-bold text-t86-dark\">series khác</p><p>13, 12, 11, XS, X</p></div><div><p class=\"font-bold text-t86-dark\">15 series</p><p>Pro Max, Pro, Plus</p></div><div><p class=\"font-bold text-t86-dark\">14 series</p><p>Pro Max, Pro, Plus</p></div></div>"
+  },
+  {
+    "preTitle": "VAY MUA",
+    "title": "Tiêu dùng linh hoạt",
+    "features": [
+      "Giải ngân **tại quầy**",
+      "Khoản vay lên đến **15 triệu**",
+      "Linh hoạt kỳ hạn vay từ **1 đến 4 tháng**",
+      "Thủ tục **nhanh gọn**",
+      "**Hỗ trợ tối đa** lịch sử tín dụng"
+    ],
+    "button": {
+      "text": "VAY NGAY →",
+      "link": "products.html"
+    },
+    "imageSrc": "static/iphone-shopping.png",
+    "visualsHtml": "<div class=\"feature-list\"><div class=\"feature-item mb-3\"><div class=\"feature-indicator\" style=\"background-color: #52c41a\"></div><div><p class=\"font-pacifico text-3xl text-t86 mb-3\">Dễ dàng tiếp cận</p><div><h3 class=\"font-bold text-lg text-t86-dark mb-1\">Cần gì đắn đo?</h3><p class=\"text-t86-gray mb-1\">Thanh xuân không chờ, vay liền không ngại</p></div></div></div><div class=\"feature-item\"><div class=\"feature-indicator\" style=\"background-color: #faad14\"></div><div><h3 class=\"font-bold text-lg text-t86-dark mb-1\">Mua sắm cực chill</h3><p class=\"text-t86-gray\">Tiền về tức thì, mua gì cũng tiện</p></div></div></div>"
+  },
+  {
+    "preTitle": "VAY MUA",
+    "title": "Xe máy",
+    "features": [
+      "Giải ngân **tại quầy**",
+      "Khoản vay lên đến **15 triệu**",
+      "Linh hoạt kỳ hạn vay từ **3 đến 10 tháng**",
+      "Thủ tục **nhanh gọn**",
+      "**Hỗ trợ tối đa** lịch sử tín dụng"
+    ],
+    "button": {
+      "text": "VAY NGAY →",
+      "link": "products.html"
+    },
+    "imageSrc": "static/motorbike.jpg",
+    "visualsHtml": "<p class=\"font-pacifico text-3xl text-t86 mb-4\">Chinh phục mọi nẻo đường</p><h3 class=\"font-bold text-t86-dark mb-3\">Hỗ trợ đa dạng dòng xe</h3><div class=\"grid grid-cols-2 gap-x-8 gap-y-4 text-t86-gray\"><div><p class=\"font-bold text-t86-dark\">Honda</p><p>Vision, Air Blade, SH</p></div><div><p class=\"font-bold text-t86-dark\">Yamaha</p><p>Exciter, Sirius, Janus</p></div></div>"
+  }
+]

@@ -28,6 +28,12 @@ h6 {
 .font-dancing-script {
   font-family: 'Dancing Script', cursive;
 }
+.font-oswald {
+  font-family: 'Oswald', sans-serif;
+}
+.font-pacifico {
+  font-family: 'Pacifico', cursive;
+}
 /* ================================================== */
 /* === CUSTOM COLOR FOR DANCING SCRIPT TEXT === */
 /* ================================================== */
@@ -375,51 +381,122 @@ section#home::before {
 }
 
 /* ================================================== */
-/* === STATS SECTION === */
+/* === STATS SECTION (TỐI ƯU HÓA) === */
 /* ================================================== */
+
 #stats {
-  min-height: 70vh;
+  min-height: 70vh; /* Giữ nguyên */
   display: flex;
   align-items: center;
 }
+
 .stats-overlay {
-  background: linear-gradient(to right, #00833e, #002d5b);
-  opacity: 0.8;
+  background: linear-gradient(
+    90deg,
+    rgba(0, 45, 91, 0.80) 0%, /* Giảm từ 0.92 xuống 0.85 */
+    rgba(0, 131, 62, 0.70) 100%  /* Giảm từ 0.9 xuống 0.78 */
+  );
 }
-@keyframes scroll-background {
+
+/* Container chính cho lưới ảnh nền.
+  Quan trọng: Bỏ animation ra khỏi đây.
+*/
+#stats-background-grid {
+  display: flex;
+  gap: 1rem;
+  width: 100%;
+  height: 100%; /* Chỉ cần 100% chiều cao của section */
+  position: absolute;
+  inset: 0;
+}
+
+/* Định nghĩa animation cuộn lên.
+  Nó di chuyển cột từ vị trí ban đầu (translateY(0))
+  lên một nửa chiều cao của nó (translateY(-50%)).
+  Chúng ta chỉ cần -50% vì JavaScript đã nhân đôi nội dung hình ảnh
+  để tạo ra một vòng lặp liền mạch.
+*/
+@keyframes scroll-up {
   from {
-    transform: translateY(0);
+    transform: translateY(0%);
   }
   to {
     transform: translateY(-50%);
   }
 }
-#stats-background-grid {
-  display: flex;
-  gap: 1rem;
-  width: 100%;
-  height: 200%;
-  position: absolute;
-  top: 0;
-  left: 0;
-  animation: scroll-background 120s linear infinite;
-}
+
+/*
+  Thiết lập chung cho mỗi cột.
+  Quan trọng: Mỗi cột sẽ chứa các ảnh được nhân đôi và sẽ tự cuộn.
+*/
 .stats-bg-column {
   flex: 1;
   display: flex;
   flex-direction: column;
   gap: 1rem;
+  /* Áp dụng animation cho TỪNG CỘT */
+  animation: scroll-up linear infinite;
 }
-.stats-bg-column:nth-child(even) {
-  animation-direction: reverse;
-  animation-duration: 150s;
-}
+
 .stats-bg-column img {
   width: 100%;
   aspect-ratio: 4 / 3;
   object-fit: cover;
   border-radius: 0.5rem;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  flex-shrink: 0; /* Ngăn ảnh bị co lại */
+}
+
+/*
+  Đây là phần quan trọng nhất:
+  Đặt thời gian hoàn thành animation khác nhau cho mỗi cột.
+  Thời gian càng ngắn, cột cuộn càng nhanh.
+*/
+.stats-bg-column:nth-child(1) { animation-duration: 30s; } /* Nhanh hơn */
+.stats-bg-column:nth-child(2) { animation-duration: 42s; } /* Nhanh hơn */
+.stats-bg-column:nth-child(3) { animation-duration: 28s; } /* Nhanh hơn */
+.stats-bg-column:nth-child(4) { animation-duration: 38s; } /* Nhanh hơn */
+.stats-bg-column:nth-child(5) { animation-duration: 25s; } /* Nhanh hơn */
+.stats-bg-column:nth-child(6) { animation-duration: 35s; } /* Nhanh hơn */
+/* Đảo ngược hướng cho một vài cột để thêm phần ngẫu nhiên */
+.stats-bg-column:nth-child(7) { 
+  animation-duration: 45s; /* Nhanh hơn */
+  animation-direction: reverse; 
+}
+.stats-bg-column:nth-child(8) { animation-duration: 25; } /* Nhanh hơn */
+
+/*
+  Thêm hiệu ứng mờ dần ở hai đầu để trông mượt mà hơn
+  khi ảnh xuất hiện và biến mất.
+*/
+/* Làm cho lớp phủ mờ ở trên và dưới cùng bớt đậm hơn
+  để ảnh hiện ra mượt mà.
+*/
+#stats-background-grid::before {
+  top: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(12, 23, 26, 0.85) 10%, /* Giảm từ 1 (đặc) xuống 0.95 */
+    rgba(12, 23, 26, 0)
+  );
+}
+
+#stats-background-grid::after {
+  bottom: 0;
+  background: linear-gradient(
+    to top,
+    rgba(12, 23, 26, 0.85) 10%, /* Giảm từ 1 (đặc) xuống 0.95 */
+    rgba(12, 23, 26, 0)
+  );
+}
+
+#stats-background-grid::after {
+  bottom: 0;
+  background: linear-gradient(
+    to top,
+    rgba(12, 23, 26, 1) 10%,
+    rgba(12, 23, 26, 0)
+  );
 }
 
 /* ================================================== */
@@ -695,4 +772,116 @@ body#find-us-page::before {
 
   /* Optional: Prevents the blur from fading at the edges */
   transform: scale(1.1);
+}
+
+/* ======================================================= */
+/* === ĐỊNH VỊ & SỬA LỖI NÚT PRODUCT SWIPER (PHIÊN BẢN MỚI) === */
+/* ======================================================= */
+
+/* Bước 1: Đảm bảo container chính là gốc để định vị */
+.product-slides-container {
+  position: relative;
+}
+
+/* Bước 2: Định vị và tạo kiểu cho các nút */
+.product-nav-next,
+.product-nav-prev {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%); /* Luôn giữ để căn giữa theo chiều dọc */
+  z-index: 10;
+
+  /* Style cho nút */
+  width: 44px;
+  height: 44px;
+  background-color: rgba(0, 0, 0, 0.4);
+  color: white;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: transform 0.2s ease, background-color 0.2s ease; /* Thêm transition cho mượt */
+}
+
+/* Bước 3: Đẩy nút ra ngoài bằng giá trị âm */
+.product-nav-next {
+  right: -60px; /* Đẩy nút Next ra xa hơn về bên phải */
+}
+
+.product-nav-prev {
+  left: -60px; /* Đẩy nút Prev ra xa hơn về bên trái */
+}
+
+/* Bước 4: Sửa lỗi "nhảy" khi hover bằng cách kết hợp transform */
+.product-nav-next:hover,
+.product-nav-prev:hover {
+  background-color: rgba(0, 0, 0, 0.6);
+  transform: translateY(-50%) scale(1.1); /* KẾT HỢP cả hai hiệu ứng */
+}
+
+/* Icon mũi tên (sử dụng Font Awesome) */
+.product-nav-next::after,
+.product-nav-prev::after {
+  font-family: 'Font Awesome 5 Free';
+  font-weight: 900;
+  font-size: 1.25rem;
+}
+.product-nav-next::after { content: '\f054'; }
+.product-nav-prev::after { content: '\f053'; }
+
+
+/* Bước 5: Điều chỉnh lại vị trí trên Mobile để không bị tràn màn hình */
+@media (max-width: 768px) {
+  .product-nav-next,
+  .product-nav-prev {
+    /* Đưa nút vào trong trên màn hình nhỏ */
+    width: 38px;
+    height: 38px;
+  }
+  .product-nav-next {
+    right: 10px; /* Đặt lại vị trí ở trong, cách lề 10px */
+  }
+  .product-nav-prev {
+    left: 10px; /* Đặt lại vị trí ở trong, cách lề 10px */
+  }
+}
+
+/* ========================================= */
+/* === CORE VALUES SECTION (DARK BG STYLES) === */
+/* ========================================= */
+
+.core-value-icon-dark {
+  width: 50px; /* Kích thước vòng tròn */
+  height: 50px; /* Kích thước vòng tròn */
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.2); /* Viền màu trắng hơi trong suốt */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #00b74f; /* Màu icon xanh lá */
+  font-size: 1.5rem; /* Kích thước icon */
+  flex-shrink: 0; /* Ngăn icon bị co lại */
+}
+
+/* Đảm bảo màu xanh lá tùy chỉnh */
+.text-t86-green {
+    color: #00b74f; /* Xanh lá của T86 */
+}
+
+/* ================================================== */
+/* === TĂNG CỠ CHỮ CHO KHU VỰC STATS === */
+/* ================================================== */
+
+/* * Tăng kích thước của số đếm.
+ * Giá trị mặc định của lớp text-7xl là 4.5rem. 
+ * Chúng ta sẽ tăng nó lên 6rem.
+ */
+#stats h3 {
+  font-size: 8rem; 
+}
+
+/* * Tăng kích thước của chữ mô tả bên dưới số.
+ * Đồng thời tăng nhẹ khoảng cách giữa các chữ cho dễ đọc.
+ */
+#stats p {
+  font-size: 2rem; /* Cỡ chữ to hơn */
+  letter-spacing: 0.05em; 
 }

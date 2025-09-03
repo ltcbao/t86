@@ -133,15 +133,35 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     partners.forEach(partner => {
-      const partnerCard = `
-        <div class="bg-white p-6 rounded-lg shadow-md border border-gray-200 hover:shadow-xl transition-shadow">
+      let mapLinkHtml = ''; // Mặc định là chuỗi rỗng
+    // Chỉ tạo thẻ <a> nếu cột 'Link Google Map' có dữ liệu
+    if (partner['Link Google Map'] && partner['Link Google Map'].trim() !== '') {
+      mapLinkHtml = `
+        <a href="${partner['Link Google Map']}" target="_blank" rel="noopener noreferrer" class="text-t86-green hover:text-t86-green-light font-semibold text-sm">
+          Xem trên bản đồ <i class="fas fa-arrow-right ml-1"></i>
+        </a>
+      `;
+    }
+
+    // Giữ nguyên logic tạo logo
+    const logoHtml = partner['Logo'] ? `
+      <div class="flex-shrink-0 w-24 h-24 flex items-center justify-center bg-gray-50 rounded-md overflow-hidden border">
+        <img src="${partner['Logo']}" alt="Logo của ${partner['Tên đối tác']}" class="max-w-full max-h-full object-contain p-1">
+      </div>
+    ` : '';
+
+    // Bước 2: Dựng thẻ đối tác và chèn biến mapLinkHtml vào
+    const partnerCard = `
+      <div class="bg-white p-6 rounded-lg shadow-md border border-gray-200 hover:shadow-xl transition-shadow flex items-center gap-x-6">
+        <div class="flex-grow">
           <h3 class="font-bold text-lg text-t86-blue mb-2">${partner['Tên đối tác']}</h3>
           <p class="text-t86-dark text-sm mb-1"><i class="fas fa-map-marker-alt w-5 mr-2 text-t86-gray"></i>${partner['Địa chỉ']}</p>
           <p class="text-t86-dark text-sm mb-3"><i class="fas fa-phone w-5 mr-2 text-t86-gray"></i>${partner['Số điện thoại']}</p>
-          <a href="${partner['Link Google Map']}" target="_blank" rel="noopener noreferrer" class="text-t86-green hover:text-t86-green-light font-semibold text-sm">
-            Xem trên bản đồ <i class="fas fa-arrow-right ml-1"></i>
-          </a>
-        </div>`;
+          ${mapLinkHtml}
+        </div>
+        ${logoHtml}
+      </div>`;
+    
       partnerList.innerHTML += partnerCard;
     });
   }
