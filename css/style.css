@@ -926,3 +926,15 @@ body#find-us-page::before {
   font-weight: 600; /* In đậm vừa phải */
   color: #374151; /* Màu xám đậm */
 }
+
+/* ================================================== */
+/* === RESPONSIVE CHO GIÁ TRỊ CỐT LÕI (MOBILE) === */
+/* ================================================== */
+@media (max-width: 767px) {
+  /* Làm cho icon nhỏ hơn một chút trên màn hình mobile */
+  .core-value-icon {
+    width: 55px;
+    height: 55px;
+    font-size: 2rem; /* Giảm kích thước font của icon */
+  }
+}
