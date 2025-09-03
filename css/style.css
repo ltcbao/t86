@@ -885,3 +885,44 @@ body#find-us-page::before {
   font-size: 2rem; /* Cỡ chữ to hơn */
   letter-spacing: 0.05em; 
 }
+
+
+/* ================================================== */
+/* === SECTION: GIÁ TRỊ CỐT LÕI (ABOUT PAGE) === */
+/* ================================================== */
+
+/* Hiệu ứng chuyển màu cho tiêu đề chính */
+.text-gradient-blue-green {
+  background: linear-gradient(
+    90deg,
+    #0056b3 0%, /* Màu xanh dương sáng hơn, ví dụ: bootstrap primary blue */
+    #28a745 100% /* Màu xanh lá cây sáng hơn, ví dụ: bootstrap success green */
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent;
+}
+/* Định dạng cho icon - ĐÃ TĂNG KÍCH THƯỚC VÀ FIX LỖI */
+.core-value-icon {
+  width: 60px; /* Tăng kích thước hộp chứa */
+  height: 60px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+  /* Màu và kích thước icon */
+  color: #1dad3f; /* Màu xám đậm nhạt */
+  font-size: 2.2rem; /* Tăng từ 1.7rem lên để icon to hơn */
+  
+  /* CSS cho icon xếp chồng hoạt động đúng */
+  line-height: 1; 
+}
+
+/* Định dạng cho dòng tagline chốt lại của mỗi giá trị */
+.core-value-tagline {
+  font-style: italic;
+  font-weight: 600; /* In đậm vừa phải */
+  color: #374151; /* Màu xám đậm */
+}
