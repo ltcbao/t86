@@ -67,7 +67,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const container = document.getElementById("news-ticker-content");
     if (!container) return;
 
-    fetch("news-ticker.json")
+    fetch("data/news-ticker.json")
       .then((response) => {
         if (!response.ok) {
           throw new Error("Không thể tải file news-ticker.json");
@@ -109,83 +109,160 @@ document.addEventListener("DOMContentLoaded", function () {
       });
   }
 
+  // function initializeProductSlider() {
+  //   const container = document.querySelector(".product-slides-container");
+  //   if (!container) return;
+
+  //   fetch("data/products.json")
+  //     .then((response) => response.json())
+  //     .then((productData) => {
+  //       let slidesHtml = "";
+  //       productData.forEach((slide) => {
+  //         // Tạo danh sách các tính năng, thay thế **text** bằng thẻ span in đậm
+  //         const featuresHtml = slide.features
+  //           .map((feature) => {
+  //             const formattedFeature = feature.replace(
+  //               /\*\*(.*?)\*\*/g,
+  //               '<span class="font-bold mx-1 text-t86-green-light">$1</span>'
+  //             );
+  //             return `<li class="flex items-center justify-center md:justify-start">
+  //                   <i class="fas fa-check text-t86-green-light mr-3"></i>${formattedFeature}
+  //                 </li>`;
+  //           })
+  //           .join("");
+
+  //         // Dựng cấu trúc HTML cho một slide
+  //         slidesHtml += `
+  //         <div class="swiper-slide">
+  //           <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center h-full">
+  //             <div class="product-content-wrapper text-center md:text-left">
+  //               <p class="font-raleway text-lg text-t86-dark mb-1">${slide.preTitle}</p>
+  //               <h2 class="text-4xl md:text-5xl font-bold tracking-tight leading-tight uppercase text-t86-green-light">${slide.title}</h2>
+  //               <ul class="mt-6 space-y-3 text-md text-t86-dark/90">${featuresHtml}</ul>
+  //               <div class="mt-8">
+  //                 <button onclick="location.href='${slide.button.link}'" class="bg-t86-green text-white font-bold px-8 py-3 rounded-full hover:bg-t86-green-light hover:scale-105 ripple btn-product">
+  //                   ${slide.button.text}
+  //                 </button>
+  //               </div>
+  //             </div>
+  //             <div class="product-content-wrapper">
+  //               <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+  //                 <div class="product-image-container">
+  //                   <img src="${slide.imageSrc}" class="object-contain pulse-animation" alt="${slide.title}" />
+  //                 </div>
+  //                 <div>
+  //                   ${slide.visualsHtml}
+  //                 </div>
+  //               </div>
+  //             </div>
+  //           </div>
+  //         </div>
+  //       `;
+  //       });
+
+  //       // Chèn các slide và các nút điều khiển vào container
+  //       container.innerHTML = `
+  //       <div class="swiper product-swiper">
+  //         <div class="swiper-wrapper">${slidesHtml}</div>
+  //         <div class="swiper-pagination product-pagination"></div>
+  //       </div>
+  //       <div class="swiper-button-prev product-nav-prev"></div>
+  //       <div class="swiper-button-next product-nav-next"></div>
+  //     `;
+
+  //       // Khởi tạo Swiper SAU KHI đã dựng xong HTML
+  //       new Swiper(".product-swiper", {
+  //         loop: true,
+  //         effect: "fade",
+  //         fadeEffect: { crossFade: true },
+  //         speed: 800,
+  //         autoplay: { delay: 7000, disableOnInteraction: false },
+  //         pagination: { el: ".product-pagination", clickable: true },
+  //         navigation: {
+  //           nextEl: ".product-nav-next",
+  //           prevEl: ".product-nav-prev",
+  //         },
+  //       });
+  //     })
+  //     .catch((error) => console.error("Lỗi khi tải dữ liệu sản phẩm:", error));
+  // }
   function initializeProductSlider() {
     const container = document.querySelector(".product-slides-container");
     if (!container) return;
 
-    fetch("products.json")
-      .then((response) => response.json())
-      .then((productData) => {
-        let slidesHtml = "";
-        productData.forEach((slide) => {
-          // Tạo danh sách các tính năng, thay thế **text** bằng thẻ span in đậm
-          const featuresHtml = slide.features
-            .map((feature) => {
-              const formattedFeature = feature.replace(
-                /\*\*(.*?)\*\*/g,
-                '<span class="font-bold mx-1 text-t86-green-light">$1</span>'
-              );
-              return `<li class="flex items-center justify-center md:justify-start">
-                    <i class="fas fa-check text-t86-green-light mr-3"></i>${formattedFeature}
-                  </li>`;
-            })
-            .join("");
+    fetch("data/products.json")
+        .then((response) => response.json())
+        .then((productData) => {
+            let slidesHtml = "";
+            
+            // Vòng lặp này sẽ tự động chạy qua TẤT CẢ các sản phẩm trong file JSON
+            productData.forEach((slide) => {
+                const featuresHtml = slide.features
+                    .map((feature) => {
+                        const formattedFeature = feature.replace(
+                            /\*\*(.*?)\*\*/g,
+                            '<span class="font-bold mx-1 text-t86-green-light">$1</span>'
+                        );
+                        return `<li class="flex items-center justify-center md:justify-start">
+                              <i class="fas fa-check text-t86-green-light mr-3"></i>${formattedFeature}
+                            </li>`;
+                    })
+                    .join("");
 
-          // Dựng cấu trúc HTML cho một slide
-          slidesHtml += `
-          <div class="swiper-slide">
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center h-full">
-              <div class="product-content-wrapper text-center md:text-left">
-                <p class="font-raleway text-lg text-t86-dark mb-1">${slide.preTitle}</p>
-                <h2 class="text-4xl md:text-5xl font-bold tracking-tight leading-tight uppercase text-t86-green-light">${slide.title}</h2>
-                <ul class="mt-6 space-y-3 text-md text-t86-dark/90">${featuresHtml}</ul>
-                <div class="mt-8">
-                  <button onclick="location.href='${slide.button.link}'" class="bg-t86-green text-white font-bold px-8 py-3 rounded-full hover:bg-t86-green-light hover:scale-105 ripple btn-product">
-                    ${slide.button.text}
-                  </button>
+                slidesHtml += `
+                <div class="swiper-slide">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center h-full">
+                        <div class="product-content-wrapper text-center md:text-left">
+                            <p class="font-raleway text-lg text-t86-dark mb-1">${slide.preTitle}</p>
+                            <h2 class="text-4xl md:text-5xl font-bold tracking-tight leading-tight uppercase text-t86-green-light">${slide.title}</h2>
+                            <ul class="mt-6 space-y-3 text-md text-t86-dark/90">${featuresHtml}</ul>
+                            <div class="mt-8">
+                                <button onclick="location.href='${slide.button.link}'" class="bg-t86-green text-white font-bold px-8 py-3 rounded-full hover:bg-t86-green-light hover:scale-105 ripple btn-product">
+                                    ${slide.button.text}
+                                </button>
+                            </div>
+                        </div>
+                        <div class="product-content-wrapper flex flex-col items-center justify-center">
+                            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+                                <div class="product-image-container">
+                                    <img src="${slide.imageSrc}" class="object-contain pulse-animation" alt="${slide.title}" />
+                                </div>
+                                <div>
+                                    ${slide.visualsHtml}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-              </div>
-              <div class="product-content-wrapper">
-                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
-                  <div class="product-image-container">
-                    <img src="${slide.imageSrc}" class="object-contain pulse-animation" alt="${slide.title}" />
-                  </div>
-                  <div>
-                    ${slide.visualsHtml}
-                  </div>
-                </div>
+                `;
+            });
+
+            container.innerHTML = `
+            <div class="container mx-auto px-4">
+              <div class="swiper product-swiper">
+                <div class="swiper-wrapper">${slidesHtml}</div>
+                <div class="swiper-pagination product-pagination"></div>
               </div>
             </div>
-          </div>
-        `;
-        });
+            <div class="swiper-button-prev product-nav-prev"></div>
+            <div class="swiper-button-next product-nav-next"></div>
+            `;
 
-        // Chèn các slide và các nút điều khiển vào container
-        container.innerHTML = `
-        <div class="swiper product-swiper">
-          <div class="swiper-wrapper">${slidesHtml}</div>
-          <div class="swiper-pagination product-pagination"></div>
-        </div>
-        <div class="swiper-button-prev product-nav-prev"></div>
-        <div class="swiper-button-next product-nav-next"></div>
-      `;
-
-        // Khởi tạo Swiper SAU KHI đã dựng xong HTML
-        new Swiper(".product-swiper", {
-          loop: true,
-          effect: "fade",
-          fadeEffect: { crossFade: true },
-          speed: 800,
-          autoplay: { delay: 7000, disableOnInteraction: false },
-          pagination: { el: ".product-pagination", clickable: true },
-          navigation: {
-            nextEl: ".product-nav-next",
-            prevEl: ".product-nav-prev",
-          },
-        });
-      })
-      .catch((error) => console.error("Lỗi khi tải dữ liệu sản phẩm:", error));
-  }
+            new Swiper(".product-swiper", {
+                loop: true,
+                effect: "fade",
+                fadeEffect: { crossFade: true },
+                speed: 800,
+                autoplay: { delay: 7000, disableOnInteraction: false },
+                pagination: { el: ".product-pagination", clickable: true },
+                navigation: {
+                    nextEl: ".product-nav-next",
+                    prevEl: ".product-nav-prev",
+                },
+            });
+        })
+        .catch((error) => console.error("Lỗi khi tải dữ liệu sản phẩm:", error));
+}
   function initializeAllScripts() {
     // --- Swiper Initialization for Hero ---
     if (document.querySelector(".hero-swiper")) {
@@ -469,211 +546,39 @@ document.addEventListener("DOMContentLoaded", function () {
         [array[i], array[j]] = [array[j], array[i]];
       }
     }
-
-    // function populateStatsBackground() {
-    //   const statsImageFiles = [
-    //     "0009eb79ccac45f21cbd71.jpg",
-    //     "00bedbcdfc1875462c0974.jpg",
-    //     "055492d6b7033e5d671230.jpg",
-    //     "0860971db0c8399660d969.jpg",
-    //     "0a3a51b77462fd3ca47328.jpg",
-    //     "0ba0739f564adf14865b22.jpg",
-    //     "0e3aaa058fd0068e5fc110.jpg",
-    //     "12754a866d53e40dbd4278.jpg",
-    //     "147572619472483770961.jpg",
-    //     "14786a474f92c6cc9f8313.jpg",
-    //     "1504b73a92ef1bb142fe17.jpg",
-    //     "169be0ebc73e4e60172f62.jpg",
-    //     "1733f94ede9b57c50e8a59.jpg",
-    //     "1e1a39241cf195afcce07.jpg",
-    //     "288ac7f7e022697c303364.jpg",
-    //     "292cf2aed77b5e25076a37.jpg",
-    //     "2d66b258978d1ed3479c15.jpg",
-    //     "30a283d0a4052d5b741467.jpg",
-    //     "3bf31f0e38dbb185e8ca80.jpg",
-    //     "3cd5312716f29facc6e388.jpg",
-    //     "3e63da5dff8876d62f996.jpg",
-    //     "3ed4f1edd4385d6604298.jpg",
-    //     "3eeefd6cd8b951e708a826.jpg",
-    //     "4214ab998e4c07125e5d34.jpg",
-    //     "4366f65fd38a5ad4039b2.jpg",
-    //     "45f3260101d4888ad1c581.jpg",
-    //     "4ed82a550f8086dedf9131.jpg",
-    //     "54d2cdece8396167382818.jpg",
-    //     "55469bc4be11374f6e0038.jpg",
-    //     "579a72a45771de2f876012.jpg",
-    //     "5a3de8cfcf1a46441f0b90.jpg",
-    //     "6344acb98b6c02325b7d76.jpg",
-    //     "698e30fd17289e76c73973.jpg",
-    //     "6aff440c63d9ea87b3c887.jpg",
-    //     "6b89a17b86ae0ff056bf77.jpg",
-    //     "6c4e13c33616bf48e60735.jpg",
-    //     "745f67ad4078c926906979.jpg",
-    //     "7de3256e00bb89e5d0aa32.jpg",
-    //     "836bde9bf94e7010295f75.jpg",
-    //     "8379358b125e9b00c24f84.jpg",
-    //     "844744c56110e84eb10136.jpg",
-    //     "85daa22785f20cac55e386.jpg",
-    //     "889d4dee6a3be365ba2a58.jpg",
-    //     "893c250300d68988d0c73.jpg",
-    //     "8bf1b20c95d91c8745c885.jpg",
-    //     "93b37ac35d16d4488d0768.jpg",
-    //     "9464a95b8c8e05d05c9f4.jpg",
-    //     "a49449e96e3ce762be2d65.jpg",
-    //     "a4d66cef493ac064992b14.jpg",
-    //     "a6a5189b3d4eb410ed5f20.jpg",
-    //     "a7d0d92dfef877a62ee991.jpg",
-    //     "b9230ad12d04a45afd1583.jpg",
-    //     "c2766f494a9cc3c29a8d25.jpg",
-    //     "c8ed33d316069f58c61721.jpg",
-    //     "ce044f3a6aefe3b1bafe1.jpg",
-    //     "d1238bd0ac05255b7c1482.jpg",
-    //     "d29e80a7a5722c2c756324.jpg",
-    //     "d4df2ee10b34826adb255.jpg",
-    //     "d4e7d76bf2be7be022af27.jpg",
-    //     "d6bc8b85ae50270e7e4123.jpg",
-    //     "d79568ab4d7ec4209d6f19.jpg",
-    //     "d8ee319316469f18c65760.jpg",
-    //     "da0b107937acbef2e7bd66.jpg",
-    //     "dbb44fc9681ce142b80d63.jpg",
-    //     "df1b2fe40931806fd920.jpg",
-    //     "df4199ccbc1935476c0840.jpg",
-    //     "df8fa0b085650c3b55749.jpg",
-    //     "e8201a193fccb692efdd16.jpg",
-    //     "ec06238406518f0fd64033.jpg",
-    //     "ece9261401c1889fd1d092.jpg",
-    //     "ed1e2b9c0e498717de5829.jpg",
-    //     "f02e6cac4979c027996839.jpg",
-    //     "fa4dd0bff76a7e34277b89.jpg",
-    //     "fb13fa2bdffe56a00fef11.jpg",
-    //     "fcabf2d8d50d5c53051c72.jpg",
-    //     "ff348146a6932fcd768270.jpg",
-    //     "image1.jpg",
-    //     "image2.jpg",
-    //   ];
-    //   shuffleArray(statsImageFiles);
-    //   const imageDirectory = "static/stats-images/";
-    //   const columns = document.querySelectorAll(".stats-bg-column");
-    //   if (columns.length === 0) return;
-    //   const fullImageList = [...statsImageFiles, ...statsImageFiles];
-    //   columns.forEach((column, colIndex) => {
-    //     const imageList = [
-    //       ...fullImageList.slice(colIndex),
-    //       ...fullImageList.slice(0, colIndex),
-    //     ];
-    //     imageList.forEach((fileName) => {
-    //       const img = document.createElement("img");
-    //       img.src = imageDirectory + fileName;
-    //       img.alt = "Stats background image";
-    //       column.appendChild(img);
-    //     });
-    //   });
-    // }
+    
     function populateStatsBackground() {
-      const statsImageFiles = [
-        "0009eb79ccac45f21cbd71.jpg",
-        "00bedbcdfc1875462c0974.jpg",
-        "055492d6b7033e5d671230.jpg",
-        "0860971db0c8399660d969.jpg",
-        "0a3a51b77462fd3ca47328.jpg",
-        "0ba0739f564adf14865b22.jpg",
-        "0e3aaa058fd0068e5fc110.jpg",
-        "12754a866d53e40dbd4278.jpg",
-        "147572619472483770961.jpg",
-        "14786a474f92c6cc9f8313.jpg",
-        "1504b73a92ef1bb142fe17.jpg",
-        "169be0ebc73e4e60172f62.jpg",
-        "1733f94ede9b57c50e8a59.jpg",
-        "1e1a39241cf195afcce07.jpg",
-        "288ac7f7e022697c303364.jpg",
-        "292cf2aed77b5e25076a37.jpg",
-        "2d66b258978d1ed3479c15.jpg",
-        "30a283d0a4052d5b741467.jpg",
-        "3bf31f0e38dbb185e8ca80.jpg",
-        "3cd5312716f29facc6e388.jpg",
-        "3e63da5dff8876d62f996.jpg",
-        "3ed4f1edd4385d6604298.jpg",
-        "3eeefd6cd8b951e708a826.jpg",
-        "4214ab998e4c07125e5d34.jpg",
-        "4366f65fd38a5ad4039b2.jpg",
-        "45f3260101d4888ad1c581.jpg",
-        "4ed82a550f8086dedf9131.jpg",
-        "54d2cdece8396167382818.jpg",
-        "55469bc4be11374f6e0038.jpg",
-        "579a72a45771de2f876012.jpg",
-        "5a3de8cfcf1a46441f0b90.jpg",
-        "6344acb98b6c02325b7d76.jpg",
-        "698e30fd17289e76c73973.jpg",
-        "6aff440c63d9ea87b3c887.jpg",
-        "6b89a17b86ae0ff056bf77.jpg",
-        "6c4e13c33616bf48e60735.jpg",
-        "745f67ad4078c926906979.jpg",
-        "7de3256e00bb89e5d0aa32.jpg",
-        "836bde9bf94e7010295f75.jpg",
-        "8379358b125e9b00c24f84.jpg",
-        "844744c56110e84eb10136.jpg",
-        "85daa22785f20cac55e386.jpg",
-        "889d4dee6a3be365ba2a58.jpg",
-        "893c250300d68988d0c73.jpg",
-        "8bf1b20c95d91c8745c885.jpg",
-        "93b37ac35d16d4488d0768.jpg",
-        "9464a95b8c8e05d05c9f4.jpg",
-        "a49449e96e3ce762be2d65.jpg",
-        "a4d66cef493ac064992b14.jpg",
-        "a6a5189b3d4eb410ed5f20.jpg",
-        "a7d0d92dfef877a62ee991.jpg",
-        "b9230ad12d04a45afd1583.jpg",
-        "c2766f494a9cc3c29a8d25.jpg",
-        "c8ed33d316069f58c61721.jpg",
-        "ce044f3a6aefe3b1bafe1.jpg",
-        "d1238bd0ac05255b7c1482.jpg",
-        "d29e80a7a5722c2c756324.jpg",
-        "d4df2ee10b34826adb255.jpg",
-        "d4e7d76bf2be7be022af27.jpg",
-        "d6bc8b85ae50270e7e4123.jpg",
-        "d79568ab4d7ec4209d6f19.jpg",
-        "d8ee319316469f18c65760.jpg",
-        "da0b107937acbef2e7bd66.jpg",
-        "dbb44fc9681ce142b80d63.jpg",
-        "df1b2fe40931806fd920.jpg",
-        "df4199ccbc1935476c0840.jpg",
-        "df8fa0b085650c3b55749.jpg",
-        "e8201a193fccb692efdd16.jpg",
-        "ec06238406518f0fd64033.jpg",
-        "ece9261401c1889fd1d092.jpg",
-        "ed1e2b9c0e498717de5829.jpg",
-        "f02e6cac4979c027996839.jpg",
-        "fa4dd0bff76a7e34277b89.jpg",
-        "fb13fa2bdffe56a00fef11.jpg",
-        "fcabf2d8d50d5c53051c72.jpg",
-        "ff348146a6932fcd768270.jpg",
-        "image1.jpg",
-        "image2.jpg",
-      ];
-      const imageDirectory = "static/stats-images/";
-      const columns = document.querySelectorAll(".stats-bg-column");
+  const imageDirectory = "static/stats-images/";
+  const columns = document.querySelectorAll(".stats-bg-column");
 
-      if (columns.length === 0) return;
+  if (columns.length === 0) return;
 
-      // Điểm thay đổi chính là ở đây:
-      // Chúng ta sẽ lặp qua từng cột và tạo một danh sách ảnh đã xáo trộn RIÊNG cho cột đó.
+  // Lấy danh sách hình ảnh từ file JSON
+  fetch('data/stats-images.json')
+    .then(response => {
+      // Kiểm tra nếu có lỗi khi tải file
+      if (!response.ok) {
+        throw new Error('Không thể tải file stats-images.json');
+      }
+      return response.json();
+    })
+    .then(statsImageFiles => {
+      // Bắt đầu xử lý hình ảnh khi dữ liệu đã được tải
       columns.forEach((column) => {
-        // 1. Tạo một bản sao của danh sách ảnh gốc để không ảnh hưởng đến các cột khác
+        // Tạo một bản sao của danh sách ảnh để xáo trộn
         let imageListForThisColumn = [...statsImageFiles];
 
-        // 2. Xáo trộn danh sách ảnh của riêng cột này
+        // Xáo trộn danh sách ảnh
         shuffleArray(imageListForThisColumn);
 
-        // 3. Nhân đôi danh sách đã xáo trộn để tạo hiệu ứng lặp liền mạch
+        // Nhân đôi danh sách đã xáo trộn để tạo hiệu ứng lặp vô hạn
         const fullImageList = [
           ...imageListForThisColumn,
           ...imageListForThisColumn,
         ];
 
-        // 4. Xóa nội dung cũ của cột (nếu có)
+        // Xóa nội dung cũ của cột và thêm các ảnh mới
         column.innerHTML = "";
-
-        // 5. Thêm các ảnh đã được xáo trộn riêng vào cột
         fullImageList.forEach((fileName) => {
           const img = document.createElement("img");
           img.src = imageDirectory + fileName;
@@ -681,7 +586,11 @@ document.addEventListener("DOMContentLoaded", function () {
           column.appendChild(img);
         });
       });
-    }
+    })
+    .catch(error => {
+      console.error("Lỗi khi tải danh sách hình ảnh:", error);
+    });
+}
     populateStatsBackground();
 
     const typingSubtitle = document.querySelector(
@@ -798,5 +707,29 @@ document.addEventListener("DOMContentLoaded", function () {
     // --- Initialize AOS ---
     AOS.init({ duration: 1000, once: true });
     highlightActiveNav(); // Highlight the nav link after the header is loaded
+
+    // --- LOGIC CHO MOBILE MENU ---
+const mobileMenuButton = document.getElementById('mobile-menu-button');
+const mobileMenu = document.getElementById('mobile-menu');
+const closeMobileMenuButton = document.getElementById('close-mobile-menu');
+
+if (mobileMenuButton && mobileMenu && closeMobileMenuButton) {
+    mobileMenuButton.addEventListener('click', () => {
+        mobileMenu.classList.add('active');
+        document.body.classList.add('overflow-hidden'); // Ngăn cuộn trang khi menu mở
+    });
+    closeMobileMenuButton.addEventListener('click', () => {
+        mobileMenu.classList.remove('active');
+        document.body.classList.remove('overflow-hidden');
+    });
+    // Đóng menu khi click vào một link
+    mobileMenu.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => {
+            mobileMenu.classList.remove('active');
+            document.body.classList.remove('overflow-hidden');
+        });
+    });
+}
   }
+  
 });

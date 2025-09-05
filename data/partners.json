@@ -1,0 +1,614 @@
+[
+  {
+    "Tên đối tác": "SANG APPLE 28QT",
+    "Địa chỉ": "28 Quang Trung",
+    "Số điện thoại": "19000304",
+    "Link Google Map": "https://maps.google.com/?q=SANG+APPLE+28+Quang+Trung",
+    "Tỉnh thành": "TP.HCM",
+    "Khu vực": "Gò Vấp",
+    "Logo": "static/logo-partners/logo-sang-apple.png"
+  },
+  {
+    "Tên đối tác": "SANG APPLE 352PVT",
+    "Địa chỉ": "352 Phan Văn Trị",
+    "Số điện thoại": "19000304",
+    "Link Google Map": "https://maps.google.com/?q=SANG+APPLE+352+Phan+Văn+Trị",
+    "Tỉnh thành": "TP.HCM",
+    "Khu vực": "Gò Vấp",
+    "Logo": "static/logo-partners/logo-sang-apple.png"
+  },
+  {
+    "Tên đối tác": "TÁO ZIN 104QT",
+    "Địa chỉ": "104 Quang Trung",
+    "Số điện thoại": "0765.33.8888",
+    "Link Google Map": "https://maps.google.com/?q=TÁO+ZIN+104+Quang+Trung",
+    "Tỉnh thành": "TP.HCM",
+    "Khu vực": "Gò Vấp",
+    "Logo": "static/logo-partners/logo-taozin.png"
+  },
+  {
+    "Tên đối tác": "CENTERPHONES",
+    "Địa chỉ": "259 Quang Trung",
+    "Số điện thoại": "09 3255 2355",
+    "Link Google Map": "https://maps.google.com/?q=CENTERPHONES+259+Quang+Trung",
+    "Tỉnh thành": "TP.HCM",
+    "Khu vực": "Gò Vấp",
+    "Logo": "static/logo-partners/logo-centerphone.png"
+  },
+  {
+    "Tên đối tác": "TRUNG TÍN MOBILE",
+    "Địa chỉ": "281 Quang Trung",
+    "Số điện thoại": "0914 123 456",
+    "Link Google Map": "https://maps.google.com/?q=TRUNG+TÍN+MOBILE+281+Quang+Trung",
+    "Tỉnh thành": "TP.HCM",
+    "Khu vực": "Gò Vấp",
+    "Logo": ""
+  },
+  {
+    "Tên đối tác": "TUẤN TÚ MOBILE",
+    "Địa chỉ": "394 Quang Trung",
+    "Số điện thoại": "0915 123 456",
+    "Link Google Map": "https://maps.google.com/?q=TUẤN+TÚ+MOBILE+394+Quang+Trung",
+    "Tỉnh thành": "TP.HCM",
+    "Khu vực": "Gò Vấp",
+    "Logo": ""
+  },
+  {
+    "Tên đối tác": "PHÚ GIA MOBILE",
+    "Địa chỉ": "358 Quang Trung",
+    "Số điện thoại": "0939.1368.39",
+    "Link Google Map": "https://maps.google.com/?q=PHÚ+GIA+MOBILE+358+Quang+Trung",
+    "Tỉnh thành": "TP.HCM",
+    "Khu vực": "Gò Vấp",
+    "Logo": "static/logo-partners/logo-phu-gia.png"
+  },
+  {
+    "Tên đối tác": "TÝ STORE",
+    "Địa chỉ": "376 Quang Trung",
+    "Số điện thoại": "0917 123 456",
+    "Link Google Map": "https://maps.google.com/?q=TÝ+STORE+376+Quang+Trung",
+    "Tỉnh thành": "TP.HCM",
+    "Khu vực": "Gò Vấp",
+    "Logo": ""
+  },
+  {
+    "Tên đối tác": "LÊ QUÂN 559QT",
+    "Địa chỉ": "559 Quang Trung",
+    "Số điện thoại": "0979 227227",
+    "Link Google Map": "https://maps.google.com/?q=LÊ+QUÂN+559+Quang+Trung",
+    "Tỉnh thành": "TP.HCM",
+    "Khu vực": "Gò Vấp",
+    "Logo": "static/logo-partners/logo-le-quan.png"
+  },
+  {
+    "Tên đối tác": "ALODIDONG 426QT",
+    "Địa chỉ": "426 Quang Trung",
+    "Số điện thoại": "0939 66 1386",
+    "Link Google Map": "https://maps.google.com/?q=ALODIDONG+426+Quang+Trung",
+    "Tỉnh thành": "TP.HCM",
+    "Khu vực": "Gò Vấp",
+    "Logo": "static/logo-partners/logo-alodidong.png"
+  },
+  {
+    "Tên đối tác": "HI TÁO THƠM",
+    "Địa chỉ": "1059 Phan Văn Trị",
+    "Số điện thoại": "0349568888",
+    "Link Google Map": "https://maps.google.com/?q=HI+TÁO+THƠM+1059+Phan+Văn+Trị",
+    "Tỉnh thành": "TP.HCM",
+    "Khu vực": "Gò Vấp",
+    "Logo": "static/logo-partners/logo-hi-tao-thom.png"
+  },
+  {
+    "Tên đối tác": "HOÀI STORE 659PVT",
+    "Địa chỉ": "659 Phan Văn Trị",
+    "Số điện thoại": "0924 123 456",
+    "Link Google Map": "https://maps.google.com/?q=HOÀI+STORE+659+Phan+Văn+Trị",
+    "Tỉnh thành": "TP.HCM",
+    "Khu vực": "Gò Vấp",
+    "Logo": ""
+  },
+  {
+    "Tên đối tác": "HUY HOÀNG 429QT",
+    "Địa chỉ": "429 Quang Trung",
+    "Số điện thoại": "1900 8682",
+    "Link Google Map": "https://maps.google.com/?q=HUY+HOÀNG+429+Quang+Trung",
+    "Tỉnh thành": "TP.HCM",
+    "Khu vực": "Gò Vấp",
+    "Logo": "static/logo-partners/logo-huy-hoang.jpg"
+  },
+  {
+    "Tên đối tác": "HUY HOÀNG 832NVQ",
+    "Địa chỉ": "832 Nguyễn Văn Quá",
+    "Số điện thoại": "1900 8682",
+    "Link Google Map": "https://maps.google.com/?q=HUY+HOÀNG+832+Nguyễn+Văn+Quá",
+    "Tỉnh thành": "TP.HCM",
+    "Khu vực": "Gò Vấp",
+    "Logo": "static/logo-partners/logo-huy-hoang.jpg"
+  },
+  {
+    "Tên đối tác": "HUY HOÀNG 100LVD",
+    "Địa chỉ": "100 Lê Văn Duyệt",
+    "Số điện thoại": "1900 8682",
+    "Link Google Map": "https://maps.google.com/?q=HUY+HOÀNG+100+Lê+Văn+Duyệt",
+    "Tỉnh thành": "TP.HCM",
+    "Khu vực": "Gò Vấp",
+    "Logo": "static/logo-partners/logo-huy-hoang.jpg"
+  },
+  {
+    "Tên đối tác": "LOCK MALL",
+    "Địa chỉ": "1177 Phan Văn Trị",
+    "Số điện thoại": "0928 123 456",
+    "Link Google Map": "https://maps.google.com/?q=LOCK+MALL+1177+Phan+Văn+Trị",
+    "Tỉnh thành": "TP.HCM",
+    "Khu vực": "Gò Vấp",
+    "Logo": "static/logo-partners/logo-lock-mall.png"
+  },
+  {
+    "Tên đối tác": "ĐẠI VIỆT MOBILE",
+    "Địa chỉ": "334B Phan Văn Trị",
+    "Số điện thoại": "0977 54 3883",
+    "Link Google Map": "https://maps.google.com/?q=ĐẠI+VIỆT+MOBILE+334B+Phan+Văn+Trị",
+    "Tỉnh thành": "TP.HCM",
+    "Khu vực": "Gò Vấp",
+    "Logo": "static/logo-partners/logo-dai-viet.png"
+  },
+  {
+    "Tên đối tác": "PHƯỚC KHA STORE",
+    "Địa chỉ": "205 Lê Văn Thọ",
+    "Số điện thoại": "0930 123 456",
+    "Link Google Map": "https://maps.google.com/?q=PHƯỚC+KHA+STORE+205+Lê+Văn+Thọ",
+    "Tỉnh thành": "TP.HCM",
+    "Khu vực": "Gò Vấp",
+    "Logo": ""
+  },
+  {
+    "Tên đối tác": "KHANG HUY APPLE",
+    "Địa chỉ": "296 Lê Văn Thọ",
+    "Số điện thoại": "0981 308 308",
+    "Link Google Map": "https://maps.google.com/?q=KHANG+HUY+APPLE+296+Lê+Văn+Thọ",
+    "Tỉnh thành": "TP.HCM",
+    "Khu vực": "Gò Vấp",
+    "Logo": "static/logo-partners/logo-khang-huy-apple.jpg"
+  },
+  {
+    "Tên đối tác": "PHÚ VƯỢNG MOBILE",
+    "Địa chỉ": "715 Phan Văn Trị",
+    "Số điện thoại": "079 213 5678",
+    "Link Google Map": "https://maps.google.com/?q=PHÚ+VƯỢNG+MOBILE+715+Phan+Văn+Trị",
+    "Tỉnh thành": "TP.HCM",
+    "Khu vực": "Gò Vấp",
+    "Logo": "static/logo-partners/logo-phu-vuong-mobile.png"
+  },
+  {
+    "Tên đối tác": "THẮNG TÁO",
+    "Địa chỉ": "682 Quang Trung",
+    "Số điện thoại": "079 216 5678",
+    "Link Google Map": "https://maps.google.com/?q=THẮNG+TÁO+682+Quang+Trung",
+    "Tỉnh thành": "TP.HCM",
+    "Khu vực": "Gò Vấp",
+    "Logo": "static/logo-partners/logo-thang-tao.png"
+  },
+  {
+    "Tên đối tác": "TÁO GIÁ KHO",
+    "Địa chỉ": "486 Quang Trung",
+    "Số điện thoại": "0935 123 456",
+    "Link Google Map": "https://maps.google.com/?q=TÁO+GIÁ+KHO+486+Quang+Trung",
+    "Tỉnh thành": "TP.HCM",
+    "Khu vực": "Gò Vấp",
+    "Logo": "static/logo-partners/logo-taozin.png"
+  },
+  {
+    "Tên đối tác": "CHÀNG TRAI BÁN TÁO",
+    "Địa chỉ": "103 Quang Trung",
+    "Số điện thoại": "0899 998 820",
+    "Link Google Map": "https://maps.google.com/?q=CHÀNG+TRAI+BÁN+TÁO+103+Quang+Trung",
+    "Tỉnh thành": "TP.HCM",
+    "Khu vực": "Gò Vấp",
+    "Logo": "static/logo-partners/logo-chang-trai-ban-tao.jpg"
+  },
+  {
+    "Tên đối tác": "RENEW ZONE",
+    "Địa chỉ": "22 Đường số 4, KDC City Land",
+    "Số điện thoại": "0983 468 860",
+    "Link Google Map": "https://maps.google.com/?q=RENEW+ZONE+22+Đường+số+4,+KDC+City+Land",
+    "Tỉnh thành": "TP.HCM",
+    "Khu vực": "Gò Vấp",
+    "Logo": "static/logo-partners/logo-renew-zone.png"
+  },
+  {
+    "Tên đối tác": "HA STORE",
+    "Địa chỉ": "118/116 Bạch Đằng",
+    "Số điện thoại": "0523 397 999",
+    "Link Google Map": "https://maps.google.com/?q=HA+STORE+118/116+Bạch+Đằng",
+    "Tỉnh thành": "TP.HCM",
+    "Khu vực": "Gò Vấp",
+    "Logo": "static/logo-partners/logo-ha-store.png"
+  },
+  {
+    "Tên đối tác": "MINH HÀO STORE",
+    "Địa chỉ": "290 Quang Trung",
+    "Số điện thoại": "0935 903 636",
+    "Link Google Map": "https://maps.google.com/?q=MINH+HÀO+STORE+290+Quang+Trung",
+    "Tỉnh thành": "TP.HCM",
+    "Khu vực": "Gò Vấp",
+    "Logo": "static/logo-partners/logo-minh-hao-store.png"
+  },
+  {
+    "Tên đối tác": "LDL PHONE",
+    "Địa chỉ": "496 Quang Trung",
+    "Số điện thoại": "097.42.666.42",
+    "Link Google Map": "https://maps.google.com/?q=LDL+PHONE+496+Quang+Trung",
+    "Tỉnh thành": "TP.HCM",
+    "Khu vực": "Gò Vấp",
+    "Logo": "static/logo-partners/logo-ldl-phone.png"
+  },
+  {
+    "Tên đối tác": "PHÚ THỊNH",
+    "Địa chỉ": "537 Quang Trung",
+    "Số điện thoại": "0948 123 456",
+    "Link Google Map": "https://maps.google.com/?q=PHÚ+THỊNH+537+Quang+Trung",
+    "Tỉnh thành": "TP.HCM",
+    "Khu vực": "Gò Vấp",
+    "Logo": ""
+  },
+  {
+    "Tên đối tác": "NHÀ TÁO 878QT",
+    "Địa chỉ": "878 Quang Trung",
+    "Số điện thoại": "1900998839",
+    "Link Google Map": "https://maps.google.com/?q=NHÀ+TÁO+878+Quang+Trung",
+    "Tỉnh thành": "TP.HCM",
+    "Khu vực": "Gò Vấp",
+    "Logo": "static/logo-partners/logo-nha-tao.png"
+  },
+  {
+    "Tên đối tác": "HOPE PHONE",
+    "Địa chỉ": "548 Quang Trung",
+    "Số điện thoại": "0964 123 456",
+    "Link Google Map": "https://maps.google.com/?q=HOPE+PHONE+548+Quang+Trung",
+    "Tỉnh thành": "TP.HCM",
+    "Khu vực": "Gò Vấp",
+    "Logo": ""
+  },
+  {
+    "Tên đối tác": "MINH THẮNG",
+    "Địa chỉ": "11 Lê văn thọ,Phường 8",
+    "Số điện thoại": "0378 888 547",
+    "Link Google Map": "https://maps.google.com/?q=MINH+THẮNG+11+Lê+văn+thọ,+Phường+8",
+    "Tỉnh thành": "TP.HCM",
+    "Khu vực": "Gò Vấp",
+    "Logo": "static/logo-partners/logo-minh-thang-store.jpg"
+  },
+  {
+    "Tên đối tác": "SANG APPLE 3/2",
+    "Địa chỉ": "Đường 3/2",
+    "Số điện thoại": "19000304",
+    "Link Google Map": "https://maps.google.com/?q=SANG+APPLE+Đường+3/2",
+    "Tỉnh thành": "TP.HCM",
+    "Khu vực": "Quận 10",
+    "Logo": "static/logo-partners/logo-sang-apple.png"
+  },
+  {
+    "Tên đối tác": "NGỌC THÀNH MOBILE",
+    "Địa chỉ": "606 Lê Hồng Phong",
+    "Số điện thoại": "0909 400 012",
+    "Link Google Map": "https://maps.google.com/?q=NGỌC+THÀNH+MOBILE+606+Lê+Hồng+Phong",
+    "Tỉnh thành": "TP.HCM",
+    "Khu vực": "Quận 10",
+    "Logo": "static/logo-partners/logo-ngoc-thanh.png"
+  },
+  {
+    "Tên đối tác": "TT MOBILE",
+    "Địa chỉ": "549 Lê Hồng Phong,Phường 10",
+    "Số điện thoại": "09 1900 5088",
+    "Link Google Map": "https://maps.google.com/?q=TT+MOBILE+549+Lê+Hồng+Phong,+Phường+10",
+    "Tỉnh thành": "TP.HCM",
+    "Khu vực": "Quận 10",
+    "Logo": "static/logo-partners/logo-tt-mobile.png"
+  },
+  {
+    "Tên đối tác": "DI ĐỘNG 360",
+    "Địa chỉ": "231 Lý Thái Tổ",
+    "Số điện thoại": "0908999910",
+    "Link Google Map": "https://maps.google.com/?q=DI+ĐỘNG+360+231+Lý+Thái+Tổ",
+    "Tỉnh thành": "TP.HCM",
+    "Khu vực": "Quận 10",
+    "Logo": "static/logo-partners/logo-di-dong-360.png"
+  },
+  {
+    "Tên đối tác": "TÁO ZIN 575LHP",
+    "Địa chỉ": "575 Lê Hồng Phong",
+    "Số điện thoại": "0765.33.8888",
+    "Link Google Map": "https://maps.google.com/?q=TÁO+ZIN+575+Lê+Hồng+Phong",
+    "Tỉnh thành": "TP.HCM",
+    "Khu vực": "Quận 10",
+    "Logo": "static/logo-partners/logo-taozin.png"
+  },
+  {
+    "Tên đối tác": "CENTERPHONES",
+    "Địa chỉ": "155 Đường 3/2",
+    "Số điện thoại": "0888 09 6789",
+    "Link Google Map": "https://maps.google.com/?q=CENTERPHONES+155+Đường+3/2",
+    "Tỉnh thành": "TP.HCM",
+    "Khu vực": "Quận 10",
+    "Logo": "static/logo-partners/logo-centerphone.png"
+  },
+  {
+    "Tên đối tác": "LÊ QUÂN 643LHP",
+    "Địa chỉ": "643 Lê Hồng Phong",
+    "Số điện thoại": "0979 227227",
+    "Link Google Map": "https://maps.google.com/?q=LÊ+QUÂN+643+Lê+Hồng+Phong",
+    "Tỉnh thành": "TP.HCM",
+    "Khu vực": "Quận 10",
+    "Logo": "static/logo-partners/logo-le-quan.png"
+  },
+  {
+    "Tên đối tác": "ALODIDONG 634LHP",
+    "Địa chỉ": "634 Lê Hồng Phong",
+    "Số điện thoại": "0939 66 1386",
+    "Link Google Map": "https://maps.google.com/?q=ALODIDONG+634+Lê+Hồng+Phong",
+    "Tỉnh thành": "TP.HCM",
+    "Khu vực": "Quận 10",
+    "Logo": "static/logo-partners/logo-alodidong.png"
+  },
+  {
+    "Tên đối tác": "MOBILE WORLD",
+    "Địa chỉ": "692 Lê Hồng Phong",
+    "Số điện thoại": "0965 28 79 89",
+    "Link Google Map": "https://maps.google.com/?q=MOBILE+WORLD+692+Lê+Hồng+Phong",
+    "Tỉnh thành": "TP.HCM",
+    "Khu vực": "Quận 10",
+    "Logo": "static/logo-partners/logo-mobile-world.png"
+  },
+  {
+    "Tên đối tác": "THANH LUXURY",
+    "Địa chỉ": "496 Lê Hồng Phong",
+    "Số điện thoại": "0969 882 266",
+    "Link Google Map": "https://maps.google.com/?q=THANH+LUXURY+496+Lê+Hồng+Phong",
+    "Tỉnh thành": "TP.HCM",
+    "Khu vực": "Quận 10",
+    "Logo": "static/logo-partners/logo-thanh-luxury-mobile.png"
+  },
+  {
+    "Tên đối tác": "PHÁT THÀNH",
+    "Địa chỉ": "11 Đường 3/2",
+    "Số điện thoại": "0797 097 097",
+    "Link Google Map": "https://maps.google.com/?q=PHÁT+THÀNH+11+Đường+3/2",
+    "Tỉnh thành": "TP.HCM",
+    "Khu vực": "Quận 10",
+    "Logo": "static/logo-partners/logo-phat-thanh.png"
+  },
+  {
+    "Tên đối tác": "2NAM STORE",
+    "Địa chỉ": "428 Lê Hồng Phong",
+    "Số điện thoại": "0286 279 7979",
+    "Link Google Map": "https://maps.google.com/?q=2NAM+STORE+428+Lê+Hồng+Phong",
+    "Tỉnh thành": "TP.HCM",
+    "Khu vực": "Quận 10",
+    "Logo": "static/logo-partners/logo-2nam-store.png"
+  },
+  {
+    "Tên đối tác": "VIỄN QUANG",
+    "Địa chỉ": "672 Lê Hồng Phong",
+    "Số điện thoại": "0988.0000.29",
+    "Link Google Map": "https://maps.google.com/?q=VIỄN+QUANG+672+Lê+Hồng+Phong",
+    "Tỉnh thành": "TP.HCM",
+    "Khu vực": "Quận 10",
+    "Logo": "static/logo-partners/logo-vien-quang.svg"
+  },
+  {
+    "Tên đối tác": "HOÀI STORE 771LBB",
+    "Địa chỉ": "771 Lũy Bán Bích",
+    "Số điện thoại": "0943 123 456",
+    "Link Google Map": "https://maps.google.com/?q=HOÀI+STORE+771+Lũy+Bán+Bích",
+    "Tỉnh thành": "TP.HCM",
+    "Khu vực": "Quận 10",
+    "Logo": ""
+  },
+  {
+    "Tên đối tác": "KIM CƯƠNG MOBILE",
+    "Địa chỉ": "526 Đường 3/2",
+    "Số điện thoại": "0945 123 456",
+    "Link Google Map": "https://maps.google.com/?q=KIM+CƯƠNG+MOBILE+526+Đường+3/2",
+    "Tỉnh thành": "TP.HCM",
+    "Khu vực": "Quận 10",
+    "Logo": ""
+  },
+  {
+    "Tên đối tác": "THẾ GIỚI TÁO",
+    "Địa chỉ": "177 Tôn Thất Hiệp",
+    "Số điện thoại": "0903 101 112",
+    "Link Google Map": "https://maps.google.com/?q=THẾ+GIỚI+TÁO+177+Tôn+Thất+Hiệp",
+    "Tỉnh thành": "TP.HCM",
+    "Khu vực": "Quận 10",
+    "Logo": "static/logo-partners/logo-the-gioi-tao.png"
+  },
+  {
+    "Tên đối tác": "HOÀNG KIÊN",
+    "Địa chỉ": "403 Ngô Gia Tự",
+    "Số điện thoại": "0813 600 999",
+    "Link Google Map": "https://maps.google.com/?q=HOÀNG+KIÊN+403+Ngô+Gia+Tự",
+    "Tỉnh thành": "TP.HCM",
+    "Khu vực": "Quận 10",
+    "Logo": "static/logo-partners/logo-hoang-kien.webp"
+  },
+  {
+    "Tên đối tác": "NHÀ TÁO 3/2",
+    "Địa chỉ": "1249 Đường 3/2",
+    "Số điện thoại": "1900998839",
+    "Link Google Map": "https://maps.google.com/?q=NHÀ+TÁO+1249+Đường+3/2",
+    "Tỉnh thành": "TP.HCM",
+    "Khu vực": "Quận 10",
+    "Logo": "static/logo-partners/logo-nha-tao.png"
+  },
+  {
+    "Tên đối tác": "NHÀ TÁO 504AC",
+    "Địa chỉ": "504 Âu Cơ",
+    "Số điện thoại": "1900998839",
+    "Link Google Map": "https://maps.google.com/?q=NHÀ+TÁO+504+Âu+Cơ",
+    "Tỉnh thành": "TP.HCM",
+    "Khu vực": "Quận 10",
+    "Logo": "static/logo-partners/logo-nha-tao.png"
+  },
+  {
+    "Tên đối tác": "DIDONGMY 3/2",
+    "Địa chỉ": "293 Đường 3/2",
+    "Số điện thoại": "0942.99.77.66",
+    "Link Google Map": "https://maps.google.com/?q=DIDONGMY+293+Đường+3/2",
+    "Tỉnh thành": "TP.HCM",
+    "Khu vực": "Quận 10",
+    "Logo": "static/logo-partners/logo-didongmy.png"
+  },
+  {
+    "Tên đối tác": "VPHONE 102BV",
+    "Địa chỉ": "102 Ba Vân",
+    "Số điện thoại": "0704456678",
+    "Link Google Map": "https://maps.google.com/?q=VPHONE+102+Ba+Vân",
+    "Tỉnh thành": "TP.HCM",
+    "Khu vực": "Quận 10",
+    "Logo": "static/logo-partners/logo-vphone.svg"
+  },
+  {
+    "Tên đối tác": "TÁO MÈO",
+    "Địa chỉ": "1130 Đường 3/2",
+    "Số điện thoại": "0969 123 456",
+    "Link Google Map": "https://maps.google.com/?q=TÁO+MÈO+1130+Đường+3/2",
+    "Tỉnh thành": "TP.HCM",
+    "Khu vực": "Quận 10",
+    "Logo": ""
+  },
+  {
+    "Tên đối tác": "SANG APPLE 1036KVC",
+    "Địa chỉ": "1036 Kha Vạn Cân",
+    "Số điện thoại": "19000304",
+    "Link Google Map": "https://maps.google.com/?q=SANG+APPLE+1036+Kha+Vạn+Cân",
+    "Tỉnh thành": "TP.HCM",
+    "Khu vực": "Thủ Đức",
+    "Logo": "static/logo-partners/logo-sang-apple.png"
+  },
+  {
+    "Tên đối tác": "SANG APPLE 86LVV",
+    "Địa chỉ": "86 Lê Văn Việt",
+    "Số điện thoại": "19000304",
+    "Link Google Map": "https://maps.google.com/?q=SANG+APPLE+86+Lê+Văn+Việt",
+    "Tỉnh thành": "TP.HCM",
+    "Khu vực": "Thủ Đức",
+    "Logo": "static/logo-partners/logo-sang-apple.png"
+  },
+  {
+    "Tên đối tác": "ALODIDONG 280VVN",
+    "Địa chỉ": "280 Võ Văn Ngân",
+    "Số điện thoại": "0939 66 1386",
+    "Link Google Map": "https://maps.google.com/?q=ALODIDONG+280+Võ+Văn+Ngân",
+    "Tỉnh thành": "TP.HCM",
+    "Khu vực": "Thủ Đức",
+    "Logo": "static/logo-partners/logo-alodidong.png"
+  },
+  {
+    "Tên đối tác": "NHÀ TÁO 42LVV",
+    "Địa chỉ": "42 Lê Văn Việt",
+    "Số điện thoại": "1900998839",
+    "Link Google Map": "https://maps.google.com/?q=NHÀ+TÁO+42+Lê+Văn+Việt",
+    "Tỉnh thành": "TP.HCM",
+    "Khu vực": "Thủ Đức",
+    "Logo": "static/logo-partners/logo-nha-tao.png"
+  },
+  {
+    "Tên đối tác": "DIDONGMY 143VVN",
+    "Địa chỉ": "143 Võ Văn Ngân",
+    "Số điện thoại": "0942.99.77.66",
+    "Link Google Map": "https://maps.google.com/?q=DIDONGMY+143+Võ+Văn+Ngân",
+    "Tỉnh thành": "TP.HCM",
+    "Khu vực": "Thủ Đức",
+    "Logo": "static/logo-partners/logo-didongmy.png"
+  },
+  {
+    "Tên đối tác": "HVH76 STORE",
+    "Địa chỉ": "15 Đỗ Xuân Hợp",
+    "Số điện thoại": "0969 331 976",
+    "Link Google Map": "https://maps.google.com/?q=HVH76+STORE+15+Đỗ+Xuân+Hợp",
+    "Tỉnh thành": "TP.HCM",
+    "Khu vực": "Thủ Đức",
+    "Logo": "static/logo-partners/logo-hvh76-store.png"
+  },
+  {
+    "Tên đối tác": "HỒNG PHÁT",
+    "Địa chỉ": "283 Nguyễn Thị Định",
+    "Số điện thoại": "0959 123 456",
+    "Link Google Map": "https://maps.google.com/?q=HỒNG+PHÁT+283+Nguyễn+Thị+Định",
+    "Tỉnh thành": "TP.HCM",
+    "Khu vực": "Thủ Đức",
+    "Logo": ""
+  },
+  {
+    "Tên đối tác": "BIN APPLE",
+    "Địa chỉ": "44 Tăng Nhơn Phú",
+    "Số điện thoại": "0960 123 456",
+    "Link Google Map": "https://maps.google.com/?q=BIN+APPLE+44+Tăng+Nhơn+Phú",
+    "Tỉnh thành": "TP.HCM",
+    "Khu vực": "Thủ Đức",
+    "Logo": ""
+  },
+  {
+    "Tên đối tác": "VPHONE Đ144",
+    "Địa chỉ": "Số 9, Đường 144",
+    "Số điện thoại": "0971 838 929",
+    "Link Google Map": "https://maps.google.com/?q=VPHONE+Số+9,+Đường+144",
+    "Tỉnh thành": "TP.HCM",
+    "Khu vực": "Thủ Đức",
+    "Logo": "static/logo-partners/logo-vphone.svg"
+  },
+  {
+    "Tên đối tác": "HẢI SƠN",
+    "Địa chỉ": "38 Tăng Nhơn Phú",
+    "Số điện thoại": "0966 123 456",
+    "Link Google Map": "https://maps.google.com/?q=HẢI+SƠN+38+Tăng+Nhơn+Phú",
+    "Tỉnh thành": "TP.HCM",
+    "Khu vực": "Thủ Đức",
+    "Logo": ""
+  },
+  {
+    "Tên đối tác": "SANG APPLE 690AC",
+    "Địa chỉ": "690 Âu Cơ",
+    "Số điện thoại": "19000304",
+    "Link Google Map": "https://maps.google.com/?q=SANG+APPLE+690+Âu+Cơ",
+    "Tỉnh thành": "TP.HCM",
+    "Khu vực": "Tân Bình",
+    "Logo": "static/logo-partners/logo-sang-apple.png"
+  },
+  {
+    "Tên đối tác": "24H ALO",
+    "Địa chỉ": "969 Âu Cơ",
+    "Số điện thoại": "0902 872 333",
+    "Link Google Map": "https://maps.google.com/?q=24H+ALO+969+Âu+Cơ",
+    "Tỉnh thành": "TP.HCM",
+    "Khu vực": "Tân Bình",
+    "Logo": "static/logo-partners/logo-24-alo-store.png"
+  },
+  {
+    "Tên đối tác": "DI ĐỘNG TÂN PHÚ",
+    "Địa chỉ": "635 Âu Cơ",
+    "Số điện thoại": "0967 123 456",
+    "Link Google Map": "https://maps.google.com/?q=DI+ĐỘNG+TÂN+PHÚ+635+Âu+Cơ",
+    "Tỉnh thành": "TP.HCM",
+    "Khu vực": "Tân Bình",
+    "Logo": ""
+  },
+  {
+    "Tên đối tác": "NHÀ TÁO 188TQK",
+    "Địa chỉ": "188 Trần Quang Khải",
+    "Số điện thoại": "1900998839",
+    "Link Google Map": "https://maps.google.com/?q=NHÀ+TÁO+188+Trần+Quang+Khải",
+    "Tỉnh thành": "TP.HCM",
+    "Khu vực": "Quận 1",
+    "Logo": "static/logo-partners/logo-nha-tao.png"
+  },
+  {
+    "Tên đối tác": "ANDYLONG STORE",
+    "Địa chỉ": "Số 55B Hùng Vương, Phường 4",
+    "Số điện thoại": "02822.444444",
+    "Link Google Map": "https://maps.google.com/?q=ANDYLONG+STORE+55B+Hùng+Vương,+Phường+4",
+    "Tỉnh thành": "TP.HCM",
+    "Khu vực": "Quận 5",
+    "Logo": "static/logo-partners/logo-andylong.png"
+  }
+]

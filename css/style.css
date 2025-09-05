@@ -335,7 +335,7 @@ section#home::before {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 32rem; /* We'll use a consistent height of 32rem for all slides */
+  height: 28rem; /* Adjusted height to be less tall */
   width: 100%;
 }
 
@@ -385,7 +385,7 @@ section#home::before {
 /* ================================================== */
 
 #stats {
-  min-height: 70vh; /* Giữ nguyên */
+  min-height: 60vh; /* Adjusted to be less tall */
   display: flex;
   align-items: center;
 }
@@ -875,14 +875,14 @@ body#find-us-page::before {
  * Chúng ta sẽ tăng nó lên 6rem.
  */
 #stats h3 {
-  font-size: 8rem; 
+  font-size: 5rem; /* Giảm cỡ chữ để cân đối hơn */
 }
 
 /* * Tăng kích thước của chữ mô tả bên dưới số.
  * Đồng thời tăng nhẹ khoảng cách giữa các chữ cho dễ đọc.
  */
 #stats p {
-  font-size: 2rem; /* Cỡ chữ to hơn */
+  font-size: 1.5rem; /* Giảm cỡ chữ để cân đối hơn */
   letter-spacing: 0.05em; 
 }
 
@@ -937,4 +937,49 @@ body#find-us-page::before {
     height: 55px;
     font-size: 2rem; /* Giảm kích thước font của icon */
   }
+}
+/* ======================================================= */
+/* === NÚT SẢN PHẨM "VAY NGAY" (BẢN SỬA LỖI MẤT GÓC CUỐI CÙNG) === */
+/* ======================================================= */
+
+.product-slides-container .btn-product {
+  /* --- Các thuộc tính cơ bản --- */
+  position: relative;
+  z-index: 1;
+  transition: transform 0.3s ease, background-color 0.3s ease;
+  animation: final-button-glow 1.5s infinite alternate ease-in-out;
+
+  /* --- CÁC THUỘC TÍNH SỬA LỖI RENDERING --- */
+  border-radius: 9999px; /* Ghi đè dứt điểm, đảm bảo bo tròn tuyệt đối */
+  overflow: hidden;     /* Giữ nguyên tắc vàng: cắt bỏ phần thừa */
+  isolation: isolate;   /* QUAN TRỌNG: Tạo stacking context mới, ngăn hiệu ứng con "tràn" ra ngoài */
+  -webkit-mask-image: -webkit-radial-gradient(white, black); /* Fix cho một số trình duyệt Webkit/Chrome */
+  will-change: transform; /* Báo cho trình duyệt tối ưu cho animation transform */
+}
+
+.product-slides-container .btn-product:hover {
+  background-color: #00A651;
+  transform: scale(1.05);
+}
+
+@keyframes final-button-glow {
+  from {
+    box-shadow: 0 0 5px rgba(0, 166, 81, 0.4);
+  }
+  to {
+    box-shadow: 0 0 20px rgba(0, 166, 81, 0.9);
+  }
+}
+.btn-product{
+  left: 2rem;
+}
+
+/* --- MOBILE MENU STYLES --- */
+#mobile-menu {
+  transition: transform 0.3s ease-in-out;
+  transform: translateX(100%);
+}
+
+#mobile-menu.active {
+  transform: translateX(0);
 }
