@@ -90,8 +90,9 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   function initializeProductSlider() {
-    const mainContainer = document.getElementById("product-content-placeholder");
-    if (!mainContainer) return;
+const sliderContainer = document.querySelector(".product-slides-container");
+if (!sliderContainer) return;
+
 
     fetch("data/products.json")
       .then((response) => response.json())
@@ -139,7 +140,7 @@ document.addEventListener("DOMContentLoaded", function () {
         `;
         });
 
-        mainContainer.innerHTML = `
+        sliderContainer.innerHTML = `
           <div class="product-slides-container relative container mx-auto px-4">
             <div class="swiper product-swiper">
               <div class="swiper-wrapper">${slidesHtml}</div>
