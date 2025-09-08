@@ -747,3 +747,8 @@ body#find-us-page::before {
     box-shadow: 0 0 20px rgba(0, 166, 81, 0.9);
   }
 }
+@media (min-width: 768px) {
+  #mobile-menu {
+    display: none !important; /* Quan trọng: Ẩn hoàn toàn menu trên desktop */
+  }
+}
