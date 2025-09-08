@@ -88,11 +88,9 @@ document.addEventListener("DOMContentLoaded", function () {
           '<span class="mx-8">Không thể tải tin tức...</span>';
       });
   }
-
-  function initializeProductSlider() {
-const sliderContainer = document.querySelector(".product-slides-container");
-if (!sliderContainer) return;
-
+function initializeProductSlider() {
+    const sliderContainer = document.querySelector(".product-slides-container");
+    if (!sliderContainer) return;
 
     fetch("data/products.json")
       .then((response) => response.json())
@@ -141,14 +139,12 @@ if (!sliderContainer) return;
         });
 
         sliderContainer.innerHTML = `
-          <div class="product-slides-container relative container mx-auto px-4">
-            <div class="swiper product-swiper">
-              <div class="swiper-wrapper">${slidesHtml}</div>
-              <div class="swiper-pagination product-pagination"></div>
-            </div>
-            <div class="swiper-button-prev product-nav-prev"></div>
-            <div class="swiper-button-next product-nav-next"></div>
+          <div class="swiper product-swiper">
+            <div class="swiper-wrapper">${slidesHtml}</div>
+            <div class="swiper-pagination product-pagination"></div>
           </div>
+          <div class="swiper-button-prev product-nav-prev"></div>
+          <div class="swiper-button-next product-nav-next"></div>
         `;
 
         const productSwiper = new Swiper(".product-swiper", {
@@ -164,28 +160,129 @@ if (!sliderContainer) return;
           },
         });
 
-        // Hàm cập nhật đường link cho nút bấm
-        const updateButtonLink = (swiper) => {
-          const activeSlide = swiper.slides[swiper.realIndex];
-          const button = activeSlide.querySelector('.btn-product');
-          const newLink = activeSlide.getAttribute('data-link');
-          if (button && newLink) {
-            button.onclick = () => {
-              window.location.href = newLink;
-            };
-          }
-        };
-
-        // Cập nhật đường link ngay khi khởi tạo Swiper
-        updateButtonLink(productSwiper);
-
-        // Cập nhật đường link mỗi khi slide thay đổi
-        productSwiper.on('slideChange', () => {
-          updateButtonLink(productSwiper);
-        });
+        // ==========================================================
+        // === PHẦN SỬA LỖI VÀ TỐI ƯU HÓA LOGIC CLICK ===
+        // ==========================================================
+        
+        // Chỉ gán MỘT sự kiện click cho toàn bộ slider
+        const swiperWrapper = document.querySelector(".product-swiper");
+        if (swiperWrapper) {
+          swiperWrapper.addEventListener('click', function(event) {
+            // Kiểm tra xem người dùng có click vào nút .btn-product không
+            const button = event.target.closest('.btn-product');
+            if (button) {
+              // Lấy slide đang hoạt động từ chính Swiper
+              const activeSlide = productSwiper.slides[productSwiper.realIndex];
+              const link = activeSlide.getAttribute('data-link');
+              
+              if (link) {
+                console.log("Redirecting to:", link); // Dòng này để debug, có thể xóa
+                window.location.href = link;
+              }
+            }
+          });
+        }
+        
       })
       .catch((error) => console.error("Lỗi khi tải dữ liệu sản phẩm:", error));
-  }
+}
+//   function initializeProductSlider() {
+// const sliderContainer = document.querySelector(".product-slides-container");
+// if (!sliderContainer) return;
+
+
+//     fetch("data/products.json")
+//       .then((response) => response.json())
+//       .then((productData) => {
+//         let slidesHtml = "";
+        
+//         productData.forEach((slide) => {
+//           const featuresHtml = slide.features
+//             .map((feature) => {
+//               const formattedFeature = feature.replace(
+//                 /\*\*(.*?)\*\*/g,
+//                 '<span class="font-bold mx-1 text-t86-green-light">$1</span>'
+//               );
+//               return `<li class="product-feature-item">
+//                     <i class="fas fa-check text-t86-green-light mr-3"></i>${formattedFeature}
+//                   </li>`;
+//             })
+//             .join("");
+
+//             slidesHtml += `
+//           <div class="swiper-slide" data-link="${slide.button.link}">
+//             <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center h-full">
+//               <div class="product-content-wrapper text-center md:text-left">
+//                 <p class="font-raleway text-lg text-t86-dark mb-1">${slide.preTitle}</p>
+//                 <h2 class="text-4xl md:text-5xl font-bold tracking-tight leading-tight uppercase text-t86-green-light">${slide.title}</h2>
+//                 <ul class="product-ul mt-6 space-y-3 text-md text-t86-dark/90">${featuresHtml}</ul>
+//                 <div class="mt-8">
+//                   <button class="bg-t86-green text-white font-bold px-8 py-3 rounded-full hover:bg-t86-green-light hover:scale-105 ripple btn-product">
+//                     ${slide.button.text}
+//                   </button>
+//                 </div>
+//               </div>
+//               <div class="product-content-wrapper flex flex-col items-center justify-center">
+//                 <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+//                   <div class="product-image-container">
+//                     <img src="${slide.imageSrc}" class="object-contain pulse-animation" alt="${slide.title}" />
+//                   </div>
+//                   <div>
+//                     ${slide.visualsHtml}
+//                   </div>
+//                 </div>
+//               </div>
+//             </div>
+//           </div>
+//         `;
+//         });
+
+//         sliderContainer.innerHTML = `
+//           <div class="product-slides-container relative container mx-auto px-4">
+//             <div class="swiper product-swiper">
+//               <div class="swiper-wrapper">${slidesHtml}</div>
+//               <div class="swiper-pagination product-pagination"></div>
+//             </div>
+//             <div class="swiper-button-prev product-nav-prev"></div>
+//             <div class="swiper-button-next product-nav-next"></div>
+//           </div>
+//         `;
+
+//         const productSwiper = new Swiper(".product-swiper", {
+//           loop: true,
+//           effect: "fade",
+//           fadeEffect: { crossFade: true },
+//           speed: 800,
+//           autoplay: { delay: 7000, disableOnInteraction: false },
+//           pagination: { el: ".product-pagination", clickable: true },
+//           navigation: {
+//             nextEl: ".product-nav-next",
+//             prevEl: ".product-nav-prev",
+//           },
+//         });
+
+//         // Hàm cập nhật đường link cho nút bấm
+//         const updateButtonLink = (swiper) => {
+//           const activeSlide = swiper.slides[swiper.realIndex];
+//           const button = activeSlide.querySelector('.btn-product');
+//           const newLink = activeSlide.getAttribute('data-link');
+//           if (button && newLink) {
+//             button.onclick = () => {
+//               window.location.href = newLink;
+//             };
+//           }
+//         };
+
+//         // Cập nhật đường link ngay khi khởi tạo Swiper
+//         updateButtonLink(productSwiper);
+
+//         // Cập nhật đường link mỗi khi slide thay đổi
+//         productSwiper.on('slideChange', () => {
+//           updateButtonLink(productSwiper);
+//         });
+//       })
+//       .catch((error) => console.error("Lỗi khi tải dữ liệu sản phẩm:", error));
+//   }
   
   function initializeAllScripts() {
     if (document.querySelector(".hero-swiper")) {
