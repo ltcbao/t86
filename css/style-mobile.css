@@ -1,0 +1,151 @@
+/* ================================================== */
+/* === MOBILE STYLES ONLY (Optimized & Consolidated) === */
+/* ================================================== */
+
+@media (max-width: 768px) {
+  /* --- Global & Base Styles --- */
+  body {
+    overflow-x: hidden;
+    width: 100%;
+  }
+
+  /* --- Header & Navigation --- */
+#header-placeholder {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 9999;
+}
+/* ================================================== */
+/* === MOBILE MENU Z-INDEX FIX === */
+/* ================================================== */
+
+/* Đảm bảo menu mobile luôn ở lớp trên cùng */
+#mobile-menu {
+  z-index: 99999 !important;
+}
+  .swiper-button-next,
+  .swiper-button-prev {
+    width: 36px;
+    height: 36px;
+  }
+  .swiper-button-next::after,
+  .swiper-button-prev::after {
+    font-size: 1rem;
+  }
+  .swiper-button-next {
+    right: 10px;
+  }
+  .swiper-button-prev {
+    left: 10px;
+  }
+  .product-nav-next,
+  .product-nav-prev {
+    width: 38px;
+    height: 38px;
+  }
+  .product-nav-next {
+    right: 10px;
+  }
+  .product-nav-prev {
+    left: 10px;
+  }
+
+  /* --- Hero Section --- */
+  #about-hero-new {
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+  }
+  #about-hero-new h1 {
+    font-size: 2.75rem;
+  }
+  #about-hero-new p {
+    font-size: 1rem;
+    margin-top: 0.5rem;
+  }
+
+  /* --- About Page Sections --- */
+  #about-content,
+  #core-values {
+    padding-top: 2.5rem;
+    padding-bottom: 2.5rem;
+  }
+  .flex-col {
+    gap: 1.5rem;
+  }
+  .flex-col.lg\:flex-row {
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+  .gap-12,
+  .gap-y-12 {
+    gap: 1.5rem;
+  }
+  .core-value-icon {
+    width: 40px;
+    height: 40px;
+    font-size: 1.5rem;
+  }
+  .core-value-icon-dark {
+    width: 40px;
+    height: 40px;
+    font-size: 1.5rem;
+  }
+  .core-value-tagline {
+    margin-top: 0.25rem;
+  }
+
+  /* --- Product Section --- */
+  .product-content-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  .product-image-container {
+    height: auto;
+    max-height: 20rem;
+  }
+  .product-slide .product-ul {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 0;
+    margin: 0 auto;
+    list-style-type: none;
+    gap: 0.5rem;
+  }
+  .product-feature-item {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    white-space: nowrap;
+  }
+  
+  /* --- Other Components --- */
+  .zalo-icon {
+    width: 2rem;
+    height: 2rem;
+    margin-right: 0.5rem;
+    vertical-align: middle;
+  }
+  .partner-logo-container {
+    height: 10rem;
+    width: 7rem;
+  }
+  /* ================================================== */
+/* === MOBILE MENU VISIBILITY LOGIC === */
+/* ================================================== */
+
+/* Mặc định, menu ẩn ở bên trái */
+#mobile-menu {
+  transform: translateX(-100%);
+  transition: transform 0.3s ease-in-out;
+}
+
+/* Khi có class 'is-open', menu sẽ trượt vào màn hình */
+#mobile-menu.is-open {
+  transform: translateX(0);
+}
+}

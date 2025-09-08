@@ -1,0 +1,12 @@
+/* ================================================== */
+/* === DESKTOP STYLES ONLY === */
+/* ================================================== */
+
+@media (min-width: 768px) {
+  #hero-slide-1 .hero-title,
+  #hero-slide-2 .hero-title,
+  #hero-slide-3 .hero-title {
+    font-size: 3.75rem;
+    line-height: 1.1;
+  }
+}

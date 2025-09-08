@@ -1,5 +1,53 @@
 /* ================================================== */
-/* === BASE & TYPOGRAPHY STYLES === */
+/* === IMPORT DESKTOP & MOBILE STYLES === */
+/* ================================================== */
+@import url("style-mobile.css");
+@import url("style-desktop.css");
+
+/* ================================================== */
+/* === GLOBAL OVERFLOW FIX - Phiên bản Mạnh mẽ hơn === */
+/* ================================================== */
+html,
+body,
+#root, /* Nếu bạn đang dùng React/Vue, có thể cần thêm #root */
+#app /* Hoặc #app */ {
+  overflow-x: hidden !important; /* Dùng !important để đảm bảo ghi đè */
+  width: 100% !important;
+  max-width: 100% !important; /* Đảm bảo không có gì vượt quá 100% */
+}
+
+/* Đảm bảo các container chính cũng không bị tràn */
+.container {
+  overflow-x: hidden !important;
+  width: 100% !important;
+  max-width: 100% !important;
+}
+
+/* Kiểm tra các phần tử có vị trí cố định/tuyệt đối */
+.fixed, .absolute {
+  max-width: 100% !important;
+}
+/* ================================================== */
+/* === MOBILE MENU OVERLAP FIX V2 === */
+/* ================================================== */
+
+/* Đẩy toàn bộ section hero xuống lớp dưới cùng */
+section#home {
+  z-index: 1 !important;
+}
+
+/* Đảm bảo canvas của particles.js ở lớp dưới VÀ không nhận click */
+#particles-js {
+  z-index: 2 !important;
+  pointer-events: none; /* Rất quan trọng: Cho phép click xuyên qua */
+}
+
+/* Đặt swiper hero nằm trên particles nhưng vẫn ở dưới header */
+.swiper.hero-swiper {
+  z-index: 3 !important;
+}
+/* ================================================== */
+/* === BASE & TYPOGRAPHY STYLES (COMMON FOR ALL) === */
 /* ================================================== */
 html {
   height: 100%;
@@ -10,10 +58,10 @@ body {
   line-height: 1.65;
   display: flex;
   flex-direction: column;
-  min-height: 100vh; /* Ensures the body is at least the full height of the screen */
+  min-height: 100vh;
 }
 main {
-  flex-grow: 1; /* Allows the main section to grow and fill available space */
+  flex-grow: 1;
 }
 h1,
 h2,
@@ -34,13 +82,12 @@ h6 {
 .font-pacifico {
   font-family: 'Pacifico', cursive;
 }
+
 /* ================================================== */
 /* === CUSTOM COLOR FOR DANCING SCRIPT TEXT === */
 /* ================================================== */
-
-/* Áp dụng màu đỏ hồng cho dòng chữ "Dễ dàng sở hữu" */
 .text-t86 {
-  color: #e52b50; /* Mã màu cho đỏ hồng (Amaranth) */
+  color: #e52b50;
 }
 
 /* ================================================== */
@@ -87,7 +134,6 @@ section#home::before {
     url('../static/background-1.jpg');
   background-size: cover;
   background-position: center;
-  /* animation: kenburns 20s ease-in-out infinite alternate; */
 }
 @keyframes kenburns {
   from {
@@ -196,8 +242,8 @@ section#home::before {
 #hero-slide-1 .hero-title,
 #hero-slide-2 .hero-title,
 #hero-slide-3 .hero-title {
-  color: #c2d436;                               /* Áp dụng màu xanh lá mạ đặc trưng */
-  text-shadow: 1px 1px 8px rgba(0, 0, 0, 0.5); /* Thêm hiệu ứng đổ bóng cho dễ đọc */
+  color: #c2d436;
+  text-shadow: 1px 1px 8px rgba(0, 0, 0, 0.5);
 }
 #magnetic-btn .magnetic-effect {
   position: absolute;
@@ -241,54 +287,50 @@ section#home::before {
   transition-delay: 0.2s;
 }
 .swiper-slide-active .anim-el.product-visuals {
-  opacity: 1; /* Fixed visibility */
+  opacity: 1;
   transition-delay: 0.3s;
 }
 .swiper-slide-active .anim-el.product-btn-wrapper {
   transition-delay: 1.6s;
 }
-
+/* ================================================== */
+/* === SẢN PHẨM: ANIMATION MƯỢT MÀ VÀ HOÀN CHỈNH === */
+/* ================================================== */
+/* Keyframes cho hiệu ứng xuất hiện của các mục */
 @keyframes pulse-in {
   from {
     opacity: 0;
-    transform: translateY(15px) scale(0.95);
+    transform: translateY(10px) scale(0.98); /* Giảm độ co dãn và quãng đường di chuyển */
   }
   to {
     opacity: 1;
     transform: translateY(0) scale(1);
   }
 }
-@keyframes pulse-animation {
-  0%,
-  100% {
-    transform: scale(1.1);
-  }
-  50% {
-    transform: scale(1.02);
-  }
+
+/* Áp dụng animation cho từng mục trong danh sách khi slide active */
+.swiper-slide-active .product-feature-item {
+  animation: pulse-in 0.7s cubic-bezier(0.25, 1, 0.5, 1) forwards; /* Dùng easing function mượt hơn */
+  will-change: transform, opacity;
 }
-.pulse-animation {
-  animation: pulse-animation 5s infinite ease-in-out;
+/* Thiết lập animation-delay cho từng mục để tạo hiệu ứng nối tiếp */
+.swiper-slide-active .product-feature-item:nth-child(1) {
+  animation-delay: 0.3s;
 }
-.swiper-slide-active .product-ul li {
-  animation: pulse-in 0.8s ease-out forwards;
-}
-.swiper-slide-active .product-ul li:nth-child(1) {
+.swiper-slide-active .product-feature-item:nth-child(2) {
   animation-delay: 0.4s;
 }
-.swiper-slide-active .product-ul li:nth-child(2) {
+.swiper-slide-active .product-feature-item:nth-child(3) {
+  animation-delay: 0.5s;
+}
+.swiper-slide-active .product-feature-item:nth-child(4) {
   animation-delay: 0.6s;
 }
-.swiper-slide-active .product-ul li:nth-child(3) {
-  animation-delay: 0.8s;
-}
-.swiper-slide-active .product-ul li:nth-child(4) {
-  animation-delay: 1s;
-}
-.swiper-slide-active .product-ul li:nth-child(5) {
-  animation-delay: 1.2s;
+.swiper-slide-active .product-feature-item:nth-child(5) {
+  animation-delay: 0.7s;
 }
 
+ 
 .product-slide .product-h2 {
   color: #00833e;
   font-weight: 900;
@@ -308,7 +350,6 @@ section#home::before {
 .product-slide .product-ul li .fa-check {
   color: #00a651;
 }
-
 .product-slide .feature-list {
   display: flex;
   flex-direction: column;
@@ -326,20 +367,17 @@ section#home::before {
   border-radius: 50%;
   margin-top: 0.4rem;
 }
+
 /* ================================================== */
 /* === PRODUCT IMAGE UNIFORM SIZE FIX === */
 /* ================================================== */
-
-/* This container will have a fixed height, creating a uniform space for the image */
 .product-image-container {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 28rem; /* Adjusted height to be less tall */
+  height: 28rem;
   width: 100%;
 }
-
-/* The image will be scaled to fit inside the container without being cropped or distorted */
 .product-image-container img {
   max-width: 100%;
   max-height: 100%;
@@ -362,60 +400,44 @@ section#home::before {
   background-color: #00a651;
   transform: scale(1.05);
 }
-/* Định nghĩa lại animation, chỉ tác động vào box-shadow để tránh xung đột */
 @keyframes button-glow-shadow {
   from {
-    /* Trạng thái ban đầu */
     box-shadow: 0 0 5px rgba(0, 166, 81, 0.4);
   }
   to {
-    /* Trạng thái sáng nhất */
     box-shadow: 0 0 20px rgba(0, 166, 81, 0.9);
   }
 }
-
-/* Áp dụng animation đã sửa cho nút */
 .product-slide .btn-product {
-  /* Animation này sẽ không còn xung đột với hiệu ứng scale khi hover */
   animation: button-glow-shadow 1.5s infinite alternate ease-in-out;
+}
+.btn-product {
+  left: 2rem;
 }
 
 /* ================================================== */
-/* === STATS SECTION (TỐI ƯU HÓA) === */
+/* === STATS SECTION === */
 /* ================================================== */
-
 #stats {
-  min-height: 60vh; /* Adjusted to be less tall */
+  min-height: 60vh;
   display: flex;
   align-items: center;
 }
-
 .stats-overlay {
   background: linear-gradient(
     90deg,
-    rgba(0, 45, 91, 0.80) 0%, /* Giảm từ 0.92 xuống 0.85 */
-    rgba(0, 131, 62, 0.70) 100%  /* Giảm từ 0.9 xuống 0.78 */
+    rgba(0, 45, 91, 0.8) 0%,
+    rgba(0, 131, 62, 0.7) 100%
   );
 }
-
-/* Container chính cho lưới ảnh nền.
-  Quan trọng: Bỏ animation ra khỏi đây.
-*/
 #stats-background-grid {
   display: flex;
   gap: 1rem;
   width: 100%;
-  height: 100%; /* Chỉ cần 100% chiều cao của section */
+  height: 100%;
   position: absolute;
   inset: 0;
 }
-
-/* Định nghĩa animation cuộn lên.
-  Nó di chuyển cột từ vị trí ban đầu (translateY(0))
-  lên một nửa chiều cao của nó (translateY(-50%)).
-  Chúng ta chỉ cần -50% vì JavaScript đã nhân đôi nội dung hình ảnh
-  để tạo ra một vòng lặp liền mạch.
-*/
 @keyframes scroll-up {
   from {
     transform: translateY(0%);
@@ -424,72 +446,48 @@ section#home::before {
     transform: translateY(-50%);
   }
 }
-
-/*
-  Thiết lập chung cho mỗi cột.
-  Quan trọng: Mỗi cột sẽ chứa các ảnh được nhân đôi và sẽ tự cuộn.
-*/
 .stats-bg-column {
   flex: 1;
   display: flex;
   flex-direction: column;
   gap: 1rem;
-  /* Áp dụng animation cho TỪNG CỘT */
   animation: scroll-up linear infinite;
 }
-
 .stats-bg-column img {
   width: 100%;
   aspect-ratio: 4 / 3;
   object-fit: cover;
   border-radius: 0.5rem;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-  flex-shrink: 0; /* Ngăn ảnh bị co lại */
+  flex-shrink: 0;
 }
-
-/*
-  Đây là phần quan trọng nhất:
-  Đặt thời gian hoàn thành animation khác nhau cho mỗi cột.
-  Thời gian càng ngắn, cột cuộn càng nhanh.
-*/
-.stats-bg-column:nth-child(1) { animation-duration: 30s; } /* Nhanh hơn */
-.stats-bg-column:nth-child(2) { animation-duration: 42s; } /* Nhanh hơn */
-.stats-bg-column:nth-child(3) { animation-duration: 28s; } /* Nhanh hơn */
-.stats-bg-column:nth-child(4) { animation-duration: 38s; } /* Nhanh hơn */
-.stats-bg-column:nth-child(5) { animation-duration: 25s; } /* Nhanh hơn */
-.stats-bg-column:nth-child(6) { animation-duration: 35s; } /* Nhanh hơn */
-/* Đảo ngược hướng cho một vài cột để thêm phần ngẫu nhiên */
+.stats-bg-column:nth-child(1) { animation-duration: 30s; }
+.stats-bg-column:nth-child(2) { animation-duration: 42s; }
+.stats-bg-column:nth-child(3) { animation-duration: 28s; }
+.stats-bg-column:nth-child(4) { animation-duration: 38s; }
+.stats-bg-column:nth-child(5) { animation-duration: 25s; }
+.stats-bg-column:nth-child(6) { animation-duration: 35s; }
 .stats-bg-column:nth-child(7) { 
-  animation-duration: 45s; /* Nhanh hơn */
+  animation-duration: 45s;
   animation-direction: reverse; 
 }
-.stats-bg-column:nth-child(8) { animation-duration: 25; } /* Nhanh hơn */
-
-/*
-  Thêm hiệu ứng mờ dần ở hai đầu để trông mượt mà hơn
-  khi ảnh xuất hiện và biến mất.
-*/
-/* Làm cho lớp phủ mờ ở trên và dưới cùng bớt đậm hơn
-  để ảnh hiện ra mượt mà.
-*/
+.stats-bg-column:nth-child(8) { animation-duration: 25; }
 #stats-background-grid::before {
   top: 0;
   background: linear-gradient(
     to bottom,
-    rgba(12, 23, 26, 0.85) 10%, /* Giảm từ 1 (đặc) xuống 0.95 */
+    rgba(12, 23, 26, 0.85) 10%,
     rgba(12, 23, 26, 0)
   );
 }
-
 #stats-background-grid::after {
   bottom: 0;
   background: linear-gradient(
     to top,
-    rgba(12, 23, 26, 0.85) 10%, /* Giảm từ 1 (đặc) xuống 0.95 */
+    rgba(12, 23, 26, 0.85) 10%,
     rgba(12, 23, 26, 0)
   );
 }
-
 #stats-background-grid::after {
   bottom: 0;
   background: linear-gradient(
@@ -497,6 +495,13 @@ section#home::before {
     rgba(12, 23, 26, 1) 10%,
     rgba(12, 23, 26, 0)
   );
+}
+#stats h3 {
+  font-size: 5rem;
+}
+#stats p {
+  font-size: 1.5rem;
+  letter-spacing: 0.05em;
 }
 
 /* ================================================== */
@@ -529,96 +534,18 @@ section#home::before {
 .about-content-bg {
   background-color: #f7f7f7;
 }
-
-@media (max-width: 768px) {
-  h1 {
-    font-size: 2.5rem;
-  }
-  h2 {
-    font-size: 2rem;
-  }
-
-  .swiper-button-next,
-  .swiper-button-prev {
-    width: 36px;
-    height: 36px;
-  }
-  .swiper-button-next::after,
-  .swiper-button-prev::after {
-    font-size: 16px;
-  }
-  .swiper-button-next {
-    right: 10px;
-  }
-  .swiper-button-prev {
-    left: 10px;
-  }
-
-  .hero-features {
-    position: static;
-    flex-direction: column;
-    background: none;
-    backdrop-filter: none;
-    border: none;
-    margin-top: 2rem;
-    gap: 1.5rem;
-  }
-  #hero-slide-1 {
-    padding-bottom: 20px;
-  }
-  #hero-slide-1 .hero-title,
-  #hero-slide-2 .hero-title,
-  #hero-slide-3 .hero-title {
-    color: #c2d436;                               /* Áp dụng màu xanh lá mạ đặc trưng */
-    text-shadow: 1px 1px 8px rgba(0, 0, 0, 0.5); /* Thêm hiệu ứng đổ bóng cho dễ đọc */
-    font-size: 2rem;                             /* Đặt cùng một kích thước font chữ */
-    white-space: nowrap;                         /* Đảm bảo tất cả đều nằm trên một hàng */
-  }
-
-  /* #hero-slide-1 .hero-title {
-    font-size: 2rem; /* Cỡ chữ cho "TÀI CHÍNH CÁ NHÂN" */
-  }
-
-  #hero-slide-2 .hero-title,
-  #hero-slide-3 .hero-title {
-    font-size: 1.75rem; /* Giảm cỡ chữ cho "Sản Phẩm Vượt Trội" & "Đối Tác Tin Cậy" */
-  } */
-
-  /* =============================================== */
-  /* === FINAL MOBILE ALIGNMENT FIX === */
-  /* =============================================== */
-  .product-slide .product-content-wrapper {
-    /* Center the titles and button */
-    text-align: center;
-  }
-
-  .product-slide .product-ul {
-    /* This forces the list itself to be centered */
-    width: -moz-fit-content;
-    width: fit-content;
-    margin-left: auto !important;
-    margin-right: auto !important;
-
-    /* This keeps the text inside the list left-aligned for neatness */
-    text-align: left;
-  }
-  .zalo-icon {
-    width: 2rem;
-    height: 2rem;
-    margin-right: 0.5rem;
-    vertical-align: middle;
-  }
+#about-content {
+  padding-top: 5rem;
+  padding-bottom: 5rem;
+}
+#core-values {
+padding-top: 5rem;
+  padding-bottom: 5rem;
+}
 
 /* ================================================== */
 /* === PARTNER LOGOS MARQUEE === */
 /* ================================================== */
-
-/* Keyframes that define the scrolling animation */
-/* --- MARQ================================================== /
-/ === PARTNER LOGOS MARQUEE === /
-/ ================================================== */
-
-/* Keyframes that define the scrolling animation */
 @keyframes marquee {
   from {
     transform: translateX(0);
@@ -627,197 +554,118 @@ section#home::before {
     transform: translateX(-50%);
   }
 }
-
 .marquee {
   min-height: 10rem;
   display: flex;
   align-items: center;
 }
-
 .marquee-content {
   animation: marquee 40s linear infinite;
   position: relative;
   z-index: 1;
 }
-
 .marquee:hover .marquee-content {
   animation-play-state: paused;
 }
-
-/* --- PARTNER LOGOS --- */
-
 .partner-logo-container {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 20rem; /* Increased height  */
-  width: 9rem; /* Reduced width */
+  height: 20rem;
+  width: 9rem;
   padding: 1rem;
 }
-
 .partner-logo-img {
   max-height: 100%;
   max-width: 100%;
   object-fit: contain;
   transition: transform 0.3s ease-in-out;
 }
-
 .partner-logo-img:hover {
-  transform: scale(2.1); /* Adjusted scale for a more subtle hover */
-}
-/* =============================================== */
-/* === TEST CODE FOR BUTTON GLOW === */
-/* =============================================== */
-
-/* This is a test animation. It should be very obvious. */
-@keyframes test-glow-animation {
-  from {
-    box-shadow: 0 0 30px rgba(29, 154, 33, 0.922);
-  }
-  to {
-    box-shadow: 0 0 10px rgb(228, 228, 208);
-  }
-}
-
-/* We will force the animation onto the button to override any conflicts. */
-.btn-product {
-  animation: test-glow-animation 1s infinite alternate !important;
+  transform: scale(2.1);
 }
 
 /* ================================================== */
 /* === FOOTER BOTTOM / COPYRIGHT SECTION STYLES === */
 /* ================================================== */
-
-/* Container chính cho phần copyright */
 .financity-copyright-container {
-  display: flex; /* Sử dụng Flexbox để sắp xếp */
-  justify-content: space-between; /* Đẩy 2 phần sang hai bên */
-  align-items: center; /* Căn giữa theo chiều dọc */
-  flex-wrap: wrap; /* Cho phép xuống dòng trên màn hình nhỏ */
-
-  /* Các thuộc tính tương tự lớp .container của Tailwind */
-  max-width: 1280px; /* lg breakpoint */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  max-width: 1280px;
   margin-left: auto;
   margin-right: auto;
-  padding: 1rem; /* 16px */
+  padding: 1rem;
 }
-
-/* Căn lề cho nội dung bên trái và phải */
 .financity-copyright-left,
 .financity-copyright-right {
   padding-left: 1rem;
   padding-right: 1rem;
 }
 
-/* Style cho màn hình mobile: các phần tử sẽ tự động xếp chồng lên nhau */
-@media (max-width: 768px) {
-  .financity-copyright-container {
-    flex-direction: column; /* Xếp chồng theo chiều dọc */
-    justify-content: center; /* Căn giữa */
-    gap: 0.5rem; /* Tạo khoảng cách nhỏ giữa các dòng */
-  }
-}
-
-/* ================================================== */
-/* === UNIFY HERO FONT SIZE (WEB ONLY) === */
-/* ================================================== */
-@media (min-width: 768px) {
-  #hero-slide-1 .hero-title,
-  #hero-slide-2 .hero-title,
-  #hero-slide-3 .hero-title {
-    font-size: 3.75rem; /* Tương đương text-6xl của Tailwind */
-    line-height: 1.1;   /* Căn chỉnh lại chiều cao dòng cho nhất quán */
-  }
-}
-
 /* ================================================== */
 /* === HEADER GRADIENT BACKGROUND === */
 /* ================================================== */
-
 #header-placeholder {
   background-image: linear-gradient(to right, #002d5b, #00833e);
-  /* Remove the shadow, as it's not needed for a dark header */
   box-shadow: none;
 }
-
-/* Style for the active navigation link on the dark background */
 #header-placeholder a.nav-link.font-bold {
   opacity: 1;
-  color: #c2d436; /* Use the vibrant accent green for active links */
+  color: #c2d436;
 }
 
 /* ================================================== */
 /* === BLURRED BACKGROUND FOR FIND-US PAGE === */
 /* ================================================== */
-
-/* This targets ONLY the body of the find-us page */
 body#find-us-page {
   position: relative;
   z-index: 0;
 }
-
 body#find-us-page::before {
   content: '';
-  position: fixed; /* Stays in place when scrolling */
-  inset: 0; /* Covers the entire screen */
-  z-index: -1; /* Pushes it behind all other content */
-
-  /* Make sure the image path is correct */
+  position: fixed;
+  inset: 0;
+  z-index: -1;
   background-image: url('../static/together.jpg');
   background-size: cover;
   background-position: center;
-
-  /* Apply the blur effect. You can change 8px to be more or less blurry. */
   filter: blur(1px);
-
-  /* Optional: Prevents the blur from fading at the edges */
   transform: scale(1.1);
 }
 
 /* ======================================================= */
-/* === ĐỊNH VỊ & SỬA LỖI NÚT PRODUCT SWIPER (PHIÊN BẢN MỚI) === */
+/* === NÚT SẢN PHẨM "VAY NGAY" === */
 /* ======================================================= */
-
-/* Bước 1: Đảm bảo container chính là gốc để định vị */
 .product-slides-container {
   position: relative;
 }
-
-/* Bước 2: Định vị và tạo kiểu cho các nút */
 .product-nav-next,
 .product-nav-prev {
   position: absolute;
   top: 50%;
-  transform: translateY(-50%); /* Luôn giữ để căn giữa theo chiều dọc */
+  transform: translateY(-50%);
   z-index: 10;
-
-  /* Style cho nút */
   width: 44px;
   height: 44px;
   background-color: rgba(0, 0, 0, 0.4);
   color: white;
   border-radius: 50%;
   cursor: pointer;
-  transition: transform 0.2s ease, background-color 0.2s ease; /* Thêm transition cho mượt */
+  transition: transform 0.2s ease, background-color 0.2s ease;
 }
-
-/* Bước 3: Đẩy nút ra ngoài bằng giá trị âm */
 .product-nav-next {
-  right: -60px; /* Đẩy nút Next ra xa hơn về bên phải */
+  right: -60px;
 }
-
 .product-nav-prev {
-  left: -60px; /* Đẩy nút Prev ra xa hơn về bên trái */
+  left: -60px;
 }
-
-/* Bước 4: Sửa lỗi "nhảy" khi hover bằng cách kết hợp transform */
 .product-nav-next:hover,
 .product-nav-prev:hover {
   background-color: rgba(0, 0, 0, 0.6);
-  transform: translateY(-50%) scale(1.1); /* KẾT HỢP cả hai hiệu ứng */
+  transform: translateY(-50%) scale(1.1);
 }
-
-/* Icon mũi tên (sử dụng Font Awesome) */
 .product-nav-next::after,
 .product-nav-prev::after {
   font-family: 'Font Awesome 5 Free';
@@ -827,141 +675,70 @@ body#find-us-page::before {
 .product-nav-next::after { content: '\f054'; }
 .product-nav-prev::after { content: '\f053'; }
 
-
-/* Bước 5: Điều chỉnh lại vị trí trên Mobile để không bị tràn màn hình */
-@media (max-width: 768px) {
-  .product-nav-next,
-  .product-nav-prev {
-    /* Đưa nút vào trong trên màn hình nhỏ */
-    width: 38px;
-    height: 38px;
-  }
-  .product-nav-next {
-    right: 10px; /* Đặt lại vị trí ở trong, cách lề 10px */
-  }
-  .product-nav-prev {
-    left: 10px; /* Đặt lại vị trí ở trong, cách lề 10px */
-  }
-}
-
 /* ========================================= */
 /* === CORE VALUES SECTION (DARK BG STYLES) === */
 /* ========================================= */
-
 .core-value-icon-dark {
-  width: 50px; /* Kích thước vòng tròn */
-  height: 50px; /* Kích thước vòng tròn */
+  width: 50px;
+  height: 50px;
   border-radius: 50%;
-  border: 1px solid rgba(255, 255, 255, 0.2); /* Viền màu trắng hơi trong suốt */
+  border: 1px solid rgba(255, 255, 255, 0.2);
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #00b74f; /* Màu icon xanh lá */
-  font-size: 1.5rem; /* Kích thước icon */
-  flex-shrink: 0; /* Ngăn icon bị co lại */
+  color: #00b74f;
+  font-size: 1.5rem;
+  flex-shrink: 0;
 }
-
-/* Đảm bảo màu xanh lá tùy chỉnh */
 .text-t86-green {
-    color: #00b74f; /* Xanh lá của T86 */
+    color: #00b74f;
 }
-
-/* ================================================== */
-/* === TĂNG CỠ CHỮ CHO KHU VỰC STATS === */
-/* ================================================== */
-
-/* * Tăng kích thước của số đếm.
- * Giá trị mặc định của lớp text-7xl là 4.5rem. 
- * Chúng ta sẽ tăng nó lên 6rem.
- */
-#stats h3 {
-  font-size: 5rem; /* Giảm cỡ chữ để cân đối hơn */
-}
-
-/* * Tăng kích thước của chữ mô tả bên dưới số.
- * Đồng thời tăng nhẹ khoảng cách giữa các chữ cho dễ đọc.
- */
-#stats p {
-  font-size: 1.5rem; /* Giảm cỡ chữ để cân đối hơn */
-  letter-spacing: 0.05em; 
-}
-
-
-/* ================================================== */
-/* === SECTION: GIÁ TRỊ CỐT LÕI (ABOUT PAGE) === */
-/* ================================================== */
-
-/* Hiệu ứng chuyển màu cho tiêu đề chính */
 .text-gradient-blue-green {
   background: linear-gradient(
     90deg,
-    #0056b3 0%, /* Màu xanh dương sáng hơn, ví dụ: bootstrap primary blue */
-    #28a745 100% /* Màu xanh lá cây sáng hơn, ví dụ: bootstrap success green */
+    #0056b3 0%,
+    #28a745 100%
   );
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
   color: transparent;
 }
-/* Định dạng cho icon - ĐÃ TĂNG KÍCH THƯỚC VÀ FIX LỖI */
 .core-value-icon {
-  width: 60px; /* Tăng kích thước hộp chứa */
+  width: 60px;
   height: 60px;
   flex-shrink: 0;
   display: flex;
   align-items: center;
   justify-content: center;
-  
-  /* Màu và kích thước icon */
-  color: #1dad3f; /* Màu xám đậm nhạt */
-  font-size: 2.2rem; /* Tăng từ 1.7rem lên để icon to hơn */
-  
-  /* CSS cho icon xếp chồng hoạt động đúng */
-  line-height: 1; 
+  color: #1dad3f;
+  font-size: 2.2rem;
+  line-height: 1;
 }
-
-/* Định dạng cho dòng tagline chốt lại của mỗi giá trị */
 .core-value-tagline {
   font-style: italic;
-  font-weight: 600; /* In đậm vừa phải */
-  color: #374151; /* Màu xám đậm */
+  font-weight: 600;
+  color: #374151;
 }
 
-/* ================================================== */
-/* === RESPONSIVE CHO GIÁ TRỊ CỐT LÕI (MOBILE) === */
-/* ================================================== */
-@media (max-width: 767px) {
-  /* Làm cho icon nhỏ hơn một chút trên màn hình mobile */
-  .core-value-icon {
-    width: 55px;
-    height: 55px;
-    font-size: 2rem; /* Giảm kích thước font của icon */
-  }
-}
 /* ======================================================= */
 /* === NÚT SẢN PHẨM "VAY NGAY" (BẢN SỬA LỖI MẤT GÓC CUỐI CÙNG) === */
 /* ======================================================= */
-
 .product-slides-container .btn-product {
-  /* --- Các thuộc tính cơ bản --- */
   position: relative;
   z-index: 1;
   transition: transform 0.3s ease, background-color 0.3s ease;
   animation: final-button-glow 1.5s infinite alternate ease-in-out;
-
-  /* --- CÁC THUỘC TÍNH SỬA LỖI RENDERING --- */
-  border-radius: 9999px; /* Ghi đè dứt điểm, đảm bảo bo tròn tuyệt đối */
-  overflow: hidden;     /* Giữ nguyên tắc vàng: cắt bỏ phần thừa */
-  isolation: isolate;   /* QUAN TRỌNG: Tạo stacking context mới, ngăn hiệu ứng con "tràn" ra ngoài */
-  -webkit-mask-image: -webkit-radial-gradient(white, black); /* Fix cho một số trình duyệt Webkit/Chrome */
-  will-change: transform; /* Báo cho trình duyệt tối ưu cho animation transform */
+  border-radius: 9999px;
+  overflow: hidden;
+  isolation: isolate;
+  -webkit-mask-image: -webkit-radial-gradient(white, black);
+  will-change: transform;
 }
-
 .product-slides-container .btn-product:hover {
   background-color: #00A651;
   transform: scale(1.05);
 }
-
 @keyframes final-button-glow {
   from {
     box-shadow: 0 0 5px rgba(0, 166, 81, 0.4);
@@ -969,17 +746,4 @@ body#find-us-page::before {
   to {
     box-shadow: 0 0 20px rgba(0, 166, 81, 0.9);
   }
-}
-.btn-product{
-  left: 2rem;
-}
-
-/* --- MOBILE MENU STYLES --- */
-#mobile-menu {
-  transition: transform 0.3s ease-in-out;
-  transform: translateX(100%);
-}
-
-#mobile-menu.active {
-  transform: translateX(0);
 }

@@ -11,7 +11,21 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
   };
+  function initializeMobileMenu() {
+    const menuButton = document.getElementById("mobile-menu-button");
+    const closeButton = document.getElementById("close-mobile-menu");
+    const mobileMenu = document.getElementById("mobile-menu");
 
+    if (menuButton && closeButton && mobileMenu) {
+      menuButton.addEventListener("click", () => {
+        mobileMenu.classList.add("is-open");
+      });
+
+      closeButton.addEventListener("click", () => {
+        mobileMenu.classList.remove("is-open");
+      });
+    }
+  }
   // Hàm mới để đọc dữ liệu đối tác từ file JSON
   async function loadPartnersData() {
     try {
@@ -48,7 +62,14 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
   // Tải Header và Footer, sau đó thực thi hàm highlight
-  loadComponent('#header-placeholder', 'header.html', highlightActiveNav);
+  // Tải Header và Footer, sau đó thực thi các hàm cần thiết
+  loadComponent('#header-placeholder', 'header.html', () => {
+    highlightActiveNav();
+    // ==========================================================
+    // BƯỚC 2: GỌI HÀM MENU NGAY SAU KHI HEADER ĐƯỢC TẢI
+    // ==========================================================
+    initializeMobileMenu(); 
+  });
   loadComponent('#footer-placeholder', 'footer.html');
 
   // --- Logic riêng cho trang Find Us ---
