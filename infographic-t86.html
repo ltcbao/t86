@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Infographic: Hành Trình & Tầm Ảnh Hưởng Của T86</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Raleway:wght@700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css" />
+
+    <style>
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: #f0f4f8;
+        }
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Raleway', sans-serif;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 350px;
+            max-height: 400px;
+        }
+        @media (max-width: 768px) {
+            .chart-container {
+                height: 300px;
+            }
+        }
+        .kpi-number {
+            background: linear-gradient(135deg, #00A651, #00833E);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+    </style>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        t86: {
+                            green: '#00833E',
+                            'green-light': '#00A651',
+                            'green-accent': '#C2D436',
+                            blue: '#002D5B',
+                            light: '#F8F9FA',
+                            dark: '#212529',
+                            gray: '#6C757D',
+                        },
+                    },
+                },
+            },
+        };
+    </script>
+</head>
+<body class="text-t86-dark">
+    
+    <header id="header-placeholder" class="fixed top-0 left-0 w-full bg-white shadow-md z-50"></header>
+
+    <main class="container mx-auto p-4 md:p-8 pt-24">
+        
+        <header class="text-center mb-12">
+            <h1 class="text-4xl md:text-5xl font-extrabold text-t86-blue mb-2">Hành Trình & Tầm Ảnh Hưởng Của T86</h1>
+            <p class="text-lg text-t86-gray max-w-3xl mx-auto">Trực quan hóa dữ liệu về sứ mệnh, sự tăng trưởng và mạng lưới đối tác của Công ty TNHH Kinh doanh T86 kể từ khi thành lập.</p>
+        </header>
+
+        <section class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
+            <div class="md:col-span-1 bg-white p-6 rounded-lg shadow-md flex flex-col justify-center items-center text-center">
+                <h2 class="text-2xl font-bold text-t86-green mb-2">Sứ Mệnh Của Chúng Tôi</h2>
+                <p class="text-t86-gray">Mang đến giải pháp tài chính minh bạch, linh hoạt và dễ tiếp cận cho người tiêu dùng Việt Nam, giúp nâng cao chất lượng cuộc sống.</p>
+            </div>
+            <div class="md:col-span-2 bg-t86-blue text-white p-8 rounded-lg shadow-lg flex flex-col justify-center items-center text-center">
+                <p class="text-2xl md:text-3xl font-semibold mb-2">Đã phục vụ hơn</p>
+                <h2 class="text-7xl md:text-8xl font-extrabold text-t86-green-accent">20,000+</h2>
+                <p class="text-2xl md:text-3xl font-semibold mt-2">khách hàng trên toàn quốc</p>
+            </div>
+        </section>
+
+        <section class="mb-12">
+            <h2 class="text-3xl font-bold text-center text-t86-blue mb-8">Giá Trị Cốt Lõi</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div class="bg-white p-6 rounded-lg shadow-md text-center">
+                    <div class="text-4xl text-t86-green-light mb-3">👥</div>
+                    <h3 class="text-xl font-bold text-t86-dark mb-2">Khách hàng là trọng tâm</h3>
+                    <p class="text-t86-gray text-sm">Luôn lắng nghe, thấu hiểu và hỗ trợ mọi nhu cầu của khách hàng một cách tận tâm.</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-md text-center">
+                    <div class="text-4xl text-t86-green-light mb-3">🔍</div>
+                    <h3 class="text-xl font-bold text-t86-dark mb-2">Minh bạch & Trách nhiệm</h3>
+                    <p class="text-t86-gray text-sm">Quy trình và điều kiện rõ ràng, giúp khách hàng an tâm với mọi lựa chọn.</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-md text-center">
+                    <div class="text-4xl text-t86-green-light mb-3">💡</div>
+                    <h3 class="text-xl font-bold text-t86-dark mb-2">Đổi mới & Linh hoạt</h3>
+                    <p class="text-t86-gray text-sm">Luôn cải tiến công nghệ để cung cấp sản phẩm nhanh chóng và thuận tiện nhất.</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-md text-center">
+                    <div class="text-4xl text-t86-green-light mb-3">🌱</div>
+                    <h3 class="text-xl font-bold text-t86-dark mb-2">Phát triển con người</h3>
+                    <p class="text-t86-gray text-sm">Xây dựng môi trường làm việc tích cực, nơi mỗi cá nhân đều được phát triển.</p>
+                </div>
+            </div>
+        </section>
+        
+        <section class="mb-12">
+            <h2 class="text-3xl font-bold text-center text-t86-blue mb-8">Sản Phẩm Tài Chính Nổi Bật</h2>
+             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="bg-white p-6 rounded-lg shadow-md border-t-4 border-t86-green transition-all duration-300 ease-in-out hover:-translate-y-2 hover:shadow-xl">
+                    <h3 class="text-2xl font-bold text-t86-blue mb-3">iPhone Trả Góp</h3>
+                    <ul class="space-y-2 text-t86-gray list-disc list-inside">
+                        <li>Giải ngân tại quầy</li>
+                        <li>Khoản vay lên đến 15 triệu</li>
+                        <li>Kỳ hạn linh hoạt 3-10 tháng</li>
+                    </ul>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-md border-t-4 border-t86-green-light transition-all duration-300 ease-in-out hover:-translate-y-2 hover:shadow-xl">
+                    <h3 class="text-2xl font-bold text-t86-blue mb-3">Tiêu Dùng Linh Hoạt</h3>
+                    <ul class="space-y-2 text-t86-gray list-disc list-inside">
+                        <li>Hỗ trợ mọi nhu cầu chi tiêu</li>
+                        <li>Khoản vay lên đến 15 triệu</li>
+                        <li>Kỳ hạn linh hoạt 1-4 tháng</li>
+                    </ul>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-md border-t-4 border-t86-green-accent transition-all duration-300 ease-in-out hover:-translate-y-2 hover:shadow-xl">
+                    <h3 class="text-2xl font-bold text-t86-blue mb-3">Vay Mua Xe Máy</h3>
+                    <ul class="space-y-2 text-t86-gray list-disc list-inside">
+                         <li>Thủ tục nhanh gọn</li>
+                        <li>Hỗ trợ đa dạng dòng xe</li>
+                        <li>Kỳ hạn linh hoạt 3-10 tháng</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section class="mb-12">
+            <div class="bg-white p-6 rounded-lg shadow-md">
+                <h2 class="text-3xl font-bold text-center text-t86-blue mb-4">Tư Vấn Tài Chính AI ✨</h2>
+                <p class="text-center text-t86-gray mb-6 text-sm">Bạn chưa biết sản phẩm nào phù hợp với mình? Hãy mô tả nhu cầu của bạn bên dưới, trợ lý AI của T86 sẽ tư vấn cho bạn!</p>
+                <div class="max-w-xl mx-auto">
+                    <textarea id="ai-prompt" class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-t86-green-light" rows="3" placeholder="Ví dụ: Tôi cần vay tiền để mua một chiếc iPhone 15 cho công việc..."></textarea>
+                    <button id="ai-submit" class="mt-4 w-full bg-t86-green text-white font-bold px-8 py-3 rounded-full hover:bg-t86-green-light transition-all transform hover:scale-105">
+                        Nhận Tư Vấn
+                    </button>
+                    <div id="ai-loading" class="text-center mt-4 hidden">
+                        <p class="text-t86-blue animate-pulse">Trợ lý AI đang phân tích...</p>
+                    </div>
+                    <div id="ai-result" class="mt-6 p-4 bg-gray-50 rounded-lg border border-gray-200 text-t86-dark hidden whitespace-pre-line">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div class="bg-white p-6 rounded-lg shadow-md">
+                <h3 class="text-2xl font-bold text-center text-t86-blue mb-4">Tăng Trưởng Mạng Lưới Đối Tác</h3>
+                <p class="text-center text-t86-gray mb-6 text-sm">Số lượng đối tác liên kết đã tăng trưởng vượt bậc kể từ khi thành lập, mở rộng sự hiện diện của T86 trên thị trường.</p>
+                <div class="chart-container">
+                    <canvas id="partnerGrowthChart"></canvas>
+                </div>
+            </div>
+            <div class="bg-white p-6 rounded-lg shadow-md">
+                <h3 class="text-2xl font-bold text-center text-t86-blue mb-4">Phân Bố Đối Tác (TP.HCM)</h3>
+                 <p class="text-center text-t86-gray mb-6 text-sm">Mạng lưới đối tác của T86 tập trung đông đảo tại các quận trung tâm và đông dân cư của TP. Hồ Chí Minh.</p>
+                <div class="chart-container">
+                    <canvas id="partnerDistributionChart"></canvas>
+                </div>
+            </div>
+        </section>
+
+    </main>
+    
+    <footer id="footer-placeholder"></footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            
+            const loadComponent = (selector, url) => {
+                const element = document.querySelector(selector);
+                if (element) {
+                    return fetch(url)
+                        .then((response) => response.ok ? response.text() : Promise.resolve(""))
+                        .then((data) => { if (data) element.innerHTML = data; });
+                }
+                return Promise.resolve();
+            };
+
+            const initializeInfographicScripts = () => {
+                const FONT_COLOR = '#212529';
+                const GRID_COLOR = '#e5e7eb';
+                const T86_COLORS = {
+                    blue: '#002D5B',
+                    green: '#00833E',
+                    greenLight: '#00A651',
+                    greenAccent: '#C2D436',
+                };
+
+                const processLongLabels = (labels) => {
+                    return labels.map(label => {
+                        if (label.length > 16) {
+                            const words = label.split(' ');
+                            const newLabel = [];
+                            let line = '';
+                            words.forEach(word => {
+                                if ((line + word).length > 16) {
+                                    newLabel.push(line.trim());
+                                    line = '';
+                                }
+                                line += word + ' ';
+                            });
+                            newLabel.push(line.trim());
+                            return newLabel;
+                        }
+                        return label;
+                    });
+                };
+                
+                const tooltipTitleCallback = (tooltipItems) => {
+                    const item = tooltipItems[0];
+                    let label = item.chart.data.labels[item.dataIndex];
+                    if (Array.isArray(label)) {
+                        return label.join(' ');
+                    }
+                    return label;
+                };
+
+                const defaultChartOptions = {
+                    maintainAspectRatio: false,
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            labels: {
+                                color: FONT_COLOR,
+                                font: {
+                                    family: "'Montserrat', sans-serif"
+                                }
+                            }
+                        },
+                        tooltip: {
+                            callbacks: {
+                                title: tooltipTitleCallback
+                            },
+                            bodyFont: {
+                                family: "'Montserrat', sans-serif"
+                            },
+                            titleFont: {
+                                family: "'Montserrat', sans-serif"
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            ticks: {
+                                color: FONT_COLOR
+                            },
+                            grid: {
+                                color: GRID_COLOR
+                            }
+                        },
+                        x: {
+                            ticks: {
+                                color: FONT_COLOR
+                            },
+                            grid: {
+                                color: 'transparent'
+                            }
+                        }
+                    }
+                };
+                
+                if (document.getElementById('partnerGrowthChart')) {
+                    const ctx = document.getElementById('partnerGrowthChart').getContext('2d');
+                    new Chart(ctx, {
+                        type: 'line',
+                        data: {
+                            labels: ['2022', '2023', '2024'],
+                            datasets: [{
+                                label: 'Số Lượng Đối Tác',
+                                data: [15, 45, 72],
+                                backgroundColor: 'rgba(0, 166, 81, 0.2)',
+                                borderColor: T86_COLORS.greenLight,
+                                tension: 0.3,
+                                fill: true,
+                            }]
+                        },
+                        options: defaultChartOptions
+                    });
+                }
+
+                if (document.getElementById('partnerDistributionChart')) {
+                    const ctx = document.getElementById('partnerDistributionChart').getContext('2d');
+                    const originalLabels = ['Gò Vấp', 'Quận 10', 'Thủ Đức', 'Các quận khác'];
+                    new Chart(ctx, {
+                        type: 'bar',
+                        data: {
+                            labels: processLongLabels(originalLabels),
+                            datasets: [{
+                                label: 'Số Lượng Đối Tác',
+                                data: [20, 20, 9, 23],
+                                backgroundColor: [
+                                    T86_COLORS.green,
+                                    T86_COLORS.blue,
+                                    T86_COLORS.greenLight,
+                                    T86_COLORS.greenAccent,
+                                ],
+                                borderColor: [
+                                    T86_COLORS.green,
+                                    T86_COLORS.blue,
+                                    T86_COLORS.greenLight,
+                                    T86_COLORS.greenAccent,
+                                ],
+                                borderWidth: 1
+                            }]
+                        },
+                         options: {
+                            ...defaultChartOptions,
+                            plugins: {
+                                ...defaultChartOptions.plugins,
+                                legend: {
+                                    display: false
+                                }
+                            }
+                        }
+                    });
+                }
+
+                const aiSubmitButton = document.getElementById('ai-submit');
+                const aiPromptTextarea = document.getElementById('ai-prompt');
+                const aiResultDiv = document.getElementById('ai-result');
+                const aiLoadingDiv = document.getElementById('ai-loading');
+
+                if (aiSubmitButton) {
+                    aiSubmitButton.addEventListener('click', async () => {
+                        const userQuery = aiPromptTextarea.value;
+                        if (!userQuery.trim()) {
+                            aiResultDiv.textContent = 'Vui lòng mô tả nhu cầu của bạn.';
+                            aiResultDiv.classList.remove('hidden');
+                            return;
+                        }
+
+                        aiLoadingDiv.classList.remove('hidden');
+                        aiResultDiv.classList.add('hidden');
+                        aiSubmitButton.disabled = true;
+
+                        const apiKey = ""; 
+                        const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent?key=${apiKey}`;
+
+                        const systemPrompt = "Bạn là một chuyên gia tư vấn tài chính thân thiện của công ty T86. Dựa vào nhu cầu của khách hàng, hãy phân tích và đề xuất sản phẩm vay phù hợp nhất trong ba sản phẩm sau: 'iPhone Trả Góp', 'Tiêu Dùng Linh Hoạt', và 'Vay Mua Xe Máy'. Giải thích ngắn gọn tại sao sản phẩm đó phù hợp và nêu bật các đặc điểm chính của gói vay. Nếu nhu cầu của khách hàng không liên quan trực tiếp đến ba sản phẩm này, hãy tư vấn gói 'Tiêu Dùng Linh Hoạt' như một giải pháp đa dụng. Luôn trả lời bằng tiếng Việt một cách chuyên nghiệp và hữu ích.";
+
+                        const payload = {
+                            systemInstruction: {
+                                parts: [{ text: systemPrompt }]
+                            },
+                            contents: [{
+                                parts: [{ text: userQuery }]
+                            }],
+                        };
+
+                        try {
+                            const response = await fetch(apiUrl, {
+                                method: 'POST',
+                                headers: { 'Content-Type': 'application/json' },
+                                body: JSON.stringify(payload)
+                            });
+
+                            if (!response.ok) {
+                                throw new Error(`API error! status: ${response.status}`);
+                            }
+
+                            const result = await response.json();
+                            const text = result.candidates?.[0]?.content?.parts?.[0]?.text;
+
+                            if (text) {
+                                aiResultDiv.textContent = text;
+                            } else {
+                                aiResultDiv.textContent = 'Rất tiếc, đã có lỗi xảy ra. Vui lòng thử lại sau.';
+                            }
+                        } catch (error) {
+                            console.error('Error calling Gemini API:', error);
+                            aiResultDiv.textContent = 'Không thể kết nối đến dịch vụ tư vấn. Vui lòng kiểm tra lại kết nối mạng và thử lại.';
+                        } finally {
+                            aiLoadingDiv.classList.add('hidden');
+                            aiResultDiv.classList.remove('hidden');
+                            aiSubmitButton.disabled = false;
+                        }
+                    });
+                }
+            };
+            
+            const highlightActiveNav = () => {
+                const currentPage = window.location.pathname.split("/").pop() || "index.html";
+                const navLinks = document.querySelectorAll("#header-placeholder .nav-link");
+                navLinks.forEach((link) => {
+                    const linkHref = link.getAttribute("href");
+                    if (linkHref === currentPage) {
+                        link.classList.add("text-t86-green-accent", "font-bold");
+                        link.classList.remove("opacity-80");
+                    }
+                });
+            };
+            
+            const initializeMobileMenu = () => {
+                const menuButton = document.getElementById("mobile-menu-button");
+                const closeButton = document.getElementById("close-mobile-menu");
+                const mobileMenu = document.getElementById("mobile-menu");
+
+                if (menuButton && closeButton && mobileMenu) {
+                    menuButton.addEventListener("click", () => {
+                        mobileMenu.classList.add("is-open");
+                    });
+                    closeButton.addEventListener("click", () => {
+                        mobileMenu.classList.remove("is-open");
+                    });
+                }
+            };
+
+            Promise.all([
+                loadComponent("#header-placeholder", "header.html"),
+                loadComponent("#footer-placeholder", "footer.html")
+            ]).then(() => {
+                initializeInfographicScripts();
+                highlightActiveNav();
+                initializeMobileMenu();
+            });
+        });
+    </script>
+</body>
+</html>
+
